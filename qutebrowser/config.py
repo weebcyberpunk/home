@@ -329,7 +329,7 @@ c.colors.tabs.selected.even.bg = '#4084D6'
 # font setting, it's replaced with the fonts listed here. If set to an
 # empty value, a system-specific monospace default is used.
 # Type: List of Font, or Font
-c.fonts.default_family = 'UbuntuMono'
+c.fonts.default_family = 'Ubuntu Mono'
 
 # Default font size to use. Whenever "default_size" is used in a font
 # setting, it's replaced with the size listed here. Valid values are
@@ -344,7 +344,7 @@ c.fonts.web.family.standard = 'Ubuntu'
 
 # Font family for fixed fonts.
 # Type: FontFamily
-c.fonts.web.family.fixed = 'UbuntuMono'
+c.fonts.web.family.fixed = 'Ubuntu Mono'
 
 # Bindings for normal mode
 config.bind('b', 'set-cmd-text -s :quickmark-load ')
