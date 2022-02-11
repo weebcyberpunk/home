@@ -1,0 +1,10 @@
+#!/usr/bin/sh
+
+cd ~/Projects
+PROJECT="$(ls | dmenu)"
+
+if [ "$PROJECT" != "" ]
+then
+	cd $PROJECT
+	st -e vim
+fi
