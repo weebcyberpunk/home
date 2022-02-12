@@ -6,9 +6,7 @@ static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
 static const unsigned int gappx     = 20;        /* gaps between windows */
-static const char *fonts[]          = { "UbuntuMono Nerd Font:size=15:antialias=true:hinting=true",
-					"IPAPGothic:size=15:antialias=true:hinting=true"
-					};
+static const char *fonts[]          = { "UbuntuMono Nerd Font:size=15:antialias=true:hinting=true" };
 static const char dmenufont[]       = "UbuntuMono Nerd Font:size=15";
 static const char col_gray1[]       = "#383C4A";
 static const char col_gray2[]       = "#383C4A";
@@ -42,8 +40,6 @@ static const Rule rules[] = {
 	/* class      instance    title       tags mask     isfloating   isterminal noswallow monitor */
 	{ "Gnome-screenshot", NULL, "Screenshot",  0,          1,           0,         1,       -1 },
 	{ "st"        , NULL,       NULL,       0,             0,           1,         0,       -1 },
-	{ "clearine"  , NULL,       NULL,       0,             1,           0,         1,       -1 },
-	/* { "virt-manager", NULL,     NULL,       0,             0,           1,         0,       -1 }, */
 
 };
 
@@ -128,7 +124,7 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
 	{ MODKEY,                       XK_minus,  setgaps,        {.i = -4 } },
 	{ MODKEY,                       XK_equal,  setgaps,        {.i = +4 } },
-	{ MODKEY|ShiftMask,             XK_equal,  setgaps,        {.i = 1 } },
+	{ ShiftMask|ControlMask,        XK_equal,  setgaps,        {.i = 6 } },
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
 	TAGKEYS(                        XK_3,                      2)
