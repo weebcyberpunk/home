@@ -42,9 +42,42 @@ status () {
 
 	echo -n " | "
 
-	# battery widget
-	BATTERY="$(cat /sys/class/power_supply/BAT1/capacity)"
-	echo -n " $BATTERY%"
+	# battery widget and notify
+	BATTERY=$(cat /sys/class/power_supply/BAT1/capacity)
+	CHARGING=$(cat /sys/class/power_supply/BAT1/status)
+	
+	if [ $CHARGING == "Charging" ]
+	then
+		echo -n " $BATTERY%"
+
+	else
+
+		if [ $BATTERY -gt 80 ]
+		then
+			echo -n " $BATTERY%"
+
+		elif [ $BATTERY -gt 60 ]
+		then
+			echo -n " $BATTERY%"
+
+		elif [ $BATTERY -gt 40 ]
+		then
+			echo -n " $BATTERY%"
+
+		elif [ $BATTERY -gt 20 ]
+		then
+			echo -n " $BATTERY%"
+
+		elif [ $BATTERY -gt 10 ]
+		then
+			echo -n " $BATTERY%"
+
+		else
+			echo -n " $BATTERY%"
+			
+		fi
+
+	fi
 
 	echo -n " | "
 
