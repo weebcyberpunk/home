@@ -39,5 +39,12 @@ fi
 # set prompt
 PS1='%B%F{blue}%1~%f%b $ '
 
+# aliases
+
+alias upgrade='yay -Syu'
+alias pyv='source ~/Etc/python3.10/bin/activate' # activate python venv
+alias rick='~/Etc/roll.sh' # runs script of https://github.com/keroserene/rickrollrc/
+alias clear='clear && pfetch'
+
 # display pfetch
 pfetch
