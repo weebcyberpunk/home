@@ -5,8 +5,8 @@ status () {
 	# cmus widget
 	echo -n "  "
 
-	CMUS_ARTIST="$(cmus-remote -Q | grep ' artist ' | awk '{print substr($0, 12)}')"  
-	CMUS_TRACK="$(cmus-remote -Q | grep ' title ' | awk '{print substr($0, 11)}')"
+	CMUS_ARTIST="$(cmus-remote -Q 2> /dev/null | grep ' artist ' | awk '{print substr($0, 12)}')"  
+	CMUS_TRACK="$(cmus-remote -Q 2> /dev/null | grep ' title ' | awk '{print substr($0, 11)}')"
 
 	if [ "$CMUS_ARTIST" = "" ]
 	then
