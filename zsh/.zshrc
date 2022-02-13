@@ -43,7 +43,13 @@ alias pyv='source ~/Etc/python3.10/bin/activate' # activate python venv
 alias rick='~/Etc/roll.sh' # runs script of https://github.com/keroserene/rickrollrc/
 alias clear='clear && pfetch'
 alias music-dl='youtube-dl -x --audio-format mp3'
-alias fzf='vim | fzf' # open fzf selection on vim
+alias fz='vim $(fzf)' # for some unknown reason if alias fzf it bugs
+
+# modules
+
+# edit line in vim (very useful to test little scripts)
+autoload edit-command-line; zle -N edit-command-line
+bindkey '^e' edit-command-line
 
 # display pfetch
 pfetch
