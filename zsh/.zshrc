@@ -53,8 +53,13 @@ bindkey '^e' edit-command-line
 setopt PRINT_EXIT_VALUE
 
 # window title
-TITLE="Terminal"
-echo -ne '\033k'$TITLE'\033\\'
+
+# as I use ST, it avoids setting the tile inside vim term
+if [ $TERM != "xterm-256color" ]
+then
+	TITLE="Terminal"
+	echo -ne '\033k'$TITLE'\033\\'
+fi
 
 function precmd() {
 	echo -ne '\033k'$TITLE'\033\\'
