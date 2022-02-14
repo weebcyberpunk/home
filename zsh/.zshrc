@@ -45,11 +45,20 @@ alias clear='clear && pfetch'
 alias music-dl='youtube-dl -x --audio-format mp3'
 alias fz='vim $(fzf)' # for some unknown reason if alias fzf it bugs
 
-# modules
-
 # edit line in vim (very useful to test little scripts)
 autoload edit-command-line; zle -N edit-command-line
 bindkey '^e' edit-command-line
+
+# print exit value if != 0
+setopt PRINT_EXIT_VALUE
+
+# window title
+TITLE="Terminal"
+echo -ne '\033k'$TITLE'\033\\'
+
+function precmd() {
+	echo -ne '\033k'$TITLE'\033\\'
+}
 
 # display pfetch
 pfetch
