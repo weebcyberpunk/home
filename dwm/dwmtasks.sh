@@ -29,5 +29,5 @@ function tasks() {
 while :
 do
 	tasks
-	sleep 30m
+	sleep 1h
 done
