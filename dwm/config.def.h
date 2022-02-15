@@ -20,12 +20,13 @@ static const char *colors[][3]      = {
 };
 
 static const char *const autostart[] = {
-	"nitrogen", "--restore", NULL,
 	"/home/gg/.local/bin/dwmstatus.sh", NULL,
+	"nitrogen", "--restore", NULL,
 	"picom", NULL,
 	"lxsession", NULL,
 	"dunst", NULL,
 	"clipmenud", NULL,
+	"/home/gg/.local/bin/dwmtasks.sh", NULL,
 	NULL /* terminate */
 };
 
