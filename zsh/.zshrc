@@ -44,6 +44,8 @@ alias rick='~/Etc/roll.sh' # runs script of https://github.com/keroserene/rickro
 alias clear='clear && pfetch'
 alias music-dl='youtube-dl -x --audio-format mp3'
 alias fz='vim $(fzf)' # for some unknown reason if alias fzf it bugs
+alias mount-drive='udisksctl mount -b /dev/sdb1'
+alias umount-drive='udisksctl unmount -b /dev/sdb1'
 
 # edit line in vim (very useful to test little scripts)
 autoload edit-command-line; zle -N edit-command-line
