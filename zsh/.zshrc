@@ -34,7 +34,7 @@ alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 
 # set prompt
-PS1='%B%F{blue}%1~%f%b $ '
+PS1='%B%F{blue}%3~%f%b $ '
 
 # aliases
 
@@ -52,7 +52,7 @@ autoload edit-command-line; zle -N edit-command-line
 bindkey '^e' edit-command-line
 
 # print exit value if != 0
-setopt PRINT_EXIT_VALUE
+# setopt PRINT_EXIT_VALUE
 
 # window title
 
