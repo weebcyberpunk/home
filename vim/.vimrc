@@ -30,6 +30,15 @@ set splitright
 map <C-t> :term<CR>
 nnoremap tn :set rnu!<CR>
 
+" remapping jj to ESC in i mode
+"
+" most people remaps CAPS to it, but it needs sys-wide config, and sometimes
+" CAPS is usefull
+"
+" and about CAPS, I have this problem where I do not disable CAPS when exiting
+" i mode. you should pay attention to that too!
+inoremap jj <Esc>
+
 " split keybinds
 nnoremap <C-H> <C-W><C-H>
 nnoremap <C-J> <C-W><C-J>
@@ -50,7 +59,6 @@ nnoremap ,c :-1read ~/.vim/snippets/skeleton.c<CR>3j
 " }}}
 
 " WRAP AND LINEBREAK {{{
-" adapted this from reddit ;)
 augroup markdown_settings
 	autocmd!
 	autocmd BufNewFile,BufRead * set nowrap
