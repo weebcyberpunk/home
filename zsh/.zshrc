@@ -52,18 +52,20 @@ alias umount-drive='udisksctl unmount -b /dev/sdb1'
 alias music-dl='youtube-dl -x --audio-format mp3'
 alias record-screen='ffmpeg -f x11grab -i :0.0 -f pulse -i alsa_output.pci-0000_00_1f.3.analog-stereo.monitor x11-screen-record.mp4'
 alias record-cam='ffmpeg -i /dev/video0 -f alsa -i default webcam-record.mp4'
-alias record-mic='ffmpeg -f alsa -i default alsa-mic-record.mp4'
+alias record-mic='ffmpeg -f alsa -i default alsa-mic-record.mp3'
+alias take-a-shot='mpv av://v4l2:/dev/video0 --profile=low-latency --untimed' # use mpv to display the webcam on a screen and press s to take a shot
+alias record-all='$HOME/.local/bin/record-all.sh'
 
 # edit line in vim (very useful to test little scripts)
 autoload edit-command-line; zle -N edit-command-line
 bindkey '^e' edit-command-line
 
 # print exit value if != 0
-# setopt PRINT_EXIT_VALUE
+setopt PRINT_EXIT_VALUE
 
 # window title
 
-# as I use ST, it avoids setting the tile inside vim term
+# as I use ST, it avoids setting the title inside vim term
 if [ $TERM != "xterm-256color" ]
 then
 	TITLE="Terminal"
