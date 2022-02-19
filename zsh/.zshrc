@@ -38,14 +38,20 @@ PS1='%B%F{blue}%3~%f%b $ '
 
 # aliases
 
+# common
 alias upgrade='yay -Syu'
 alias pyv='source ~/Etc/python3.10/bin/activate' # activate python venv
 alias rick='~/Etc/roll.sh' # runs script of https://github.com/keroserene/rickrollrc/
 alias clear='clear && pfetch'
-alias music-dl='youtube-dl -x --audio-format mp3'
 alias fz='vim $(fzf)' # for some unknown reason if alias fzf it bugs
+# mounting and unmounting
 alias mount-drive='udisksctl mount -b /dev/sdb1'
 alias umount-drive='udisksctl unmount -b /dev/sdb1'
+# downloads and records
+alias music-dl='youtube-dl -x --audio-format mp3'
+alias record-screen='ffmpeg -f x11grab -i :0.0 x11-screen-record.mp4'
+alias record-cam='ffmpeg -i /dev/video0 -f alsa -i default webcam-record.mp4'
+alias record-mic='ffmpeg -f alsa -i default alsa-mic-record.mp4'
 
 # edit line in vim (very useful to test little scripts)
 autoload edit-command-line; zle -N edit-command-line
