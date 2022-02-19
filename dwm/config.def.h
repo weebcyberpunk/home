@@ -95,6 +95,7 @@ static const char *clipmenucmd[] = { "clipmenu", NULL };
 static const char *logoutcmd[] = { "/home/gg/.local/bin/dmenu_shutdown", NULL };
 static const char *projects_menu_cmd[] = { "/home/gg/.local/bin/dmenu_projects", NULL };
 static const char *web_menu_cmd[] = { "/home/gg/.local/bin/dmenu_web", NULL };
+static const char *ffmpegcmd[] = { "/home/gg/.local/bin/dmenu-ffmpeg.sh", NULL };
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
@@ -109,7 +110,7 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_l,      incnmaster,     {.i = -1 } },
 	{ MODKEY,                       XK_h,      setmfact,       {.f = -0.05} },
 	{ MODKEY,                       XK_l,      setmfact,       {.f = +0.05} },
-	{ ControlMask|ShiftMask,        XK_Return, zoom,           {0} },
+	{ MODKEY|ShiftMask,             XK_Return, zoom,           {0} },
 	{ ControlMask|ShiftMask,        XK_Tab,    view,           {0} },
 	{ MODKEY,                       XK_w,      killclient,     {0} },
 	{ MODKEY|ControlMask,           XK_t,      setlayout,      {.v = &layouts[0]} },
@@ -150,6 +151,7 @@ static Key keys[] = {
 	{ MODKEY|ControlMask,           XK_l,      spawn,          {.v = logoutcmd } },	
 	{ MODKEY,                       XK_period, spawn,          {.v = projects_menu_cmd } },	
 	{ MODKEY,                       XK_b,      spawn,          {.v = web_menu_cmd } },	
+	{ MODKEY|ControlMask,           XK_r,      spawn,          {.v = ffmpegcmd } },	
 	
 	// audio
 	{ ControlMask|Mod1Mask,         XK_k,      spawn,          {.v = increase_vol_cmd } },
