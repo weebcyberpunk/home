@@ -43,7 +43,7 @@ alias upgrade='yay -Syu'
 alias pyv='source ~/Etc/python3.10/bin/activate' # activate python venv
 alias rick='~/Etc/roll.sh' # runs script of https://github.com/keroserene/rickrollrc/
 alias clear='clear && pfetch'
-alias fz='vim $(fzf)' # for some unknown reason if alias fzf it bugs
+alias fzf='find * | grep' # emulates a fzf but directly in the cli and not in the finder
 # mounting and unmounting
 alias mount-drive='udisksctl mount -b /dev/sdb1'
 alias umount-drive='udisksctl unmount -b /dev/sdb1'
