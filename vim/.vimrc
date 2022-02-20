@@ -34,7 +34,8 @@ set splitright
 
 " KEYBINDS {{{
 " mapping Ctrl+t to open terminal and tn to toggle relative numbers
-map <C-t> :term<CR>
+" map <C-t> :term<CR> 		terminal map is commented out because nowadays
+" 				I'm using an st keybind
 nnoremap tn :set rnu!<CR>
 
 " remapping jj to ESC in i mode
