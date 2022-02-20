@@ -51,7 +51,7 @@ alias mount-drive='udisksctl mount -b /dev/sdb1'
 alias umount-drive='udisksctl unmount -b /dev/sdb1'
 # downloads and records
 alias music-dl='youtube-dl -x --audio-format mp3'
-alias record-screen='ffmpeg -f x11grab -i :0.0 -f pulse -i alsa_output.pci-0000_00_1f.3.analog-stereo.monitor x11-screen-record.mp4'
+alias record-screen='ffmpeg -f x11grab -i :0.0 x11-screen-record.mp4'
 alias record-cam='ffmpeg -i /dev/video0 -f alsa -i default webcam-record.mp4'
 alias record-mic='ffmpeg -f alsa -i default alsa-mic-record.mp3'
 alias take-a-shot='mpv av://v4l2:/dev/video0 --profile=low-latency --untimed' # use mpv to display the webcam on a screen and press s to take a shot

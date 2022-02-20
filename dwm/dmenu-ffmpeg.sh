@@ -5,7 +5,7 @@ CHOICE=$(echo -e $ACTIONS | dmenu)
 
 if [ "$CHOICE" == 'Record screen' ]
 then
-	$TERM -e  ffmpeg -f x11grab -i :0.0 -f pulse -i alsa_output.pci-0000_00_1f.3.analog-stereo.monitor x11-screen-record.mp4 
+	$TERM -e  ffmpeg -f x11grab -i :0.0 x11-screen-record.mp4 
 
 elif [ "$CHOICE" == 'Record cam' ]
 then
