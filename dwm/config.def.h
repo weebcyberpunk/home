@@ -96,6 +96,7 @@ static const char *logoutcmd[] = { "/home/gg/.local/bin/dmenu_shutdown", NULL };
 static const char *projects_menu_cmd[] = { "/home/gg/.local/bin/dmenu_projects", NULL };
 static const char *web_menu_cmd[] = { "/home/gg/.local/bin/dmenu_web", NULL };
 static const char *ffmpegcmd[] = { "/home/gg/.local/bin/dmenu-ffmpeg.sh", NULL };
+static const char *dmenu_cmus_cmd[] = { "/home/gg/.local/bin/dmenu_cmus.sh", NULL };
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
@@ -152,6 +153,7 @@ static Key keys[] = {
 	{ MODKEY,                       XK_period, spawn,          {.v = projects_menu_cmd } },	
 	{ MODKEY,                       XK_b,      spawn,          {.v = web_menu_cmd } },	
 	{ MODKEY|ControlMask,           XK_r,      spawn,          {.v = ffmpegcmd } },	
+	{ MODKEY,                       XK_c,      spawn,          {.v = dmenu_cmus_cmd } },
 	
 	// audio
 	{ ControlMask|Mod1Mask,         XK_k,      spawn,          {.v = increase_vol_cmd } },
