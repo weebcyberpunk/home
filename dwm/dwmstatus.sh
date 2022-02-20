@@ -83,12 +83,12 @@ status () {
 
 	# date
 	echo -n "$(date +'%b %d, %H:%M')"
-
-	# sleep so it doesn't take all our resources
-	sleep 0.75
 }
 
 while :
 do
 	xsetroot -name "$(status)"
+
+	# sleep so it doesn't take all our resources
+	sleep 1m
 done

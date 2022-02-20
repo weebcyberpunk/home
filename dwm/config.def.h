@@ -76,9 +76,9 @@ static const char *termcmd[]  = { "st", NULL };
 // custom commands
 //
 // audio
-static const char *increase_vol_cmd[] = { "pamixer", "-i", "1", NULL };
-static const char *decrease_vol_cmd[] = { "pamixer", "-d", "1", NULL };
-static const char *toggle_mute_cmd[] = { "pamixer", "-t", NULL };
+static const char *increase_vol_cmd[] = { "/home/gg/.local/bin/pamixer_volume.sh", "--increase", NULL };
+static const char *decrease_vol_cmd[] = { "/home/gg/.local/bin/pamixer_volume.sh", "--decrease", NULL };
+static const char *toggle_mute_cmd[] = { "/home/gg/.local/bin/pamixer_volume.sh", "--mute", NULL };
 static const char *pause_cmd[] = { "cmus-remote", "-u", NULL };
 static const char *next_song_cmd[] = { "cmus-remote", "-n", NULL };
 static const char *previous_song_cmd[] = { "cmus-remote", "-r", NULL };
@@ -86,7 +86,7 @@ static const char *previous_song_cmd[] = { "cmus-remote", "-r", NULL };
 // launchers
 static const char *open_browser_cmd[] = { "qutebrowser", NULL };
 static const char *open_vim_cmd[] = { "st", "-e", "vim", NULL };
-static const char *open_cmus_cmd[] = { "st", "-e", "cmus", NULL };
+static const char *open_cmus_cmd[] = { "/home/gg/.local/bin/cmus_open.sh", NULL };
 static const char *screenshot_cmd[] = { "gnome-screenshot", "-i", NULL };
 
 // dmenu
