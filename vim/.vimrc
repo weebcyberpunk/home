@@ -67,6 +67,10 @@ noremap <C-Down> :resize -3<CR>
 " snippets keybinds
 nnoremap ,java :-1read ~/.vim/snippets/skeleton.java<CR>2j$
 nnoremap ,c :-1read ~/.vim/snippets/skeleton.c<CR>3j
+
+" replace strings (maps two spaces to find the next '++' and replace it)
+nnoremap <Space><Space> /++<CR>2xi
+
 " }}}
 
 " WRAP AND LINEBREAK {{{
