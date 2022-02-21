@@ -38,15 +38,6 @@ set splitright
 " 				I'm using an st keybind
 nnoremap tn :set rnu!<CR>
 
-" remapping jj to ESC in i mode
-"
-" most people remaps CAPS to it, but it needs sys-wide config, and sometimes
-" CAPS is usefull
-"
-" and about CAPS, I have this problem where I do not disable CAPS when exiting
-" i mode. you should pay attention to that too!
-inoremap jj <Esc>
-
 " split keybinds
 " easier navigation without Ctrl+w
 nnoremap <C-H> <C-W><C-H>
