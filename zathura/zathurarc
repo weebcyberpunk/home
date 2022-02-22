@@ -22,3 +22,5 @@ set inputbar-fg "#ffffff"
 
 set notification-bg "#383C4A" 
 set notification-fg "#ffffff"
+
+set statusbar-home-tilde true
