@@ -55,7 +55,12 @@ alias record-screen='ffmpeg -f x11grab -i :0.0 x11-screen-record.mp4'
 alias record-cam='ffmpeg -i /dev/video0 -f alsa -i default webcam-record.mp4'
 alias record-mic='ffmpeg -f alsa -i default alsa-mic-record.mp3'
 alias take-a-shot='mpv av://v4l2:/dev/video0 --profile=low-latency --untimed' # use mpv to display the webcam on a screen and press s to take a shot
-alias record-all='$HOME/.local/bin/record-all.sh'
+alias record-all='$HOME/.local/bin/record-all.sh' 			      # by default ffmpeg uses a twitter-unsupported codec, this reencodes
+alias convert-to-twitter='ffmpeg -i out.mp4 -c:v libx264 -crf 20 -preset slow -vf format=yuv420p -c:a aac -movflags +faststart output.mp4'
+# command configs
+alias cbonsai='cbonsai -l -S -i'
+alias unimatrix='unimatrix -c cyan'
+alias tty-clock='tty-clock -c -C 6 -s'
 
 # edit line in vim (very useful to test little scripts)
 autoload edit-command-line; zle -N edit-command-line
