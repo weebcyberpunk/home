@@ -46,6 +46,7 @@ alias clear='clear && pfetch'
 alias fzf='find * | grep' # emulates a fzf but directly in the cli and not in the finder
 alias fzfh='find .* | grep' # same but with only hidden
 alias rm='rm -i'
+alias weather='curl wttr.in/curitiba'
 # mounting and unmounting
 alias mount-drive='udisksctl mount -b /dev/sdb1'
 alias umount-drive='udisksctl unmount -b /dev/sdb1'
