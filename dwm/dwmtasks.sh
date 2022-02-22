@@ -4,9 +4,9 @@
 # version 0.0.0
 # since Feb 14, 2022
 
-# tasks I want my computer to run every 30 minutes
+# tasks I want my computer to run sometimes
 
-function tasks() {
+function update_packages() {
 
 	notify-send "Checking for system upgrades" "Updating database with mirror"
 
@@ -26,8 +26,18 @@ function tasks() {
 
 }
 
+function update_feeds() {
+
+	notify-send "Updating RSS feeds" "Updating local articles with online RSS feeds"
+
+	newsboat -x reload
+
+}
+
 while :
 do
-	tasks
-	sleep 1h
+	sleep 30m
+	update_packages
+	sleep 30m
+	update_feeds
 done
