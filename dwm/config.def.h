@@ -88,6 +88,9 @@ static const char *open_browser_cmd[] = { "qutebrowser", NULL };
 static const char *open_vim_cmd[] = { "st", "-e", "vim", NULL };
 static const char *open_cmus_cmd[] = { "/home/gg/.local/bin/cmus_open.sh", NULL };
 static const char *screenshot_cmd[] = { "gnome-screenshot", "-i", NULL };
+static const char *open_email_cmd[] = { "st", "-e", "neomutt", NULL };
+static const char *open_htop_cmd[] = { "st", "-e", "htop", NULL };
+static const char *open_rss_cmd[] = { "st", "-e", "newsboat", NULL };
 
 // dmenu
 static const char *passmenucmd[] = { "passmenu", "--type", NULL };
@@ -145,6 +148,9 @@ static Key keys[] = {
 	{ MODKEY,                       XK_v,      spawn,          {.v = open_vim_cmd } },
 	{ MODKEY,                       XK_m,      spawn,          {.v = open_cmus_cmd } },	
 	{ MODKEY,                       XK_p,      spawn,          {.v = screenshot_cmd } },
+	{ MODKEY,                       XK_t,      spawn,          {.v = open_email_cmd } },
+	{ MODKEY,                       XK_s,      spawn,          {.v = open_htop_cmd } },
+	{ MODKEY,                       XK_f,      spawn,          {.v = open_rss_cmd } },
 
 	// dmenu
 	{ MODKEY|ControlMask,           XK_p,      spawn,          {.v = passmenucmd } },
