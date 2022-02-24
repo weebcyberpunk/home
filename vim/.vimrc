@@ -60,8 +60,8 @@ noremap <C-Down> :resize -3<CR>
 " snippets keybinds
 nnoremap ;java :-1read ~/.vim/snippets/skeleton.java<CR>2j$
 nnoremap ;c :-1read ~/.vim/snippets/skeleton.c<CR>3j
-nnoremap ;sd :-1read ~/.vim/snippets/script-doc.sh<CR>
-nnoremap ;cd :-1read ~/.vim/snippets/header-doc.c<CR>
+nnoremap ;ds :-1read ~/.vim/snippets/script-doc.sh<CR>
+nnoremap ;dc :-1read ~/.vim/snippets/header-doc.c<CR>
 nnoremap ;gplc :-1read ~/.vim/snippets/gpl.c<CR>
 nnoremap ;gpls :-1read ~/.vim/snippets/gpl.sh<CR>
 
