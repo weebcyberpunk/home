@@ -6,6 +6,8 @@ set path+=**
 set foldmethod=marker
 set nohidden
 set background=dark
+set incsearch
+set ignorecase
 " }}}
 
 " VIM-PLUG {{{
@@ -84,6 +86,13 @@ augroup END
 " }}}
 
 " HI {{{
-" just makes the line numbers dark gray so they're more discrete
+" i'm a minimalist, I like to see nothing
+" makes numbers darkgray because it's almost invisible in my terminal
 hi LineNr ctermfg=DarkGray
+" make vertsplits literally transparent
+hi VertSplit ctermfg=0 ctermbg=NONE cterm=NONE
+set fillchars=vert:\ 
+" make statusline background transparent
+hi StatusLine ctermfg=14 ctermbg=NONE cterm=NONE
+hi StatusLineNC ctermfg=7 ctermbg=NONE cterm=NONE
 " }}}
