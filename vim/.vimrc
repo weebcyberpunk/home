@@ -71,7 +71,7 @@ nnoremap <Space><Space> /++<CR>2xi
 " }}}
 
 " WRAP AND LINEBREAK {{{
-" it file is markdown, html or txt, sets line wrap without slicing words.
+" it file is markdown, html, ms (groff) or txt, sets line wrap without slicing words.
 " other files keeps without wrap
 augroup markdown_settings
 	autocmd!
@@ -81,7 +81,8 @@ augroup markdown_settings
 	autocmd BufNewFile,BufRead *.html set wrap
 	autocmd BufNewFile,BufRead *.html set linebreak
 	autocmd BufNewFile,BufRead *.txt set wrap
-	autocmd BufNewFile,BufRead *.txt set linebreak
+	autocmd BufNewFile,BufRead *.ms set wrap
+	autocmd BufNewFile,BufRead *.ms set linebreak
 augroup END
 " }}}
 
