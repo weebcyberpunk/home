@@ -263,27 +263,27 @@ c.zoom.default = '125'
 
 # Background color of the completion widget for odd rows.
 # Type: QssColor
-c.colors.completion.odd.bg = '#404552'
+c.colors.completion.odd.bg = '#23252E'
 
 # Background color of the completion widget for even rows.
 # Type: QssColor
-c.colors.completion.even.bg = '#383C4A'
+c.colors.completion.even.bg = '#292C37'
 
 # Background color of the completion widget category headers.
 # Type: QssColor
-c.colors.completion.category.bg = '#383C4A'
+c.colors.completion.category.bg = '#292C37'
 
 # Background color of the selected completion item.
 # Type: QssColor
-c.colors.completion.item.selected.bg = '#4084D6'
+c.colors.completion.item.selected.bg = '#2777FF'
 
 # Top border color of the selected completion item.
 # Type: QssColor
-c.colors.completion.item.selected.border.top = '#4084D6'
+c.colors.completion.item.selected.border.top = '#2777FF'
 
 # Bottom border color of the selected completion item.
 # Type: QssColor
-c.colors.completion.item.selected.border.bottom = '#4084D6'
+c.colors.completion.item.selected.border.bottom = '#2777FF'
 
 # Foreground color of the matched text in the selected completion item.
 # Type: QtColor
@@ -295,35 +295,35 @@ c.colors.completion.match.fg = '#5294E2'
 
 # Background color of the statusbar.
 # Type: QssColor
-c.colors.statusbar.normal.bg = '#383C4A'
+c.colors.statusbar.normal.bg = '#23252E'
 
 # Background color of the statusbar in insert mode.
 # Type: QssColor
-c.colors.statusbar.insert.bg = '#5294E2'
+c.colors.statusbar.insert.bg = '#2777FF'
 
 # Background color of the statusbar in command mode.
 # Type: QssColor
-c.colors.statusbar.command.bg = '#383C4A'
+c.colors.statusbar.command.bg = '#23252E'
 
 # Background color of the tab bar.
 # Type: QssColor
-c.colors.tabs.bar.bg = '#383C4A'
+c.colors.tabs.bar.bg = '#23252E'
 
 # Background color of unselected odd tabs.
 # Type: QtColor
-c.colors.tabs.odd.bg = '#383C4A'
+c.colors.tabs.odd.bg = '#23252E'
 
 # Background color of unselected even tabs.
 # Type: QtColor
-c.colors.tabs.even.bg = '#383C4A'
+c.colors.tabs.even.bg = '#23252E'
 
 # Background color of selected odd tabs.
 # Type: QtColor
-c.colors.tabs.selected.odd.bg = '#4084D6'
+c.colors.tabs.selected.odd.bg = '#2777FF'
 
 # Background color of selected even tabs.
 # Type: QtColor
-c.colors.tabs.selected.even.bg = '#4084D6'
+c.colors.tabs.selected.even.bg = '#2777FF'
 
 # Default font families to use. Whenever "default_family" is used in a
 # font setting, it's replaced with the fonts listed here. If set to an
