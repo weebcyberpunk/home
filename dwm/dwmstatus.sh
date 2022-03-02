@@ -82,7 +82,7 @@ status () {
 	echo -n " | "
 
 	# date
-	echo -n "$(date +'%b %d, %H:%M')"
+	echo -n "$(date +'%a %b %d, %H:%M')"
 }
 
 while :
