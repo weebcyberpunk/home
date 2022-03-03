@@ -87,13 +87,11 @@ augroup END
 " }}}
 
 " HI {{{
-" i'm a minimalist, I like to see nothing
-" makes numbers darkgray because it's almost invisible in my terminal
+" makes numbers darkgray because it's almost invisible
 hi LineNr ctermfg=DarkGray
-" make vertsplits literally transparent
-hi VertSplit ctermfg=0 ctermbg=NONE cterm=NONE
-set fillchars=vert:\ 
-" make statusline background transparent
-hi StatusLine ctermfg=14 ctermbg=NONE cterm=NONE
-hi StatusLineNC ctermfg=7 ctermbg=NONE cterm=NONE
+" vertsplits
+hi VertSplit ctermfg=Black ctermbg=Black
+" statusline
+hi StatusLine ctermfg=Black ctermbg=Cyan
+hi StatusLineNC ctermfg=Cyan ctermbg=Black
 " }}}
