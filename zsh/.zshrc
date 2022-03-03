@@ -72,16 +72,5 @@ setopt PRINT_EXIT_VALUE
 
 # window title
 
-# as I use ST, it avoids setting the title inside vim term
-if [ $TERM != "xterm-256color" ]
-then
-	TITLE="Terminal"
-	echo -ne '\033k'$TITLE'\033\\'
-fi
-
-function precmd() {
-	echo -ne '\033k'$TITLE'\033\\'
-}
-
 # display pfetch
 pfetch
