@@ -90,8 +90,8 @@ augroup END
 " makes numbers darkgray because it's almost invisible
 hi LineNr ctermfg=DarkGray
 " vertsplits
-hi VertSplit ctermfg=Black ctermbg=Black
+hi VertSplit ctermbg=NONE cterm=NONE
 " statusline
-hi StatusLine ctermfg=Black ctermbg=Cyan
-hi StatusLineNC ctermfg=Cyan ctermbg=Black
+hi StatusLine ctermbg=NONE cterm=NONE
+hi StatusLineNC ctermbg=NONE cterm=NONE
 " }}}
