@@ -2,10 +2,11 @@
 
 /* appearance */
 static const unsigned int borderpx  = 0;        /* border pixel of windows */
+static const int startwithgaps	    = 1;	/* 1 means gaps are used by default */
+static const unsigned int gappx     = 22;       /* default gap between windows in pixels */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const unsigned int gappx     = 20;        /* gaps between windows */
 static const char *fonts[]          = { "UbuntuMono Nerd Font:size=15:antialias=true:hinting=true" };
 static const char dmenufont[]       = "UbuntuMono Nerd Font:size=15";
 static const char col_gray1[]       = "#23252E";
@@ -128,9 +129,10 @@ static Key keys[] = {
 	{ MODKEY,                       XK_period, focusmon,       {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
-	{ MODKEY,                       XK_minus,  setgaps,        {.i = -4 } },
-	{ MODKEY,                       XK_equal,  setgaps,        {.i = +4 } },
-	{ ShiftMask|ControlMask,        XK_equal,  setgaps,        {.i = 6 } },
+	{ MODKEY|Mod1Mask,              XK_minus,  setgaps,        {.i = -2 } },
+	{ MODKEY|Mod1Mask,              XK_equal,  setgaps,        {.i = +2 } },
+	{ MODKEY,                       XK_minus,  setgaps,        {.i = GAP_RESET } },
+	{ MODKEY,                       XK_equal,  setgaps,        {.i = GAP_TOGGLE} },
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
 	TAGKEYS(                        XK_3,                      2)
