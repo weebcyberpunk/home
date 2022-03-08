@@ -58,10 +58,8 @@ noremap <C-Up> :resize +3<CR>
 noremap <C-Down> :resize -3<CR>
 
 " snippets keybinds
-nnoremap ;java :-1read ~/.vim/snippets/skeleton.java<CR>5jddgg$2h :let @a=expand('%:p:h:t')<CR>"ap 2j$2h :let @a=expand('%t')<CR>"ap 5h4xr<Space>o
-nnoremap ;c :-1read ~/.vim/snippets/skeleton.c<CR>6jdd3k2l :let @a=expand('%t')<CR>"aph2xli
+nnoremap ;c :-1r ~/.vim/snippets/skeleton.c<CR>6j8l :-1r ! date +'\%b \%d, \%Y'<CR>kJ Gdd3k2l :let @a=expand('%t')<CR>"aph2xl
 nnoremap ;ds :-1read ~/.vim/snippets/script-doc.sh<CR>2j8l:r ! date +'\%b \%d, \%Y'<CR>kJjdd
-nnoremap ;dc :-1read ~/.vim/snippets/header-doc.c<CR>3j8l:r ! date +'\%b \%d, \%Y'<CR>kJ2jdd
 nnoremap ;gplc :-1read ~/.vim/snippets/gpl.c<CR>
 nnoremap ;gpls :-1read ~/.vim/snippets/gpl.sh<CR>
 
