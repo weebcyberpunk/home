@@ -26,18 +26,8 @@ function update_packages() {
 
 }
 
-function update_feeds() {
-
-	notify-send "Updating RSS feeds" "Updating local articles with online RSS feeds"
-
-	newsboat -x reload
-
-}
-
 while :
 do
-	sleep 30m
+	sleep 1h
 	update_packages
-	sleep 30m
-	update_feeds
 done
