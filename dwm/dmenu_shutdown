@@ -26,13 +26,13 @@ case "$action" in
         ;;
 
     lock)
-        slock
+        slock && $HOME/.local/bin/dwm_refresh_status.sh
         ;;
 
     suspend)
-        $HOME/.local/bin/suspend.sh
+        $HOME/.local/bin/suspend.sh && $HOME/.local/bin/dwm_refresh_status.sh
         ;;
 esac
 
 # link to repo original repo: https://github.com/AKuederle/dmenu_tools
-# link to GG's version: https://github.com/weebcyberpunk/dotfiles
+# link to Gabriel de Brito's version: https://github.com/gioiacyberpunk/dotfiles
