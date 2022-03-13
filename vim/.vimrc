@@ -60,8 +60,9 @@ noremap <C-Down> :resize -3<CR>
 " snippets keybinds
 nnoremap ;c :-1r ~/.vim/snippets/skeleton.c<CR>6j8l :-1r ! date +'\%b \%d, \%Y'<CR>kJ Gdd3k2l :let @a=expand('%t')<CR>"aph2xl
 nnoremap ;ds :-1read ~/.vim/snippets/script-doc.sh<CR>2j8l:r ! date +'\%b \%d, \%Y'<CR>kJjdd
-nnoremap ;gplc :-1read ~/.vim/snippets/gpl.c<CR>
-nnoremap ;gpls :-1read ~/.vim/snippets/gpl.sh<CR>
+nnoremap ;mitc :r ~/.vim/snippets/mit.c<CR>j :r ! date +'\%Y'<CR>kJJ
+nnoremap ;mits :-1r ~/.vim/snippets/mit.sh<CR>j :r ! date +'\%Y'<CR>kJJ
+nnoremap ;mitt :-1r ~/.vim/snippets/mit.txt<CR>:r ! date +'\%Y'<CR>kJJ
 
 " replace strings (maps two spaces to find the next '++' and replace it)
 nnoremap <Space><Space> /++<CR>2xi
