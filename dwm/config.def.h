@@ -1,3 +1,4 @@
+#define TERM "st"
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
@@ -41,7 +42,7 @@ static const Rule rules[] = {
 	 */
 	/* class      instance    title       tags mask     isfloating   isterminal noswallow monitor */
 	{ "Gnome-screenshot", NULL, "Screenshot",  0,          1,           0,         1,       -1 },
-	{ "st"        , NULL,       NULL,       0,             0,           1,         0,       -1 },
+	{ TERM          , NULL,     NULL,          0,          0,           1,         0,       -1 },
 
 };
 
@@ -72,7 +73,7 @@ static const Layout layouts[] = {
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", NULL };
-static const char *termcmd[]  = { "st", NULL };
+static const char *termcmd[]  = { TERM, NULL };
 
 // custom commands
 //
@@ -86,12 +87,13 @@ static const char *previous_song_cmd[] = { "cmus-remote", "-r", NULL };
 
 // launchers
 static const char *open_browser_cmd[] = { "qutebrowser", NULL };
-static const char *open_vim_cmd[] = { "st", "-e", "vim", NULL };
+static const char *open_vim_cmd[] = { TERM, "-e", "vim", NULL };
 static const char *open_cmus_cmd[] = { "/home/gg/.local/bin/cmus_open.sh", NULL };
 static const char *screenshot_cmd[] = { "gnome-screenshot", "-i", NULL };
-static const char *open_email_cmd[] = { "st", "-e", "neomutt", NULL };
-static const char *open_htop_cmd[] = { "st", "-e", "htop", NULL };
-static const char *open_rss_cmd[] = { "st", "-e", "newsboat", NULL };
+static const char *open_email_cmd[] = { TERM, "-e", "neomutt", NULL };
+static const char *open_htop_cmd[] = { TERM, "-e", "htop", NULL };
+static const char *open_rss_cmd[] = { TERM, "-e", "newsboat", NULL };
+static const char *open_fm_cmd[] = { TERM, "-e", "lf", NULL };
 
 // dmenu
 static const char *passmenucmd[] = { "passmenu", "--type", NULL };
@@ -123,6 +125,7 @@ static Key keys[] = {
 	{ MODKEY|ControlMask,           XK_m,      setlayout,      {.v = &layouts[2]} },
 	{ MODKEY,                       XK_space,  setlayout,      {0} },
 	{ MODKEY|ShiftMask,             XK_f,      togglefloating, {0} },
+	{ MODKEY|ShiftMask, 		XK_s, 	   togglesticky,   {0} },
 	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },
 	{ MODKEY|ShiftMask,             XK_0,      tag,            {.ui = ~0 } },
 	{ MODKEY,                       XK_comma,  focusmon,       {.i = -1 } },
@@ -152,7 +155,8 @@ static Key keys[] = {
 	{ MODKEY,                       XK_p,      spawn,          {.v = screenshot_cmd } },
 	{ MODKEY,                       XK_t,      spawn,          {.v = open_email_cmd } },
 	{ MODKEY,                       XK_s,      spawn,          {.v = open_htop_cmd } },
-	{ MODKEY,                       XK_f,      spawn,          {.v = open_rss_cmd } },
+	{ MODKEY,                       XK_r,      spawn,          {.v = open_rss_cmd } },
+	{ MODKEY,                       XK_f,      spawn,          {.v = open_fm_cmd } },
 
 	// dmenu
 	{ MODKEY|ControlMask,           XK_p,      spawn,          {.v = passmenucmd } },
