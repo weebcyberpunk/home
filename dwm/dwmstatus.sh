@@ -7,15 +7,26 @@ status () {
 
 	CMUS_ARTIST="$(cmus-remote -Q 2> /dev/null | grep ' artist ' | awk '{print substr($0, 12)}')"  
 	CMUS_TRACK="$(cmus-remote -Q 2> /dev/null | grep ' title ' | awk '{print substr($0, 11)}')"
+	CMUS_STATUS="$(cmus-remote -Q 2> /dev/null | grep 'status ' | awk '{print substr($2, 0)}')"
 
 	if [ "$CMUS_ARTIST" = "" ]
 	then
 		echo -n "nothing playing"
-	elif [ "$CMUS_ARTIST" = "Various" ]
-	then
-		echo -n "$CMUS_TRACK"
+
 	else
-		echo -n "$CMUS_ARTIST - $CMUS_TRACK"
+		if [ "$CMUS_ARTIST" = "Various" ]
+		then
+			echo -n "$CMUS_TRACK "
+		else
+			echo -n "$CMUS_ARTIST - $CMUS_TRACK "
+		fi
+
+		if [ "$CMUS_STATUS" == "playing" ]
+		then
+			echo -n "契"
+		else
+			echo -n ""
+		fi
 	fi
 
 	echo -n " | "
@@ -43,43 +54,47 @@ status () {
 	echo -n " | "
 
 	# battery widget and notify
-	BATTERY=$(cat /sys/class/power_supply/BAT1/capacity)
-	CHARGING=$(cat /sys/class/power_supply/BAT1/status)
+	BATTERY="$(cat /sys/class/power_supply/BAT1/capacity)"
+	CHARGING="$(cat /sys/class/power_supply/BAT1/status)"
 	
-	if [ $CHARGING == "Charging" ]
+	if [ $BATTERY != "" ]
 	then
-		echo -n " $BATTERY%"
-
-	else
-
-		if [ $BATTERY -gt 80 ]
+		if [ $CHARGING == "Charging" ]
 		then
-			echo -n " $BATTERY%"
-
-		elif [ $BATTERY -gt 60 ]
-		then
-			echo -n " $BATTERY%"
-
-		elif [ $BATTERY -gt 40 ]
-		then
-			echo -n " $BATTERY%"
-
-		elif [ $BATTERY -gt 20 ]
-		then
-			echo -n " $BATTERY%"
-
-		elif [ $BATTERY -gt 10 ]
-		then
-			echo -n " $BATTERY%"
+			echo -n " $BATTERY%"
 
 		else
-			echo -n " $BATTERY%"
-			
+
+			if [ $BATTERY -gt 80 ]
+			then
+				echo -n " $BATTERY%"
+
+			elif [ $BATTERY -gt 60 ]
+			then
+				echo -n " $BATTERY%"
+
+			elif [ $BATTERY -gt 40 ]
+			then
+				echo -n " $BATTERY%"
+
+			elif [ $BATTERY -gt 20 ]
+			then
+				echo -n " $BATTERY%"
+
+			elif [ $BATTERY -gt 10 ]
+			then
+				echo -n " $BATTERY%"
+
+			else
+				echo -n " $BATTERY%"
+				
+			fi
+
 		fi
 
-	fi
-
 	echo -n " | "
+
+	fi
 
 	# date
 	echo -n "$(date +'%a %b %d, %H:%M')"
