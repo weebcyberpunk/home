@@ -80,6 +80,7 @@ augroup markdown_settings
 	autocmd BufNewFile,BufRead *.html set wrap
 	autocmd BufNewFile,BufRead *.html set linebreak
 	autocmd BufNewFile,BufRead *.txt set wrap
+	autocmd BufNewFile,BufRead *.txt set linebreak
 	autocmd BufNewFile,BufRead *.ms set wrap
 	autocmd BufNewFile,BufRead *.ms set linebreak
 augroup END
