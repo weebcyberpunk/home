@@ -10,7 +10,7 @@
 #
 
 actions=("logout\nrestart\nshutdown\nlock\nsuspend")
-action=$(echo -e $actions | dmenu)
+action=$(echo -e $actions | dmenu -p 'Action: ')
 case "$action" in
     logout)
         pkill dwm
@@ -26,11 +26,11 @@ case "$action" in
         ;;
 
     lock)
-        slock && $HOME/.local/bin/dwm_refresh_status.sh
+        slock
         ;;
 
     suspend)
-        $HOME/.local/bin/suspend.sh && $HOME/.local/bin/dwm_refresh_status.sh
+        $HOME/.local/bin/suspend.sh
         ;;
 esac
 
