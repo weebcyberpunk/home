@@ -1,4 +1,4 @@
 set set_term_title=false
 set aaa_mode=all
-set resume=true
-set status_display_program=/home/gg/.local/bin/dwm_refresh_status.sh
+set resume=false
+set status_display_program=/home/gg/.local/bin/cmus_change_status.sh
