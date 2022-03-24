@@ -1,0 +1,3 @@
+# vim: filetype=neomuttrc
+
+bind index,pager B sidebar-toggle-visible
