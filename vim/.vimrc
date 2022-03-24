@@ -25,7 +25,7 @@ call plug#end()
 " WILDMENU {{{
 " setting wildmenu and removing some files from it
 set wildmenu
-set wildignore+=tags,__pycache__/,test.txt,test*.txt,LICENSE
+set wildignore+=tags,__pycache__/,test.txt,test*.txt,LICENSE,a.out
 "}}}
 
 " SPLITS {{{
