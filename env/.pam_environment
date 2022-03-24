@@ -1,5 +1,4 @@
 EDITOR=vim
-GTK_THEME=Flat-Remix-GTK-Blue-Dark
 QT_STYLE_OVERRIDE=gtk2
 LF_ICONS='\
 *.this_is_here_to_avoid_bugs=:\
