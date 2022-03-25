@@ -69,21 +69,37 @@ nnoremap <Space><Space> /++<CR>2xi
 
 " }}}
 
-" WRAP AND LINEBREAK {{{
+" FILETYPE SETTINGS {{{
 " it file is markdown, html, ms (groff) or txt, sets line wrap without slicing words.
 " other files keeps without wrap
-augroup markdown_settings
+function DocSettings()
+	set wrap
+	set linebreak
+endfunction
+
+function GroffSettings()
+	call DocSettings()
+	set filetype=groff
+endfunction
+
+augroup wrap_settings
 	autocmd!
 	autocmd BufNewFile,BufRead * set nowrap
-	autocmd BufNewFile,BufRead *.md set wrap
-	autocmd BufNewFile,BufRead *.md set linebreak
-	autocmd BufNewFile,BufRead *.html set wrap
-	autocmd BufNewFile,BufRead *.html set linebreak
-	autocmd BufNewFile,BufRead *.txt set wrap
-	autocmd BufNewFile,BufRead *.txt set linebreak
-	autocmd BufNewFile,BufRead *.ms set wrap
-	autocmd BufNewFile,BufRead *.ms set linebreak
+	autocmd BufNewFile,BufRead *.md call DocSettings()
+	autocmd BufNewFile,BufRead *.html call DocSettings()
+	autocmd BufNewFile,BufRead *.txt call DocSettings()
+	autocmd BufNewFile,BufRead *.ms call DocSettings()
 augroup END
+
+augroup groff_settings
+	autocmd!
+	autocmd BufNewFile,BufRead *.1 call GroffSettings()
+	autocmd BufNewFile,BufRead *.2 call GroffSettings()
+	autocmd BufNewFile,BufRead *.3 call GroffSettings()
+	autocmd BufNewFile,BufRead *.4 call GroffSettings()
+	autocmd BufNewFile,BufRead *.5 call GroffSettings()
+	autocmd BufNewFile,BufRead *.6 call GroffSettings()
+	autocmd BufNewFile,BufRead *.7 call GroffSettings()
 " }}}
 
 " HI {{{
