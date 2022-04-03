@@ -47,15 +47,9 @@ nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 
-" open v-split with Ctrl+w and Ctrl+i and h-split with Ctrl+w and Ctrl+u
-map <C-w><C-i> :vsp<CR>
-map <C-w><C-u> :sp<CR>
-
-" resize splits with Ctrl+arrow keys
-noremap <C-Left> :vertical resize +3<CR>
-noremap <C-Right> :vertical resize -3<CR>
-noremap <C-Up> :resize +3<CR>
-noremap <C-Down> :resize -3<CR>
+" open v-split with si and h-split with su
+nnoremap si :vsp<CR>
+nnoremap su :sp<CR>
 
 " snippets keybinds
 nnoremap ;c :-1r ~/.vim/snippets/skeleton.c<CR>6j8l :-1r ! date +'\%b \%d, \%Y'<CR>kJ Gdd3k2l :let @a=expand('%t')<CR>"aph2xl
