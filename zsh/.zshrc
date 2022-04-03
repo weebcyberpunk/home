@@ -39,7 +39,6 @@ PS1='%B%F{blue}%1~%f%b $ '
 # aliases
 
 # common
-alias upgrade='yay -Syu'
 alias pyv='source ~/Etc/python3.10/bin/activate' # activate python venv
 alias clear='clear && pfetch'
 alias fzf='find * | grep' # emulates a fzf but directly in the cli and not in the finder
@@ -50,13 +49,13 @@ alias suckless='rm config.h && sudo make clean install'
 alias mount-drive='udisksctl mount -b /dev/sdb1'
 alias umount-drive='udisksctl unmount -b /dev/sdb1'
 # downloads and records
-alias music-dl='youtube-dl -x --audio-format mp3'
+alias music-dl='youtube-dl -i -x --audio-format mp3'
 alias record-screen='ffmpeg -f x11grab -i :0.0 x11-screen-record.mp4'
 alias record-cam='ffmpeg -i /dev/video0 -f alsa -i default webcam-record.mp4'
 alias record-mic='ffmpeg -f alsa -i default alsa-mic-record.mp3'
 alias take-a-shot='mpv av://v4l2:/dev/video0 --profile=low-latency --untimed' # use mpv to display the webcam on a screen and press s to take a shot
 alias record-all='$HOME/.local/bin/record-all.sh' 			      # by default ffmpeg uses a twitter-unsupported codec, this reencodes
-alias convert-to-twitter='ffmpeg -i out.mp4 -c:v libx264 -crf 20 -preset slow -vf format=yuv420p -c:a aac -movflags +faststart output.mp4'
+alias convert-to-web='ffmpeg -i out.mp4 -c:v libx264 -crf 20 -preset slow -vf format=yuv420p -c:a aac -movflags +faststart output.mp4'
 # command configs
 alias cbonsai='cbonsai -l -S -i'
 alias unimatrix='unimatrix -c cyan'
@@ -68,8 +67,6 @@ bindkey '^e' edit-command-line
 
 # print exit value if != 0
 setopt PRINT_EXIT_VALUE
-
-# window title
 
 # display pfetch
 pfetch
