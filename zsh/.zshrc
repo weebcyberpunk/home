@@ -39,12 +39,12 @@ PS1='%B%F{blue}%1~%f%b $ '
 # aliases
 
 # common
-alias pyv='source ~/Etc/python3.10/bin/activate' # activate python venv
 alias clear='clear && pfetch'
 alias fzf='find * | grep' # emulates a fzf but directly in the cli and not in the finder
 alias fzfh='find .* | grep' # same but with only hidden
 alias weather='curl wttr.in/curitiba'
 alias suckless='rm config.h && sudo make clean install'
+alias font-list="fc-list | awk '{gsub(\$1, \"\"); print \$0}'"
 # mounting and unmounting
 alias mount-drive='udisksctl mount -b /dev/sdb1'
 alias umount-drive='udisksctl unmount -b /dev/sdb1'
