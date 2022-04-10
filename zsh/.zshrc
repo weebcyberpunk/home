@@ -34,7 +34,7 @@ alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 
 # set prompt
-PS1='%B%F{blue}%2~%f%b >_ '
+PS1='%B%F{blue}%2~%f%b > '
 
 # aliases
 
