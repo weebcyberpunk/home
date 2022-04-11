@@ -1,4 +1,5 @@
 EDITOR=vim
+BROWSER=brave
 QT_STYLE_OVERRIDE=gtk2
 GTK_THEME=Flat-Remix-GTK-Blue-Dark
 LF_ICONS='\
