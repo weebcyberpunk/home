@@ -75,8 +75,8 @@ nnoremap <Space><Space> /++<CR>2xi
 nnoremap <C-n> :NERDTreeToggle<CR>
 
 " zen mode emulator
-nnoremap <C-f> :set norelativenumber<CR> :set nonumber<CR> :GitGutterDisable<CR> :GitGutterSignsDisable<CR> :NERDTreeClose<CR>
-nnoremap <C-u> :set relativenumber<CR> :set number<CR> :NERDTree<CR> :GitGutterEnable<CR> :GitGutterSignsEnable<CR> :wincmd p<CR>
+map <C-f> :set norelativenumber<CR>:set nonumber<CR>:NERDTreeClose<CR>:GitGutterDisable<CR>:GitGutterSignsDisable<CR>
+map <C-u> :set relativenumber<CR>:set number<CR>:NERDTree<CR>:wincmd p<CR>:GitGutterEnable<CR>:GitGutterSignsEnable<CR>
 
 " }}}
 
