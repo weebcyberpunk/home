@@ -1,6 +1,7 @@
 " BASIC CONFIG {{{
 " minor configs
 filetype plugin indent on
+set tw=80
 set formatoptions+=rc
 set path+=**
 set foldmethod=marker
@@ -9,6 +10,7 @@ set background=dark
 set incsearch
 set ignorecase
 set relativenumber
+set number
 set scrolloff=5
 " }}}
 
@@ -44,7 +46,7 @@ set splitright
 " KEYBINDS {{{
 " general
 map <C-t> :term<CR>
-nnoremap tn :set rnu!<CR>
+nnoremap tn :set rnu!<CR> :set nu!<CR>
 nnoremap <C-s> :setlocal spell!<CR>
 nnoremap tg :GitGutterToggle<CR>
 
@@ -73,8 +75,8 @@ nnoremap <Space><Space> /++<CR>2xi
 nnoremap <C-n> :NERDTreeToggle<CR>
 
 " zen mode emulator
-nnoremap <C-f> :set norelativenumber<CR> :GitGutterDisable<CR> :GitGutterSignsDisable<CR> :NERDTreeClose<CR>
-nnoremap <C-u> :set relativenumber<CR> :NERDTree<CR> :GitGutterEnable<CR> :GitGutterSignsEnable<CR> :wincmd p<CR>
+nnoremap <C-f> :set norelativenumber<CR> :set nonumber<CR> :GitGutterDisable<CR> :GitGutterSignsDisable<CR> :NERDTreeClose<CR>
+nnoremap <C-u> :set relativenumber<CR> :set number<CR> :NERDTree<CR> :GitGutterEnable<CR> :GitGutterSignsEnable<CR> :wincmd p<CR>
 
 " }}}
 
