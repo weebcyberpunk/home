@@ -9,6 +9,7 @@ set background=dark
 set incsearch
 set ignorecase
 set relativenumber
+set scrolloff=5
 " }}}
 
 " VIM-PLUG {{{
@@ -41,9 +42,11 @@ set splitright
 " }}}
 
 " KEYBINDS {{{
-" mapping Ctrl+t to open terminal and tn to toggle relative numbers
+" general
 map <C-t> :term<CR>
 nnoremap tn :set rnu!<CR>
+nnoremap <C-s> :setlocal spell!<CR>
+nnoremap tg :GitGutterToggle<CR>
 
 " split keybinds
 " easier navigation without Ctrl+w
@@ -68,6 +71,10 @@ nnoremap <Space><Space> /++<CR>2xi
 
 " NERDTree
 nnoremap <C-n> :NERDTreeToggle<CR>
+
+" zen mode emulator
+nnoremap <C-f> :set norelativenumber<CR> :GitGutterDisable<CR> :GitGutterSignsDisable<CR> :NERDTreeClose<CR>
+nnoremap <C-u> :set relativenumber<CR> :NERDTree<CR> :GitGutterEnable<CR> :GitGutterSignsEnable<CR> :wincmd p<CR>
 
 " }}}
 
@@ -111,7 +118,6 @@ hi SignColumn ctermbg=NONE cterm=NONE
 function DocSettings()
 	setlocal wrap
 	setlocal linebreak
-	setlocal spell
 endfunction
 
 function GroffSettings()
@@ -123,7 +129,6 @@ augroup wrap_settings
 	autocmd!
 	autocmd BufNewFile,BufRead * setlocal nowrap
 	autocmd BufNewFile,BufRead * setlocal nolinebreak
-	autocmd BufNewFile,BufRead * setlocal nospell
 	autocmd BufNewFile,BufRead *.md call DocSettings()
 	autocmd BufNewFile,BufRead *.html call DocSettings()
 	autocmd BufNewFile,BufRead *.txt call DocSettings()
