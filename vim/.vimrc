@@ -1,7 +1,7 @@
 " BASIC CONFIG {{{
 " minor configs
 filetype plugin indent on
-set formatoptions+=r
+set formatoptions+=rc
 set path+=**
 set foldmethod=marker
 set nohidden
@@ -32,7 +32,7 @@ call plug#end()
 " WILDMENU {{{
 " setting wildmenu and removing some files from it
 set wildmenu
-set wildignore+=tags,__pycache__/,test.txt,test*.txt,LICENSE,a.out
+set wildignore+=tags,__pycache__/,test.txt,test*.txt,LICENSE,a.out,*.gch,.SRCINFO
 "}}}
 
 " SPLITS {{{
