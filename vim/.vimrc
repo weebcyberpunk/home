@@ -8,6 +8,7 @@ set nohidden
 set background=dark
 set incsearch
 set ignorecase
+set relativenumber
 " }}}
 
 " VIM-PLUG {{{
@@ -18,6 +19,11 @@ call plug#begin('~/.vim/plugged')
 Plug 'ervandew/supertab'
 " the world-famous tpope's vim-commentary
 Plug 'tpope/vim-commentary'
+" the world-famous nerdtree
+Plug 'preservim/nerdtree' |
+			\ Plug 'Xuyuanp/nerdtree-git-plugin'
+" show git status
+Plug 'airblade/vim-gitgutter'
 
 call plug#end()
 " }}}
@@ -36,8 +42,7 @@ set splitright
 
 " KEYBINDS {{{
 " mapping Ctrl+t to open terminal and tn to toggle relative numbers
-" map <C-t> :term<CR> 		" terminal map is commented out because nowadays
-" 				" I'm using an st keybind
+map <C-t> :term<CR>
 nnoremap tn :set rnu!<CR>
 
 " split keybinds
@@ -61,14 +66,52 @@ nnoremap ;mitt :-1r ~/.vim/snippets/mit.txt<CR>:r ! date +'\%Y'<CR>kJJ
 " replace strings (maps two spaces to find the next '++' and replace it)
 nnoremap <Space><Space> /++<CR>2xi
 
+" NERDTree
+nnoremap <C-n> :NERDTreeToggle<CR>
+
+" }}}
+
+" NERDTREE {{{
+
+" start NERDTree and put the cursor back in the other window.
+autocmd VimEnter * NERDTree | wincmd p
+
+" exit Vim if NERDTree is the only window remaining in the only tab.
+autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
+
+" If another buffer tries to replace NERDTree, put it in the other window, and bring back NERDTree.
+autocmd BufEnter * if bufname('#') =~ 'NERD_tree_\d\+' && bufname('%') !~ 'NERD_tree_\d\+' && winnr('$') > 1 |
+    \ let buf=bufnr() | buffer# | execute "normal! \<C-W>w" | execute 'buffer'.buf | endif
+
+let NERDTreeChDirMode=3
+let NERDTreeRespectWildIgnore=1
+let NERDTreeShowHidden=1
+let NERDTreeWinPos='right'
+let NERDTreeWinSize=20
+let NERDTreeMinimalUI=1
+
+" maps
+
+let NERDTreeMapChangeRoot='l'
+let NERDTreeMapUpdir='h'
+
+" }}}
+
+" GIT-GUTTER {{{
+
+let g:gitgutter_terminal_reports_focus=0
+set updatetime=100
+hi SignColumn ctermbg=NONE cterm=NONE
+
 " }}}
 
 " FILETYPE SETTINGS {{{
 " it file is markdown, html, ms (groff) or txt, sets line wrap without slicing words.
 " other files keeps without wrap
 function DocSettings()
-	set wrap
-	set linebreak
+	setlocal wrap
+	setlocal linebreak
+	setlocal spell
 endfunction
 
 function GroffSettings()
@@ -78,7 +121,9 @@ endfunction
 
 augroup wrap_settings
 	autocmd!
-	autocmd BufNewFile,BufRead * set nowrap
+	autocmd BufNewFile,BufRead * setlocal nowrap
+	autocmd BufNewFile,BufRead * setlocal nolinebreak
+	autocmd BufNewFile,BufRead * setlocal nospell
 	autocmd BufNewFile,BufRead *.md call DocSettings()
 	autocmd BufNewFile,BufRead *.html call DocSettings()
 	autocmd BufNewFile,BufRead *.txt call DocSettings()
@@ -99,9 +144,8 @@ augroup groff_settings
 " HI {{{
 " makes numbers darkgray because it's almost invisible
 hi LineNr ctermfg=DarkGray
-" vertsplits
-hi VertSplit ctermbg=NONE cterm=NONE
-" statusline
-hi StatusLine ctermbg=NONE cterm=NONE
-hi StatusLineNC ctermbg=NONE cterm=NONE
+" minimalist look
+" hi VertSplit ctermbg=NONE cterm=NONE
+" hi StatusLine ctermbg=NONE cterm=NONE
+" hi StatusLineNC ctermbg=NONE cterm=NONE
 " }}}
