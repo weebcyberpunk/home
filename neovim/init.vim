@@ -10,6 +10,7 @@ set ignorecase
 set relativenumber
 set number
 set scrolloff=5
+set termguicolors
 " }}}
 
 " VIM-PLUG {{{
@@ -27,6 +28,7 @@ Plug 'preservim/nerdtree' |
 Plug 'airblade/vim-gitgutter'
 
 call plug#end()
+
 " }}}
 
 " WILDMENU {{{
@@ -110,7 +112,7 @@ let NERDTreeMapUpdir='h'
 
 let g:gitgutter_terminal_reports_focus=0
 set updatetime=100
-hi SignColumn ctermbg=NONE
+hi SignColumn ctermbg=NONE cterm=NONE guibg=NONE
 "cterm=NONE
 
 " }}}
@@ -151,7 +153,7 @@ augroup groff_settings
 
 " APPEARANCE {{{
 " makes numbers darkgray because it's almost invisible
-hi LineNr ctermfg=DarkGray
+hi LineNr ctermfg=DarkGray guifg=DarkGray
 set fillchars+=eob:\ 
 " minimalist look
 " hi VertSplit ctermbg=NONE cterm=NONE
