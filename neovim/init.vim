@@ -110,7 +110,8 @@ let NERDTreeMapUpdir='h'
 
 let g:gitgutter_terminal_reports_focus=0
 set updatetime=100
-hi SignColumn ctermbg=NONE cterm=NONE
+hi SignColumn ctermbg=NONE
+"cterm=NONE
 
 " }}}
 
@@ -148,9 +149,10 @@ augroup groff_settings
 	autocmd BufNewFile,BufRead *.7 call GroffSettings()
 " }}}
 
-" HI {{{
+" APPEARANCE {{{
 " makes numbers darkgray because it's almost invisible
 hi LineNr ctermfg=DarkGray
+set fillchars+=eob:\ 
 " minimalist look
 " hi VertSplit ctermbg=NONE cterm=NONE
 " hi StatusLine ctermbg=NONE cterm=NONE
