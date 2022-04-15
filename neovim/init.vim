@@ -26,6 +26,9 @@ Plug 'preservim/nerdtree' |
 			\ Plug 'Xuyuanp/nerdtree-git-plugin'
 " show git status
 Plug 'airblade/vim-gitgutter'
+" tetris
+Plug 'alec-gibson/nvim-tetris'
+Plug 'rafamadriz/neon'
 
 call plug#end()
 
@@ -152,8 +155,10 @@ augroup groff_settings
 " }}}
 
 " APPEARANCE {{{
-" makes numbers darkgray because it's almost invisible
-hi LineNr ctermfg=DarkGray guifg=DarkGray
+let g:neon_style="dark"
+let g:neon_transparent="true"
+colorscheme neon
+
 set fillchars+=eob:\ 
 " minimalist look
 " hi VertSplit ctermbg=NONE cterm=NONE
