@@ -31,6 +31,7 @@ call plug#end()
 
 " WILDMENU {{{
 " setting wildmenu and removing some files from it
+set wildmode=list:full
 set wildignore+=tags,__pycache__/,test.txt,test*.txt,LICENSE,a.out,*.gch,.SRCINFO
 "}}}
 
