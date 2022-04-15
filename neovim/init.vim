@@ -28,9 +28,22 @@ Plug 'preservim/nerdtree' |
 Plug 'airblade/vim-gitgutter'
 " tetris
 Plug 'alec-gibson/nvim-tetris'
+" colorscheme
 Plug 'rafamadriz/neon'
+" bufferline
+Plug 'kyazdani42/nvim-web-devicons' " Recommended (for coloured icons)
+" Plug 'ryanoasis/vim-devicons' Icons without colours
+Plug 'akinsho/bufferline.nvim', { 'tag': '*' }
 
 call plug#end()
+
+" }}}
+
+" BUFFERLINE {{{
+
+lua << EOF
+require("bufferline").setup{}
+EOF
 
 " }}}
 
@@ -80,8 +93,8 @@ nnoremap <Space><Space> /++<CR>2xi
 nnoremap <C-n> :NERDTreeToggle<CR>
 
 " zen mode emulator
-map <C-f> :set norelativenumber<CR>:set nonumber<CR>:NERDTreeClose<CR>:GitGutterDisable<CR>:GitGutterSignsDisable<CR>
-map <C-u> :set relativenumber<CR>:set number<CR>:NERDTree<CR>:wincmd p<CR>:GitGutterEnable<CR>:GitGutterSignsEnable<CR>
+map <C-f> :set norelativenumber<CR>:set nonumber<CR>:NERDTreeClose<CR>:GitGutterDisable<CR>:GitGutterSignsDisable<CR>:set showtabline=0<CR>:set laststatus=1<CR>
+map <C-u> :set relativenumber<CR>:set number<CR>:NERDTree<CR>:wincmd p<CR>:GitGutterEnable<CR>:GitGutterSignsEnable<CR>:set showtabline=2<CR>:set laststatus=2<CR>
 
 " }}}
 
@@ -115,7 +128,6 @@ let NERDTreeMapUpdir='h'
 
 let g:gitgutter_terminal_reports_focus=0
 set updatetime=100
-hi SignColumn ctermbg=NONE cterm=NONE guibg=NONE
 "cterm=NONE
 
 " }}}
@@ -159,6 +171,8 @@ let g:neon_style="dark"
 let g:neon_transparent="true"
 colorscheme neon
 
+hi SignColumn ctermbg=NONE cterm=NONE guibg=NONE
+hi StatusLine ctermbg=NONE cterm=NONE guibg=NONE
 set fillchars+=eob:\ 
 " minimalist look
 " hi VertSplit ctermbg=NONE cterm=NONE
