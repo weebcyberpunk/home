@@ -29,10 +29,10 @@ Plug 'airblade/vim-gitgutter'
 " tetris
 Plug 'alec-gibson/nvim-tetris'
 " colorscheme
-Plug 'rafamadriz/neon'
+Plug 'lifepillar/vim-wwdc16-theme'
+" colored icons for bufferline
+Plug 'kyazdani42/nvim-web-devicons'
 " bufferline
-Plug 'kyazdani42/nvim-web-devicons' " Recommended (for coloured icons)
-" Plug 'ryanoasis/vim-devicons' Icons without colours
 Plug 'akinsho/bufferline.nvim', { 'tag': '*' }
 
 call plug#end()
@@ -63,7 +63,6 @@ set splitright
 " I used to use C-t to open a terminal but terminals in neovim are inusable (in
 " vim they aren't)
 " I use actually a ST bind open a new instance, outside from neovim
-" general
 nnoremap tn :set rnu!<CR> :set nu!<CR>
 nnoremap <C-s> :setlocal spell!<CR>
 nnoremap tg :GitGutterToggle<CR>
@@ -118,7 +117,6 @@ let NERDTreeWinSize=20
 let NERDTreeMinimalUI=1
 
 " maps
-
 let NERDTreeMapChangeRoot='l'
 let NERDTreeMapUpdir='h'
 
@@ -128,7 +126,6 @@ let NERDTreeMapUpdir='h'
 
 let g:gitgutter_terminal_reports_focus=0
 set updatetime=100
-"cterm=NONE
 
 " }}}
 
@@ -167,15 +164,11 @@ augroup groff_settings
 " }}}
 
 " APPEARANCE {{{
-let g:neon_style="dark"
-let g:neon_transparent="true"
-colorscheme neon
+let g:wwdc16_transp_bg = 1
+colorscheme wwdc16
 
 hi SignColumn ctermbg=NONE cterm=NONE guibg=NONE
 hi StatusLine ctermbg=NONE cterm=NONE guibg=NONE
 set fillchars+=eob:\ 
-" minimalist look
-" hi VertSplit ctermbg=NONE cterm=NONE
-" hi StatusLine ctermbg=NONE cterm=NONE
-" hi StatusLineNC ctermbg=NONE cterm=NONE
+set list lcs=tab:\|\ 
 " }}}

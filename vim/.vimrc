@@ -1,13 +1,15 @@
 " BASIC CONFIG {{{
 " minor configs
 filetype plugin indent on
-set formatoptions+=r
+set tw=80
+set formatoptions+=rc
 set path+=**
 set foldmethod=marker
 set nohidden
+set ignorecase
+set scrolloff=5
 set background=dark
 set incsearch
-set ignorecase
 " }}}
 
 " VIM-PLUG {{{
@@ -35,10 +37,9 @@ set splitright
 " }}}
 
 " KEYBINDS {{{
-" mapping Ctrl+t to open terminal and tn to toggle relative numbers
-" map <C-t> :term<CR> 		" terminal map is commented out because nowadays
-" 				" I'm using an st keybind
+map <C-t> :term<CR>
 nnoremap tn :set rnu!<CR>
+nnoremap <C-s> :setlocal spell!<CR>
 
 " split keybinds
 " easier navigation without Ctrl+w
