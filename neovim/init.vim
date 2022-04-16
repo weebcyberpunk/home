@@ -10,6 +10,7 @@ set relativenumber
 set number
 set scrolloff=5
 set termguicolors
+set signcolumn=number
 " }}}
 
 " VIM-PLUG {{{
@@ -33,6 +34,10 @@ Plug 'Mofiqul/dracula.nvim'
 Plug 'kyazdani42/nvim-web-devicons'
 " bufferline
 Plug 'akinsho/bufferline.nvim', { 'tag': '*' }
+" lsp and completion config
+Plug 'neovim/nvim-lspconfig'
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'deoplete-plugins/deoplete-lsp'
 
 call plug#end()
 
@@ -173,4 +178,14 @@ hi SignColumn ctermbg=NONE guibg=NONE
 hi GitGutterAdd ctermfg=White guifg=White
 set fillchars+=eob:\ 
 set list lcs=tab:\|\ 
+" }}}
+
+" LSP {{{
+
+lua << EOF
+require'lspconfig'.clangd.setup{}
+EOF
+
+let g:deoplete#enable_at_startup = 1
+
 " }}}
