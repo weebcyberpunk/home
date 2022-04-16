@@ -1,3 +1,4 @@
+colorscheme dracula
 set set_term_title=false
 set aaa_mode=all
 set resume=false
