@@ -41,6 +41,9 @@ Plug 'deoplete-plugins/deoplete-lsp'
 
 call plug#end()
 
+" minor plugins configs
+let g:SuperTabDefaultCompletionType = "<c-n>"
+
 " }}}
 
 " BUFFERLINE {{{
