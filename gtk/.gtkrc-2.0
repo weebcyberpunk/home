@@ -1,5 +1,5 @@
-gtk-theme-name="Flat-Remix-GTK-Blue-Dark"
-gtk-icon-theme-name="Flat-Remix-Blue-Dark"
+gtk-theme-name="Dracula"
+gtk-icon-theme-name="Adwaita"
 gtk-font-name="Ubuntu 12"
 gtk-cursor-theme-name="capitaine-cursors"
 gtk-cursor-theme-size=0

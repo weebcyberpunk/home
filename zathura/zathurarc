@@ -6,21 +6,21 @@ set selection-clipboard clipboard
 
 set font "UbuntuMono Nerd Font 18"
 
-set completion-bg "#23252E"
-set completion-group-bg "#23252E"
-set completion-highlight-bg "#2777FF"
+set completion-bg "#1E1F29"
+set completion-group-bg "#1E1F29"
+set completion-highlight-bg "#bd93f9"
 
-set default-bg "#23252E"
+set default-bg "#1E1F29"
 
-set highlight-active-color "#2777FF"
-set highlight-color "#2777FF"
+set highlight-active-color "#bd93f9"
+set highlight-color "#bd93f9"
 
-set statusbar-bg "#23252E"
+set statusbar-bg "#1E1F29"
 
-set inputbar-bg "#23252E"
+set inputbar-bg "#1E1F29"
 set inputbar-fg "#ffffff"
 
-set notification-bg "#23252E"
+set notification-bg "#1E1F29"
 set notification-fg "#ffffff"
 
 set statusbar-home-tilde true

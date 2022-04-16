@@ -29,7 +29,7 @@ Plug 'airblade/vim-gitgutter'
 " tetris
 Plug 'alec-gibson/nvim-tetris'
 " colorscheme
-Plug 'lifepillar/vim-wwdc16-theme'
+Plug 'Mofiqul/dracula.nvim'
 " colored icons for bufferline
 Plug 'kyazdani42/nvim-web-devicons'
 " bufferline
@@ -164,11 +164,13 @@ augroup groff_settings
 " }}}
 
 " APPEARANCE {{{
-let g:wwdc16_transp_bg = 1
-colorscheme wwdc16
+let g:dracula_transparent_bg = v:true
+let g:dracula_italic_comment = v:true
+colorscheme dracula
 
-hi SignColumn ctermbg=NONE cterm=NONE guibg=NONE
 hi StatusLine ctermbg=NONE cterm=NONE guibg=NONE
+hi SignColumn ctermbg=NONE guibg=NONE
+hi GitGutterAdd ctermfg=White guifg=White
 set fillchars+=eob:\ 
 set list lcs=tab:\|\ 
 " }}}
