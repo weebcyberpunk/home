@@ -155,6 +155,8 @@ let NERDTreeMapUpdir='h'
 
 let g:gitgutter_terminal_reports_focus=0
 set updatetime=100
+let g:gitgutter_highlight_linenrs = 1
+let g:gitgutter_signs = 1
 
 " }}}
 
@@ -200,9 +202,14 @@ colorscheme dracula
 hi StatusLine ctermbg=NONE cterm=NONE guibg=NONE
 hi BufferLineFill ctermbg=NONE cterm=NONE guibg=NONE ctermfg=NONE guifg=NONE
 hi SignColumn ctermbg=NONE guibg=NONE
-hi GitGutterAdd ctermfg=White guifg=White
+
 set fillchars+=eob:\ 
 set list lcs=tab:\|\ 
+
+hi GitGutterAddLineNr ctermfg=Green guifg=Green
+hi GitGutterChangeLineNr ctermfg=Yellow guifg=Yellow
+hi GitGutterDeleteLineNr ctermfg=Red guifg=Red
+hi GitGutterChangeDeleteLineNr ctermfg=Magenta guifg=Magenta
 " }}}
 
 " LSP {{{
