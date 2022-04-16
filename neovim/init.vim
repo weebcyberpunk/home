@@ -5,7 +5,6 @@ set tw=80
 set formatoptions+=r
 set path+=**
 set foldmethod=marker
-set nohidden
 set ignorecase
 set relativenumber
 set number
@@ -169,6 +168,7 @@ let g:dracula_italic_comment = v:true
 colorscheme dracula
 
 hi StatusLine ctermbg=NONE cterm=NONE guibg=NONE
+hi BufferLineFill ctermbg=NONE cterm=NONE guibg=NONE ctermfg=NONE guifg=NONE
 hi SignColumn ctermbg=NONE guibg=NONE
 hi GitGutterAdd ctermfg=White guifg=White
 set fillchars+=eob:\ 
