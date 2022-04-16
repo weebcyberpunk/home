@@ -10,7 +10,7 @@ set relativenumber
 set number
 set scrolloff=5
 set termguicolors
-set signcolumn=number
+set signcolumn=yes
 " }}}
 
 " VIM-PLUG {{{
@@ -99,8 +99,30 @@ nnoremap <Space><Space> /++<CR>2xi
 nnoremap <C-n> :NERDTreeToggle<CR>
 
 " zen mode emulator
-map <C-f> :set norelativenumber<CR>:set nonumber<CR>:NERDTreeClose<CR>:GitGutterDisable<CR>:GitGutterSignsDisable<CR>:set showtabline=0<CR>:set laststatus=1<CR>
-map <C-u> :set relativenumber<CR>:set number<CR>:NERDTree<CR>:wincmd p<CR>:GitGutterEnable<CR>:GitGutterSignsEnable<CR>:set showtabline=2<CR>:set laststatus=2<CR>
+function ZenEnable()
+	set norelativenumber
+	set nonumber
+	NERDTreeClose
+	GitGutterDisable
+	GitGutterSignsDisable
+	set showtabline=0
+	set laststatus=1
+	set signcolumn=auto
+endfunction
+
+function ZenDisable()
+	set relativenumber
+	set number
+	NERDTree
+	wincmd p
+	GitGutterEnable
+	GitGutterSignsEnable
+	set showtabline=2
+	set laststatus=2
+	set signcolumn=yes
+endfunction
+map <C-f> :call ZenEnable()<CR>
+map <C-u> :call ZenDisable()<CR>
 
 " }}}
 
