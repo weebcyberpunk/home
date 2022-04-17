@@ -1,5 +1,0 @@
-colorscheme dracula
-set set_term_title=false
-set aaa_mode=all
-set resume=false
-set status_display_program=/home/gg/.local/bin/cmus_change_status.sh
