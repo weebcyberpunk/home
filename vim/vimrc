@@ -1,5 +1,6 @@
 " BASIC CONFIG {{{
 " minor configs
+set viminfofile=~/.vim/viminfo
 filetype plugin indent on
 set tw=80
 set formatoptions+=rc
