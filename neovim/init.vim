@@ -185,6 +185,7 @@ augroup END
 
 augroup groff_settings
 	autocmd!
+	autocmd BufNewFile,BufRead *.ms call DocSettings()
 	autocmd BufNewFile,BufRead *.1 call GroffSettings()
 	autocmd BufNewFile,BufRead *.2 call GroffSettings()
 	autocmd BufNewFile,BufRead *.3 call GroffSettings()
