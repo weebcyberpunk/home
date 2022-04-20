@@ -166,6 +166,7 @@ let g:gitgutter_signs = 1
 function DocSettings()
 	setlocal wrap
 	setlocal linebreak
+	set formatoptions-=t
 endfunction
 
 function GroffSettings()
@@ -220,5 +221,6 @@ require'lspconfig'.clangd.setup{}
 EOF
 
 let g:deoplete#enable_at_startup = 1
+set completeopt-=preview
 
 " }}}
