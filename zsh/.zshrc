@@ -12,7 +12,7 @@ autoload -Uz compinit
 compinit
 # End of lines added by compinstall
 # Lines configured by zsh-newuser-install
-HISTFILE=~/.histfile
+HISTFILE='~/.local/share/zsh/histfile'
 HISTSIZE=1000
 SAVEHIST=1000
 setopt autocd beep notify
@@ -27,19 +27,30 @@ bindkey -v
 # colored aliases
 
 alias ls='ls --color=auto'
-alias dir='dir --color=auto'
-alias vdir='vdir --color=auto'
 alias grep='grep --color=auto'
-alias fgrep='fgrep --color=auto'
-alias egrep='egrep --color=auto'
 
 # set prompt
 PS1='%B%F{blue}%2~%f%b > '
 
+# function to display a cool arch logo
+function zsh_greeter() {
+
+	echo "\
+[?7l[1m[36m       /\\ \n\
+[36m      /  \ \n\
+[36m     /\   \ \n\
+[34m    /      \ \n\
+[34m   /   ,,   \ \n\
+[34m  /   |  |  -\ \n\
+[34m /_-''    ''-_\ \n\
+"
+
+}
+
 # aliases
 
 # common
-alias clear='clear && pfetch'
+alias clear='clear && zsh_greeter'
 alias fzf='find * | grep' # emulates a fzf but directly in the cli and not in the finder
 alias fzfh='find .* | grep' # same but with only hidden
 alias weather='curl wttr.in/curitiba'
@@ -68,5 +79,4 @@ bindkey '^e' edit-command-line
 # print exit value if != 0
 setopt PRINT_EXIT_VALUE
 
-# display pfetch
-pfetch
+zsh_greeter
