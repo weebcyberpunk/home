@@ -1,5 +1,6 @@
 #include<stdio.h>
 #include<stdlib.h>
+#include<errno.h>
 
 /*
  * author GG weebcyberpunk@gmail.com
@@ -8,5 +9,5 @@
  */
 int () {
 
-	return(0);
+	return(errno);
 }
