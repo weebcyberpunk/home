@@ -8,6 +8,7 @@ export HISTFILE="$HOME/.local/share/zsh/history"
 export GNUPGHOME="$HOME/.local/share/gnupg"
 export PASSWORD_STORE_DIR="$HOME/.local/share/password-store"
 export WGETRC="$HOME/.config/wget/wgetrc"
+export CARGO_HOME="$HOME/.local/share/cargo"
 
 # default programs
 export EDITOR=vim
