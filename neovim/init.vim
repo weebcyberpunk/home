@@ -34,6 +34,8 @@ Plug 'Mofiqul/dracula.nvim'
 Plug 'kyazdani42/nvim-web-devicons'
 " bufferline
 Plug 'akinsho/bufferline.nvim', { 'tag': '*' }
+" indent guides for code indented with spaces (Python and Rust)
+Plug 'Yggdroot/indentLine'
 " lsp and completion config
 Plug 'neovim/nvim-lspconfig'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -212,12 +214,17 @@ hi GitGutterAddLineNr ctermfg=Green guifg=Green
 hi GitGutterChangeLineNr ctermfg=Yellow guifg=Yellow
 hi GitGutterDeleteLineNr ctermfg=Red guifg=Red
 hi GitGutterChangeDeleteLineNr ctermfg=Magenta guifg=Magenta
+
+let g:indentLine_setColors = 0
+let g:indentLine_defaultGroup = 'SpecialKey'
+let g:indentLine_char = '|'
 " }}}
 
 " LSP {{{
 
 lua << EOF
 require'lspconfig'.clangd.setup{}
+require'lspconfig'.rls.setup{}
 EOF
 
 let g:deoplete#enable_at_startup = 1
