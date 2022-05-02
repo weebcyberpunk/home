@@ -26,8 +26,6 @@ Plug 'preservim/nerdtree' |
 			\ Plug 'Xuyuanp/nerdtree-git-plugin'
 " show git status
 Plug 'airblade/vim-gitgutter'
-" tetris
-Plug 'alec-gibson/nvim-tetris'
 " colorscheme
 Plug 'Mofiqul/dracula.nvim'
 " indent guides for code indented with spaces (Python and Rust)
