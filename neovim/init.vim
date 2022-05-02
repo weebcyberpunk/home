@@ -30,10 +30,6 @@ Plug 'airblade/vim-gitgutter'
 Plug 'alec-gibson/nvim-tetris'
 " colorscheme
 Plug 'Mofiqul/dracula.nvim'
-" colored icons for bufferline
-Plug 'kyazdani42/nvim-web-devicons'
-" bufferline
-Plug 'akinsho/bufferline.nvim', { 'tag': '*' }
 " indent guides for code indented with spaces (Python and Rust)
 Plug 'Yggdroot/indentLine'
 " lsp and completion config
@@ -45,14 +41,6 @@ call plug#end()
 
 " minor plugins configs
 let g:SuperTabDefaultCompletionType = "<c-n>"
-
-" }}}
-
-" BUFFERLINE {{{
-
-lua << EOF
-require("bufferline").setup{}
-EOF
 
 " }}}
 
@@ -107,7 +95,6 @@ function ZenEnable()
 	NERDTreeClose
 	GitGutterDisable
 	GitGutterSignsDisable
-	set showtabline=0
 	set laststatus=1
 	set signcolumn=auto
 endfunction
@@ -119,7 +106,6 @@ function ZenDisable()
 	wincmd p
 	GitGutterEnable
 	GitGutterSignsEnable
-	set showtabline=2
 	set laststatus=2
 	set signcolumn=yes
 endfunction
@@ -203,7 +189,7 @@ let g:dracula_transparent_bg = v:true
 let g:dracula_italic_comment = v:true
 colorscheme dracula
 
-hi StatusLine ctermbg=NONE cterm=NONE guibg=NONE
+" hi StatusLine ctermbg=NONE cterm=NONE guibg=NONE
 hi BufferLineFill ctermbg=NONE cterm=NONE guibg=NONE ctermfg=NONE guifg=NONE
 hi SignColumn ctermbg=NONE guibg=NONE
 
