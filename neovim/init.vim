@@ -2,7 +2,9 @@
 " minor configs
 filetype plugin indent on
 set tw=80
-set formatoptions+=r
+set fo+=r
+set fo-=o
+set fo-=l
 set path+=**
 set foldmethod=marker
 set ignorecase
@@ -30,10 +32,10 @@ Plug 'airblade/vim-gitgutter'
 Plug 'Mofiqul/dracula.nvim'
 " indent guides for code indented with spaces (Python and Rust)
 Plug 'Yggdroot/indentLine'
+" statusline
+Plug 'nvim-lualine/lualine.nvim'
 " lsp and completion config
 Plug 'neovim/nvim-lspconfig'
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'deoplete-plugins/deoplete-lsp'
 
 call plug#end()
 
@@ -204,14 +206,37 @@ let g:indentLine_defaultGroup = 'SpecialKey'
 let g:indentLine_char = '|'
 " }}}
 
+" LUALINE {{{
+
+lua << END
+require('lualine').setup {
+sections = {
+	lualine_a = {'mode'},
+	lualine_b = {'filename'},
+	lualine_c = {'diagnostics'},
+
+	lualine_x = {'diff'},
+	lualine_y = {'filetype'},
+	lualine_z = {'location'}
+	},
+options = {
+	theme = 'dracula-nvim'
+	}
+}
+END
+
+" }}}
+
 " LSP {{{
 
 lua << EOF
 require'lspconfig'.clangd.setup{}
 require'lspconfig'.rls.setup{}
+vim.diagnostic.config({
+	update_in_insert = true,
+	})
 EOF
 
-let g:deoplete#enable_at_startup = 1
 set completeopt-=preview
 
 " }}}
