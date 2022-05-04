@@ -1,0 +1,15 @@
+#!/bin/sh
+
+# File preview handler for lf.
+
+set -C -f
+
+case "$(file --brief --mime-type "$1")" in
+	image/*) mediainfo "$1" ;;
+	text/* | */xml | application/json) bat --terminal-width "$(expr $4 - 6)" -f "$1";;
+        audio/* | application/octet-stream | video/*) mediainfo "$1" || exit 1;;
+        */pdf) pdfinfo "$1" ;;
+	application/pgp-encrypted) gpg -d -- "$1" ;;
+	application/*) file "$1" ;;
+esac
+exit 1
