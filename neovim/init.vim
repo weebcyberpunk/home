@@ -19,8 +19,6 @@ set signcolumn=yes
 " call the vim-plug vim plugin manager
 call plug#begin('~/.vim/plugged')
 
-" autocomplete on i mode with tab
-Plug 'ervandew/supertab'
 " the world-famous tpope's vim-commentary
 Plug 'tpope/vim-commentary'
 " the world-famous nerdtree
@@ -36,11 +34,12 @@ Plug 'Yggdroot/indentLine'
 Plug 'nvim-lualine/lualine.nvim'
 " lsp and completion config
 Plug 'neovim/nvim-lspconfig'
+Plug 'hrsh7th/nvim-cmp'
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'saadparwaiz1/cmp_luasnip'
+Plug 'L3MON4D3/LuaSnip'
 
 call plug#end()
-
-" minor plugins configs
-let g:SuperTabDefaultCompletionType = "<c-n>"
 
 " }}}
 
@@ -227,7 +226,7 @@ END
 
 " }}}
 
-" LSP {{{
+" LSP AND COMPLETION {{{
 
 lua << EOF
 require'lspconfig'.clangd.setup{}
@@ -235,6 +234,54 @@ require'lspconfig'.rls.setup{}
 vim.diagnostic.config({
 	update_in_insert = true,
 	})
+
+-- now the shit starts
+
+local lspconfig = require('lspconfig')
+
+-- luasnip setup
+local luasnip = require 'luasnip'
+
+-- nvim-cmp setup
+local cmp = require 'cmp'
+cmp.setup {
+  snippet = {
+    expand = function(args)
+      luasnip.lsp_expand(args.body)
+    end,
+  },
+  mapping = cmp.mapping.preset.insert({
+    ['<C-d>'] = cmp.mapping.scroll_docs(-4),
+    ['<C-f>'] = cmp.mapping.scroll_docs(4),
+    ['<C-Space>'] = cmp.mapping.complete(),
+    ['<CR>'] = cmp.mapping.confirm {
+      behavior = cmp.ConfirmBehavior.Replace,
+      select = true,
+    },
+    ['<Tab>'] = cmp.mapping(function(fallback)
+      if cmp.visible() then
+        cmp.select_next_item()
+      elseif luasnip.expand_or_jumpable() then
+        luasnip.expand_or_jump()
+      else
+        fallback()
+      end
+    end, { 'i', 's' }),
+    ['<S-Tab>'] = cmp.mapping(function(fallback)
+      if cmp.visible() then
+        cmp.select_prev_item()
+      elseif luasnip.jumpable(-1) then
+        luasnip.jump(-1)
+      else
+        fallback()
+      end
+    end, { 'i', 's' }),
+  }),
+  sources = {
+    { name = 'nvim_lsp' },
+    { name = 'luasnip' },
+  },
+}
 EOF
 
 set completeopt-=preview
