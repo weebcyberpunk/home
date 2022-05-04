@@ -12,12 +12,15 @@ set scrolloff=5
 set background=dark
 set incsearch
 set t_Co=256
+set complete+=i,kspell
 " }}}
 
 " VIM-PLUG {{{
 " call the vim-plug vim plugin manager
 call plug#begin('~/.vim/plugged')
 
+" i complete with tab
+Plug 'ervandew/supertab'
 " the world-famous tpope's vim-commentary
 Plug 'tpope/vim-commentary'
 

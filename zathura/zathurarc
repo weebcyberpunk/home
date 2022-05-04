@@ -4,7 +4,7 @@ set selection-clipboard clipboard
 
 " APPEARANCE
 
-set font "UbuntuMono Nerd Font 18"
+set font "Fira Code Nerd Font 16"
 
 set completion-bg "#1E1F29"
 set completion-group-bg "#1E1F29"
