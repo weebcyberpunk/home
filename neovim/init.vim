@@ -214,7 +214,7 @@ sections = {
 	lualine_b = {'filename'},
 	lualine_c = {'diagnostics'},
 
-	lualine_x = {'diff'},
+	lualine_x = {'branch'},
 	lualine_y = {'filetype'},
 	lualine_z = {'location'}
 	},
