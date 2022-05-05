@@ -30,6 +30,8 @@ Plug 'preservim/nerdtree' |
 Plug 'airblade/vim-gitgutter'
 " the world-famous tpope's fugitive git wrapper
 Plug 'tpope/vim-fugitive'
+" make terminal great again
+Plug 'voldikss/vim-floaterm'
 " colorscheme
 Plug 'Mofiqul/dracula.nvim'
 " indent guides for code indented with spaces (Python and Rust)
@@ -148,6 +150,14 @@ let g:gitgutter_terminal_reports_focus=0
 set updatetime=100
 let g:gitgutter_highlight_linenrs = 1
 let g:gitgutter_signs = 1
+
+" }}}
+
+" TERMINAL {{{
+
+let g:floaterm_keymap_toggle = '<C-t>'
+let g:floaterm_width = 0.9
+let g:floaterm_height = 0.9
 
 " }}}
 
