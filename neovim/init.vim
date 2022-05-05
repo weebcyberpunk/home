@@ -28,6 +28,8 @@ Plug 'preservim/nerdtree' |
 			\ Plug 'Xuyuanp/nerdtree-git-plugin'
 " show git status
 Plug 'airblade/vim-gitgutter'
+" the world-famous tpope's fugitive git wrapper
+Plug 'tpope/vim-fugitive'
 " colorscheme
 Plug 'Mofiqul/dracula.nvim'
 " indent guides for code indented with spaces (Python and Rust)
@@ -285,7 +287,7 @@ cmp.setup {
 local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
 
 require'lspconfig'.clangd.setup{ capabilities = capabilities }
-require'lspconfig'.rust_analyzer.setup{ capabilities = capabilities }
+require'lspconfig'.rls.setup{ capabilities = capabilities }
 
 EOF
 
