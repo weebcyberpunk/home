@@ -46,35 +46,6 @@ cmd open ${{
     esac
 }}
 
-# define a custom 'delete' command
-cmd delete %{{
-    set -f
-    printf "$fx\n"
-    printf "delete?[y/n]"
-    read ans
-    [ $ans = "y" ] && rm -rf $fx && /usr/bin/clear
-}}
-
-# extract the current file with the right command
-# (xkcd link: https://xkcd.com/1168/)
-cmd extract %{{
-    set -f
-    case $fx in
-        *.tar.bz|*.tar.bz2|*.tbz|*.tbz2) tar xjvf $fx;;
-        *.tar.gz|*.tgz) tar xzvf $fx;;
-        *.tar.xz|*.txz) tar xJvf $fx;;
-    esac
-}}
-
-# compress current file or selected files with tar and gunzip
-cmd tar ${{
-    mkdir "$f.comp"
-    cp -r $f "$f.comp"
-    tar czf $f.tar.gz "$f.comp"
-    rm -rf "$f.comp"
-    rm $f
-}}
-
 # bulk-rename
 cmd bulk-rename ${{
     old="$(mktemp)"
@@ -113,9 +84,7 @@ map x $$f
 map X !$f
 
 # general
-map <backspace2> delete
-map t extract
-map T tar
+map <backspace2> push :delete<enter>
 map a set hidden!
 map R bulk-rename
 map m push :touch<space>
