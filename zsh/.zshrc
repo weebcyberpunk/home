@@ -12,7 +12,7 @@ autoload -Uz compinit
 compinit
 # End of lines added by compinstall
 # Lines configured by zsh-newuser-install
-HISTFILE='~/.local/share/zsh/histfile'
+HISTFILE='$HOME/.local/share/zsh/histfile'
 HISTSIZE=1000
 SAVEHIST=1000
 setopt autocd beep notify
