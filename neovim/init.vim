@@ -200,9 +200,9 @@ augroup groff_settings
 " APPEARANCE {{{
 let g:dracula_transparent_bg = v:true
 let g:dracula_italic_comment = v:true
+let g:dracula_lualine_bg_color = "NONE"
 colorscheme dracula
 
-" hi StatusLine ctermbg=NONE cterm=NONE guibg=NONE
 hi BufferLineFill ctermbg=NONE cterm=NONE guibg=NONE ctermfg=NONE guifg=NONE
 hi SignColumn ctermbg=NONE guibg=NONE
 
@@ -239,6 +239,7 @@ options = {
 END
 
 " }}}
+hi StatusLine ctermbg=NONE cterm=NONE guibg=NONE
 
 " LSP AND COMPLETION {{{
 
@@ -297,7 +298,7 @@ cmp.setup {
 local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
 
 require'lspconfig'.clangd.setup{ capabilities = capabilities }
-require'lspconfig'.rls.setup{ capabilities = capabilities }
+require'lspconfig'.rust_analyzer.setup{ capabilities = capabilities }
 
 EOF
 
