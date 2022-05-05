@@ -6,13 +6,13 @@ zstyle ':completion:*' matcher-list '' 'm:{[:lower:]}={[:upper:]}' 'm:{[:lower:]
 zstyle ':completion:*' menu select=1
 zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p%s
 zstyle ':completion:*' use-compctl false
-zstyle :compinstall filename '/home/gg/.zshrc'
+zstyle :compinstall filename '/home/gg/.config/zsh/.zshrc'
 
 autoload -Uz compinit
 compinit
 # End of lines added by compinstall
 # Lines configured by zsh-newuser-install
-HISTFILE='$HOME/.local/share/zsh/histfile'
+HISTFILE='/home/gg/.local/share/zsh/histfile'
 HISTSIZE=1000
 SAVEHIST=1000
 setopt autocd beep notify
