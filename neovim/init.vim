@@ -21,6 +21,11 @@ call plug#begin('~/.vim/plugged')
 
 " i complete with tab
 Plug 'ervandew/supertab'
+" auto closing things
+Plug 'ervandew/matchem'
+Plug 'ervandew/sgmlendtag'
+" auto wrap documents
+Plug 'preservim/vim-pencil'
 " the world-famous tpope's vim-commentary
 Plug 'tpope/vim-commentary'
 " the world-famous nerdtree
@@ -30,6 +35,8 @@ Plug 'preservim/nerdtree' |
 Plug 'airblade/vim-gitgutter'
 " the world-famous tpope's fugitive git wrapper
 Plug 'tpope/vim-fugitive'
+" the world-famous tpope's *nix helper
+Plug 'tpope/vim-eunuch'
 " make terminal great again
 Plug 'voldikss/vim-floaterm'
 " colorscheme
@@ -47,6 +54,8 @@ Plug 'hrsh7th/cmp-cmdline'
 Plug 'hrsh7th/nvim-cmp'
 Plug 'L3MON4D3/LuaSnip'
 Plug 'saadparwaiz1/cmp_luasnip'
+" Finally, the devicons
+Plug 'ryanoasis/vim-devicons'
 
 call plug#end()
 
@@ -168,9 +177,7 @@ let g:floaterm_height = 0.9
 " it file is markdown, html, ms (groff) or txt, sets line wrap without slicing words.
 " other files keeps without wrap
 function DocSettings()
-	setlocal wrap
-	setlocal linebreak
-	set formatoptions-=t
+	HardPencil
 endfunction
 
 function GroffSettings()
@@ -178,26 +185,11 @@ function GroffSettings()
 	set filetype=groff
 endfunction
 
-augroup wrap_settings
+augroup doc_settings
 	autocmd!
-	autocmd BufNewFile,BufRead * setlocal nowrap
-	autocmd BufNewFile,BufRead * setlocal nolinebreak
-	autocmd BufNewFile,BufRead *.md call DocSettings()
-	autocmd BufNewFile,BufRead *.html call DocSettings()
-	autocmd BufNewFile,BufRead *.txt call DocSettings()
-	autocmd BufNewFile,BufRead *.ms call DocSettings()
+	autocmd BufNewFile,BufRead *.md,*.html,*.txt,*.ms call DocSettings()
+	autocmd BufNewFile,BufRead *.ms,*.1,*.2,*.3,*.4,*.5,*.6,*.7 call GroffSettings()
 augroup END
-
-augroup groff_settings
-	autocmd!
-	autocmd BufNewFile,BufRead *.ms call DocSettings()
-	autocmd BufNewFile,BufRead *.1 call GroffSettings()
-	autocmd BufNewFile,BufRead *.2 call GroffSettings()
-	autocmd BufNewFile,BufRead *.3 call GroffSettings()
-	autocmd BufNewFile,BufRead *.4 call GroffSettings()
-	autocmd BufNewFile,BufRead *.5 call GroffSettings()
-	autocmd BufNewFile,BufRead *.6 call GroffSettings()
-	autocmd BufNewFile,BufRead *.7 call GroffSettings()
 
 augroup programming_settings
 	autocmd!
@@ -266,8 +258,8 @@ lua <<EOF
       end,
     },
     window = {
-      completion = cmp.config.window.bordered(),
-      documentation = cmp.config.window.bordered(),
+      -- completion = cmp.config.window.bordered(),
+      -- documentation = cmp.config.window.bordered(),
     },
     mapping = cmp.mapping.preset.insert({
     ['<C-d>'] = cmp.mapping.scroll_docs(-4),
