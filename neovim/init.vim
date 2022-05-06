@@ -105,30 +105,6 @@ nnoremap <Space><Space> /++<CR>2xi
 " NERDTree
 nnoremap <C-n> :NERDTreeToggle<CR>
 
-" zen mode emulator
-function ZenEnable()
-	set norelativenumber
-	set nonumber
-	NERDTreeClose
-	GitGutterDisable
-	GitGutterSignsDisable
-	set laststatus=1
-	set signcolumn=auto
-endfunction
-
-function ZenDisable()
-	set relativenumber
-	set number
-	NERDTree
-	wincmd p
-	GitGutterEnable
-	GitGutterSignsEnable
-	set laststatus=2
-	set signcolumn=yes
-endfunction
-map <C-f> :call ZenEnable()<CR>
-map <C-u> :call ZenDisable()<CR>
-
 " }}}
 
 " NERDTREE {{{
