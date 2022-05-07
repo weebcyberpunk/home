@@ -150,9 +150,7 @@ let g:floaterm_height = 0.9
 
 " }}}
 
-" FILETYPE SETTINGS {{{
-" it file is markdown, html, ms (groff) or txt, sets line wrap without slicing words.
-" other files keeps without wrap
+" AUTOCMD SETTINGS {{{
 function DocSettings()
 	HardPencil
 endfunction
@@ -168,7 +166,7 @@ augroup doc_settings
 	autocmd BufNewFile,BufRead *.ms,*.1,*.2,*.3,*.4,*.5,*.6,*.7 call GroffSettings()
 augroup END
 
-augroup programming_settings
+augroup general
 	autocmd!
 	autocmd BufNewFile,BufRead Cargo.toml,Cargo.lock,*.rs setlocal makeprg=cargo
 " }}}
@@ -216,11 +214,9 @@ sections = {
 options = {
 	theme = 'catppuccin',
 	globalstatus = true
-	}
+	},
 }
 END
-
-hi StatusLine ctermbg=NONE cterm=NONE guibg=NONE
 
 " }}}
 
