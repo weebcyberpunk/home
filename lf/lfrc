@@ -43,6 +43,7 @@ cmd open ${{
 	video/*) mpv $fx;;
 	audio/*) mpv $fx;;
 	*/pdf) zathura $fx;;
+	application/x-sc) sc-im $fx;;
     esac
 }}
 
