@@ -24,25 +24,33 @@ bindkey -v
 # Custom
 #
 
-function ascii_greeter() {
-	cat $HOME/.config/zsh/ascii.txt
-
+# Change cursor shape for different vi modes (literally ctrl-c from
+# https://github.com/LukeSmithxyz/voidrice)
+function zle-keymap-select () {
+    case $KEYMAP in
+        vicmd) echo -ne '\e[1 q';;      # block
+        viins|main) echo -ne '\e[5 q';; # beam
+    esac
 }
+zle -N zle-keymap-select
+zle-line-init() {
+    zle -K viins # initiate `vi insert` as keymap (can be removed if `bindkey -V` has been set elsewhere)
+    echo -ne "\e[5 q"
+}
+zle -N zle-line-init
+echo -ne '\e[5 q' # Use beam shape cursor on startup.
+preexec() { echo -ne '\e[5 q' ;} # Use beam shape cursor for each new prompt.
 
 # colored aliases
-
 alias ls='ls --color=auto'
 alias grep='grep --color=auto'
 
 # set prompt
-PS1='%B%F{blue}%2~%f%b > '
+PS1='%B%F{magenta}%2~%f%b  -> '
 
 # aliases
 
 # common
-alias fzf='find * | grep' # emulates a fzf but directly in the cli and not in the finder
-alias fzfh='find .* | grep' # same but with only hidden
-alias weather='curl wttr.in/curitiba'
 alias suckless='rm config.h && sudo make clean install'
 alias font-list="fc-list | awk '{gsub(\$1, \"\"); print \$0}'"
 # mounting and unmounting
@@ -50,15 +58,10 @@ alias mount-drive='udisksctl mount -b /dev/sdb1'
 alias umount-drive='udisksctl unmount -b /dev/sdb1'
 # downloads and records
 alias music-dl='youtube-dl -i -x --audio-format mp3'
-alias record-screen='ffmpeg -f x11grab -i :0.0 x11-screen-record.mp4'
-alias record-cam='ffmpeg -i /dev/video0 -f alsa -i default webcam-record.mp4'
-alias record-mic='ffmpeg -f alsa -i default alsa-mic-record.mp3'
-alias take-a-shot='mpv av://v4l2:/dev/video0 --profile=low-latency --untimed' # use mpv to display the webcam on a screen and press s to take a shot
-alias record-all='$HOME/.local/bin/record-all.sh' 			      # by default ffmpeg uses a twitter-unsupported codec, this reencodes
 alias convert-to-web='ffmpeg -i out.mp4 -c:v libx264 -crf 20 -preset slow -vf format=yuv420p -c:a aac -movflags +faststart output.mp4'
 # command configs
 alias cbonsai='cbonsai -l -S -i'
-alias unimatrix='unimatrix -c cyan'
+alias unimatrix='unimatrix -c magenta'
 alias tty-clock='tty-clock -c -C 6 -s'
 
 # edit line in vim (very useful to test little scripts)
@@ -68,4 +71,7 @@ bindkey '^e' edit-command-line
 # print exit value if != 0
 setopt PRINT_EXIT_VALUE
 
-ascii_greeter
+# source plugins
+PLUGS_HOME="$HOME/.config/zsh/plugs/"
+source "$PLUGS_HOME/zsh-autosuggestions/zsh-autosuggestions.zsh"
+source "$PLUGS_HOME/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
