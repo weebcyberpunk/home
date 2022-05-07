@@ -29,9 +29,10 @@ Plug 'ervandew/sgmlendtag'
 Plug 'preservim/vim-pencil'
 " the world-famous tpope's vim-commentary
 Plug 'tpope/vim-commentary'
-" the world-famous nerdtree
-Plug 'preservim/nerdtree' |
-			\ Plug 'Xuyuanp/nerdtree-git-plugin'
+" great tree explorer
+Plug 'nvim-neo-tree/neo-tree.nvim' |
+			\ Plug 'MunifTanjim/nui.nvim' |
+			\ Plug 'nvim-lua/plenary.nvim'
 " show git status
 Plug 'airblade/vim-gitgutter'
 " the world-famous tpope's fugitive git wrapper
@@ -103,33 +104,57 @@ nnoremap ;mitt :-1r ~/.vim/snippets/mit.txt<CR>:r ! date +'\%Y'<CR>kJJ
 " replace strings (maps two spaces to find the next '++' and replace it)
 nnoremap <Space><Space> /++<CR>2xi
 
-" NERDTree
-nnoremap <C-n> :NERDTreeToggle<CR>
+" neotree
+nnoremap <C-n> :NeoTreeShowToggle<CR>
 
 " }}}
 
-" NERDTREE {{{
+" NEOTREE {{{
 
-" start NERDTree and put the cursor back in the other window.
-autocmd VimEnter * NERDTree | wincmd p
+lua << EOF
+require("neo-tree").setup({
+	close_if_last_window = true,
+	default_component_configs = {
+		indent = {
+			indent_size = 1,
+			padding = 1,
+		},
+	},
+	window = {
+		position = "right",
+		padding = 0,
+		width = 23,
+		mappings = {
+			["<space>"] = { "toggle_node", nowait = true, },
+			["m"] = { "add" },
+			["M"] = "add_directory",
+			["b"] = "move",
+			},
+	},
+	filesystem = {
+		hide_dotfiles = false,
+		follow_current_file = true,
+		use_libuv_file_watcher = true,
+		window = {
+			mappings = {
+				["a"] = "toggle_hidden",
+				["h"] = "navigate_up",
+				["l"] = "set_root",
+			},
+		},
+	},
+	buffers = {
+		window = {
+			mappings = {
+				["h"] = "navigate_up",
+				["l"] = "set_root",
+			},
+		},
+	},
+	
+})
 
-" exit Vim if NERDTree is the only window remaining in the only tab.
-autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
-
-" If another buffer tries to replace NERDTree, put it in the other window, and bring back NERDTree.
-autocmd BufEnter * if bufname('#') =~ 'NERD_tree_\d\+' && bufname('%') !~ 'NERD_tree_\d\+' && winnr('$') > 1 |
-    \ let buf=bufnr() | buffer# | execute "normal! \<C-W>w" | execute 'buffer'.buf | endif
-
-let NERDTreeChDirMode=3
-let NERDTreeRespectWildIgnore=1
-let NERDTreeShowHidden=1
-let NERDTreeWinPos='right'
-let NERDTreeWinSize=20
-let NERDTreeMinimalUI=1
-
-" maps
-let NERDTreeMapChangeRoot='l'
-let NERDTreeMapUpdir='h'
+EOF
 
 " }}}
 
@@ -151,6 +176,19 @@ let g:floaterm_height = 0.9
 " }}}
 
 " AUTOCMD SETTINGS {{{
+function AutoStart()
+	Neotree
+	setlocal nonumber
+	setlocal norelativenumber
+	wincmd p
+endfunction
+
+function NeotreeSettings()
+	setlocal nonumber
+	setlocal norelativenumber
+	setlocal signcolumn = no
+endfunction
+
 function DocSettings()
 	HardPencil
 endfunction
@@ -169,6 +207,12 @@ augroup END
 augroup general
 	autocmd!
 	autocmd BufNewFile,BufRead Cargo.toml,Cargo.lock,*.rs setlocal makeprg=cargo
+augroup END
+
+augroup autostart
+	autocmd!
+	autocmd VimEnter * call AutoStart()
+augroup END
 " }}}
 
 " APPEARANCE {{{
@@ -176,13 +220,12 @@ lua << EOF
 local catppuccin = require("catppuccin")
 
 catppuccin.setup({
-transparent_background = true,
-term_colors = true,
+	transparent_background = true,
+	term_colors = true,
 })
 EOF
 colorscheme catppuccin
 
-hi BufferLineFill ctermbg=NONE cterm=NONE guibg=NONE ctermfg=NONE guifg=NONE
 hi SignColumn ctermbg=NONE guibg=NONE
 
 set fillchars+=eob:\ 
@@ -196,11 +239,13 @@ hi GitGutterChangeDeleteLineNr ctermfg=Magenta guifg=Magenta
 let g:indentLine_setColors = 0
 let g:indentLine_defaultGroup = 'SpecialKey'
 let g:indentLine_char = '|'
+
+hi NeoTreeDirectoryName ctermfg=11 guifg='#DDB6F2'
 " }}}
 
-" LUALINE {{{
-
+" STATUSLINE {{{
 lua << END
+
 require('lualine').setup {
 sections = {
 	lualine_a = {'mode'},
@@ -212,11 +257,18 @@ sections = {
 	lualine_z = {'location'}
 	},
 options = {
-	theme = 'catppuccin',
+	theme = 'auto', -- note: I manually changed the normal c bg to match my term bg
 	globalstatus = true
+	},
+extensions = {
+	'toggleterm',
+	'fugitive'
 	},
 }
 END
+
+hi StatusLine ctermbg=NONE guibg=NONE
+hi StatusLineNC ctermbg=NONE guibg=NONE
 
 " }}}
 
