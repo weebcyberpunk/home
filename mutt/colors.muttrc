@@ -3,15 +3,15 @@
 color index white default '.*'
 color index_author brightblue default '.*'
 color index_number brightblack default
-color index_subject blue default '.*'
+color index_subject magenta default '.*'
 
 # For new mail:
 color index brightyellow default "~N"
 color index_author brightred default "~N"
-color index_subject brightblue default "~N"
+color index_subject brightmagenta default "~N"
 
 # Header colors:
-color header blue default ".*"
+color header magenta default ".*"
 color header brightyellow default "^(From)"
 color header brightcyan default "^(Subject)"
 color header brightwhite default "^(CC|BCC)"
@@ -33,10 +33,10 @@ color message cyan default
 color markers red white
 color attachment white default
 color search brightyellow default
-color status brightwhite blue
+color status black magenta
 color hdrdefault brightgreen default
-color quoted magenta default
-color quoted1 blue default
+color quoted blue default
+color quoted1 magenta default
 color quoted2 cyan default
 color quoted3 yellow default
 color quoted4 red default
@@ -47,9 +47,9 @@ color underline black default
 color normal default default
 
 color body brightred default "[\-\.+_a-zA-Z0-9]+@[\-\.a-zA-Z0-9]+" # Email addresses
-color body brightblue default "(https?|ftp)://[\-\.,/%~_:?&=\#a-zA-Z0-9]+" # URL
+color body brightmagenta default "(https?|ftp)://[\-\.,/%~_:?&=\#a-zA-Z0-9]+" # URL
 color body green default "\`[^\`]*\`" # Green text between ` and `
-color body brightblue default "^# \.*" # Headings as bold blue
+color body brightmagenta default "^# \.*" # Headings as bold blue
 color body brightcyan default "^## \.*" # Subheadings as bold cyan
 color body brightgreen default "^### \.*" # Subsubheadings as bold green
 color body yellow default "^(\t| )*(-|\\*) \.*" # List items as yellow
