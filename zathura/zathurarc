@@ -6,21 +6,4 @@ set selection-clipboard clipboard
 
 set font "Fira Code Nerd Font 16"
 
-set completion-bg "#1E1F29"
-set completion-group-bg "#1E1F29"
-set completion-highlight-bg "#bd93f9"
-
-set default-bg "#1E1F29"
-
-set highlight-active-color "#bd93f9"
-set highlight-color "#bd93f9"
-
-set statusbar-bg "#1E1F29"
-
-set inputbar-bg "#1E1F29"
-set inputbar-fg "#ffffff"
-
-set notification-bg "#1E1F29"
-set notification-fg "#ffffff"
-
-set statusbar-home-tilde true
+include catppuccin

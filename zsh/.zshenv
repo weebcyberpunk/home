@@ -17,4 +17,4 @@ export TERMINAL=st
 
 # sensible defaults
 export QT_STYLE_OVERRIDE=gtk2
-export GTK_THEME=Dracula
+export GTK_THEME=Catppuccin-pink

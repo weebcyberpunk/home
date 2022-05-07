@@ -574,7 +574,7 @@ use_console_editor = yes
 #
 #state_flags_color = default:b
 #
-#main_window_color = yellow
+main_window_color = magenta
 #
 #color1 = white
 #

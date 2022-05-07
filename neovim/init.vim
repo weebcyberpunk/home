@@ -13,6 +13,7 @@ set number
 set scrolloff=5
 set termguicolors
 set signcolumn=yes
+set nowrap
 " }}}
 
 " VIM-PLUG {{{
@@ -40,7 +41,7 @@ Plug 'tpope/vim-eunuch'
 " make terminal great again
 Plug 'voldikss/vim-floaterm'
 " colorscheme
-Plug 'Mofiqul/dracula.nvim'
+Plug 'catppuccin/nvim'
 " indent guides for code indented with spaces (Python and Rust)
 Plug 'Yggdroot/indentLine'
 " statusline
@@ -173,10 +174,15 @@ augroup programming_settings
 " }}}
 
 " APPEARANCE {{{
-let g:dracula_transparent_bg = v:true
-let g:dracula_italic_comment = v:true
-let g:dracula_lualine_bg_color = "NONE"
-colorscheme dracula
+lua << EOF
+local catppuccin = require("catppuccin")
+
+catppuccin.setup({
+transparent_background = true,
+term_colors = true,
+})
+EOF
+colorscheme catppuccin
 
 hi BufferLineFill ctermbg=NONE cterm=NONE guibg=NONE ctermfg=NONE guifg=NONE
 hi SignColumn ctermbg=NONE guibg=NONE
@@ -208,7 +214,8 @@ sections = {
 	lualine_z = {'location'}
 	},
 options = {
-	theme = 'dracula-nvim'
+	theme = 'catppuccin',
+	globalstatus = true
 	}
 }
 END
@@ -248,8 +255,8 @@ lua <<EOF
     ['<Tab>'] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_next_item()
-      elseif luasnip.expand_or_jumpable() then
-        luasnip.expand_or_jump()
+      -- elseif luasnip.expand_or_jumpable() then
+      --  luasnip.expand_or_jump()
       else
         fallback()
       end
