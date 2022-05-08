@@ -5,6 +5,7 @@ set tw=80
 set fo+=r
 set fo-=o
 set fo-=l
+set fo-=t
 set path+=**
 set foldmethod=marker
 set ignorecase
