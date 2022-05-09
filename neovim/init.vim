@@ -1,5 +1,4 @@
 " BASIC CONFIG {{{
-" minor configs
 filetype plugin indent on
 set tw=80
 set fo+=r
@@ -15,12 +14,14 @@ set scrolloff=5
 set termguicolors
 set signcolumn=yes
 set nowrap
+set wildmode=list:full
+set wildignore+=tags,__pycache__/,test.txt,test*.txt,LICENSE,a.out,*.gch,.SRCINFO
+set splitbelow
+set splitright
 " }}}
 
 " VIM-PLUG {{{
-" call the vim-plug vim plugin manager
 call plug#begin('~/.vim/plugged')
-
 " i complete with tab
 Plug 'ervandew/supertab'
 " auto closing things
@@ -31,9 +32,7 @@ Plug 'preservim/vim-pencil'
 " the world-famous tpope's vim-commentary
 Plug 'tpope/vim-commentary'
 " great tree explorer
-Plug 'nvim-neo-tree/neo-tree.nvim' |
-			\ Plug 'MunifTanjim/nui.nvim' |
-			\ Plug 'nvim-lua/plenary.nvim'
+Plug 'kyazdani42/nvim-tree.lua'
 " show git status
 Plug 'airblade/vim-gitgutter'
 " the world-famous tpope's fugitive git wrapper
@@ -59,27 +58,10 @@ Plug 'L3MON4D3/LuaSnip'
 Plug 'saadparwaiz1/cmp_luasnip'
 " Finally, the devicons
 Plug 'ryanoasis/vim-devicons'
-
 call plug#end()
-
-" }}}
-
-" WILDMENU {{{
-" setting wildmenu and removing some files from it
-set wildmode=list:full
-set wildignore+=tags,__pycache__/,test.txt,test*.txt,LICENSE,a.out,*.gch,.SRCINFO
-"}}}
-
-" SPLITS {{{
-" more natural splits
-set splitbelow
-set splitright
 " }}}
 
 " KEYBINDS {{{
-" I used to use C-t to open a terminal but terminals in neovim are inusable (in
-" vim they aren't)
-" I use actually a ST bind open a new instance, outside from neovim
 nnoremap tn :set rnu!<CR> :set nu!<CR>
 nnoremap <C-s> :setlocal spell!<CR>
 nnoremap tg :GitGutterToggle<CR>
@@ -105,91 +87,90 @@ nnoremap ;mitt :-1r ~/.vim/snippets/mit.txt<CR>:r ! date +'\%Y'<CR>kJJ
 " replace strings (maps two spaces to find the next '++' and replace it)
 nnoremap <Space><Space> /++<CR>2xi
 
-" neotree
-nnoremap <C-n> :NeoTreeShowToggle<CR>
-
-" }}}
-
-" NEOTREE {{{
-
-lua << EOF
-require("neo-tree").setup({
-	close_if_last_window = true,
-	default_component_configs = {
-		indent = {
-			indent_size = 1,
-			padding = 1,
-		},
-	},
-	window = {
-		position = "right",
-		padding = 0,
-		width = 23,
-		mappings = {
-			["<space>"] = { "toggle_node", nowait = true, },
-			["m"] = { "add" },
-			["M"] = "add_directory",
-			["b"] = "move",
-			},
-	},
-	filesystem = {
-		hide_dotfiles = false,
-		follow_current_file = true,
-		use_libuv_file_watcher = true,
-		window = {
-			mappings = {
-				["a"] = "toggle_hidden",
-				["h"] = "navigate_up",
-				["l"] = "set_root",
-			},
-		},
-	},
-	buffers = {
-		window = {
-			mappings = {
-				["h"] = "navigate_up",
-				["l"] = "set_root",
-			},
-		},
-	},
-	
-})
-
-EOF
-
+" nvim tree
+nnoremap <C-n> :NvimTreeToggle<CR>
 " }}}
 
 " GIT-GUTTER {{{
-
 let g:gitgutter_terminal_reports_focus=0
 set updatetime=100
 let g:gitgutter_highlight_linenrs = 1
 let g:gitgutter_signs = 1
-
 " }}}
 
 " TERMINAL {{{
-
 let g:floaterm_keymap_toggle = '<C-t>'
 let g:floaterm_width = 0.9
 let g:floaterm_height = 0.9
+" }}}
 
+" NVIM-TREE {{{
+let g:nvim_tree_git_hl = 1
+let g:nvim_tree_show_icons = {
+			\ 'git': 1,
+			\ 'folders': 1,
+			\ 'files': 1,
+			\ 'folder_arrows': 1,
+			\ }
+
+lua <<EOF
+require'nvim-tree'.setup {
+	hijack_cursor = false,
+	open_on_setup = true,
+	open_on_tab = true,
+	update_cwd = true,
+	view = {
+		width = 20,
+		height = 20,
+		side = "right",
+		preserve_window_proportions = true,
+		signcolumn = "yes",
+		mappings = {
+			custom_only = true,
+			list = {
+				{ key = {"<CR>"}, action = "edit" },
+				{ key = {"l"}, action = "cd" },
+				{ key = {"<Space>"}, action = "preview" },
+				{ key = {"g"}, action = "first_sibling" },
+				{ key = {"G"}, action = "last_sibling" },
+				{ key = {"a"}, action = "toggle_dotfiles" },
+				{ key = {"R"}, action = "refresh" },
+				{ key = {"m"}, action = "create" },
+				{ key = {"<BS>"}, action = "remove" },
+				{ key = {"r"}, action = "full_rename" },
+				{ key = {"h"}, action = "dir_up" },
+				{ key = {"q"}, action = "close" },
+				{ key = {"/"}, action = "search_node" },
+				{ key = {"$"}, action = "run_file_command" },
+				{ key = {"++"}, action = "++" },
+				{ key = {"++"}, action = "++" },
+			},
+		},
+	},
+	renderer = {
+		indent_markers = {
+			enable = true,
+		},
+	},
+	update_focused_file = {
+		enable = true,
+		update_cwd = true,
+	},
+	diagnostics = {
+		enable = true,
+		show_on_dirs = true,
+	},
+	actions = {
+		change_dir = {
+			enable = true,
+			global = true,
+		},
+	},
+}
+EOF
 " }}}
 
 " AUTOCMD SETTINGS {{{
-function AutoStart()
-	Neotree
-	setlocal nonumber
-	setlocal norelativenumber
-	wincmd p
-endfunction
-
-function NeotreeSettings()
-	setlocal nonumber
-	setlocal norelativenumber
-	setlocal signcolumn = no
-endfunction
-
 function DocSettings()
 	HardPencil
 endfunction
@@ -208,11 +189,7 @@ augroup END
 augroup general
 	autocmd!
 	autocmd BufNewFile,BufRead Cargo.toml,Cargo.lock,*.rs setlocal makeprg=cargo
-augroup END
-
-augroup autostart
-	autocmd!
-	autocmd VimEnter * call AutoStart()
+	autocmd BufEnter * ++nested if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif
 augroup END
 " }}}
 
@@ -245,8 +222,7 @@ hi NeoTreeDirectoryName ctermfg=11 guifg='#DDB6F2'
 " }}}
 
 " STATUSLINE {{{
-lua << END
-
+lua << EOF
 require('lualine').setup {
 sections = {
 	lualine_a = {'mode'},
@@ -266,11 +242,10 @@ extensions = {
 	'fugitive'
 	},
 }
-END
+EOF
 
 hi StatusLine ctermbg=NONE guibg=NONE
 hi StatusLineNC ctermbg=NONE guibg=NONE
-
 " }}}
 
 " LSP AND COMPLETION {{{
