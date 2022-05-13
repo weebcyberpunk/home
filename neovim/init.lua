@@ -1,9 +1,5 @@
 -- GREAT DEFAULTS {{{
 vim.opt.textwidth = 80
-vim.opt.formatoptions:append("r")
-vim.opt.formatoptions:remove("o")
-vim.opt.formatoptions:remove("l")
-vim.opt.formatoptions:remove("t")
 vim.opt.foldmethod = "marker"
 vim.opt.signcolumn = "yes"
 vim.opt.wrap = false
@@ -199,37 +195,19 @@ vim.api.nvim_create_autocmd({'BufNewFile', 'BufRead'}, {
 	end
 })
 
-local gen_settings = vim.api.nvim_create_augroup('general', {clear = true})
-
 vim.api.nvim_create_autocmd({'BufNewFile', 'BufRead'}, {
 	pattern = {
 		'Cargo.toml',
 		'Cargo.lock',
 		'*.rs',
 	},
-	group = gen_settings,
+	group = buf_settings,
 	desc = 'Rust make settings',
 	callback = function()
 		vim.bo.makeprg = 'cargo'
 	end
 })
 
-vim.api.nvim_create_autocmd({'FileType'}, {
-	pattern = {
-		'*',
-	},
-	group = gen_settings,
-	desc = 'Override fo',
-	callback = function()
-		vim.opt.formatoptions:append("r")
-		vim.opt.formatoptions:remove("o")
-		vim.opt.formatoptions:remove("l")
-		vim.opt.formatoptions:remove("t")
-	end	
-})
-
--- did not find out how to do this in lua
-vim.cmd("autocmd BufEnter * ++nested if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif")
 -- }}}
 
 -- APPEARANCE {{{
