@@ -214,6 +214,20 @@ vim.api.nvim_create_autocmd({'BufNewFile', 'BufRead'}, {
 	end
 })
 
+vim.api.nvim_create_autocmd({'FileType'}, {
+	pattern = {
+		'*',
+	},
+	group = gen_settings,
+	desc = 'Override fo',
+	callback = function()
+		vim.opt.formatoptions:append("r")
+		vim.opt.formatoptions:remove("o")
+		vim.opt.formatoptions:remove("l")
+		vim.opt.formatoptions:remove("t")
+	end	
+})
+
 -- did not find out how to do this in lua
 vim.cmd("autocmd BufEnter * ++nested if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif")
 -- }}}
