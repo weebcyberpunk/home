@@ -16,6 +16,7 @@ vim.opt.splitright = true
 vim.opt.updatetime = 100
 vim.opt.completeopt = {"menu", "menuone", "noselect"}
 vim.opt.laststatus = 3
+vim.opt.spelllang = "en,pt" -- I'm brazilian so eventually I write portuguese
 -- }}}
 
 -- PLUGINS {{{
@@ -92,8 +93,11 @@ vim.g.gitgutter_signs = 1
 
 -- TERMINAL {{{
 vim.g.floaterm_keymap_toggle = "<C-t>"
-vim.g.floaterm_width = 0.9
-vim.g.floaterm_height = 0.9
+vim.g.floaterm_width = 0.99
+vim.g.floaterm_height = 0.5
+vim.g.floaterm_position = "bottom"
+vim.g.floaterm_title = "terminal"
+-- vim.g.floaterm_borderchars = ""
 -- }}}
 
 -- NVIM TREE {{{
@@ -207,7 +211,6 @@ vim.api.nvim_create_autocmd({'BufNewFile', 'BufRead'}, {
 		vim.bo.makeprg = 'cargo'
 	end
 })
-
 -- }}}
 
 -- APPEARANCE {{{
@@ -323,4 +326,5 @@ local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protoco
 require('lspconfig')['clangd'].setup { capabilities = capabilities }
 require('lspconfig')['rust_analyzer'].setup { capabilities = capabilities }
 require('lspconfig')['pylsp'].setup { capabilities = capabilities }
+require('lspconfig')['bashls'].setup { capabilities = capabilities }
 -- }}}
