@@ -111,7 +111,7 @@ vim.g.nvim_tree_show_icons = {
 
 require'nvim-tree'.setup {
 	hijack_cursor = false,
-	open_on_setup = true,
+	open_on_setup = false,
 	open_on_tab = true,
 	update_cwd = true,
 	view = {
@@ -239,7 +239,6 @@ vim.opt.listchars = { tab = '| ' }
 vim.opt.list = true
 
 vim.g.indentLine_setColors = 0
-vim.g.indentLine_defaultGroup = 'SpecialKey'
 vim.g.indentLine_char = '|'
 -- }}}
 
