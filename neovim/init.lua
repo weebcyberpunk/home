@@ -35,8 +35,6 @@ require "paq" {
 	'kyazdani42/nvim-tree.lua',
 	-- show git status
 	'airblade/vim-gitgutter',
-	-- the world-famous tpope's fugitive git wrapper
-	'tpope/vim-fugitive',
 	-- the world-famous tpope's *nix helper
 	'tpope/vim-eunuch',
 	-- make terminal great again
