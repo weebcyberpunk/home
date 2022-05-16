@@ -14,4 +14,4 @@ $SCRIPTS_HOME/dwmtasks.sh &
 $SCRIPTS_HOME/mpdchangestatus &
 
 # play sound
-mpv --no-video $HOME/.local/share/startsound.mp3
+mpv --no-video $HOME/.local/share/startsound.mp3 &
