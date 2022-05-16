@@ -1,0 +1,17 @@
+#!/bin/sh
+[ -f ~/.zshenv ] && . ~/.zshenv
+
+# vars
+SCRIPTS_HOME="$HOME/.local/bin"
+
+# autostart programs
+$SCRIPTS_HOME/dwmstatus.sh &
+nitrogen --restore &
+picom &
+lxsession &
+dunst &
+$SCRIPTS_HOME/dwmtasks.sh &
+$SCRIPTS_HOME/mpdchangestatus &
+
+# play sound
+mpv --no-video $HOME/.local/share/startsound.mp3
