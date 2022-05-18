@@ -46,6 +46,7 @@ alias convert-to-web='ffmpeg -i out.mp4 -c:v libx264 -crf 20 -preset slow -vf fo
 alias cbonsai='cbonsai -l -S -i'
 alias unimatrix='unimatrix -c magenta'
 alias tty-clock='tty-clock -c -C 5 -s'
+alias vim='nvim -u NORC' # load a clean nvim
 
 # edit line in vim (very useful to test little scripts)
 autoload edit-command-line; zle -N edit-command-line
