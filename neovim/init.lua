@@ -108,6 +108,10 @@ local fb_actions = require "telescope".extensions.file_browser.actions
 local actions = require("telescope.actions")
 require('telescope').setup({
 	defaults = {
+		prompt_prefix = ': ',
+		selection_caret = ' ',
+		border = false,
+		preview = { hide_on_startup = true, },
 		mappings = {
 			i = {
 				["<esc>"] = actions.close,
@@ -125,6 +129,7 @@ require('telescope').setup({
 		file_browser = {
 			theme = 'ivy',
 			layout_config = { height = 0.4, },
+			hidden = true,
 			mappings = {
 				["i"] = {
 					["<C-a>"] = fb_actions.toggle_hidden,
