@@ -31,8 +31,10 @@ require "paq" {
 	'preservim/vim-pencil',
 	-- the world-famous tpope's vim-commentary
 	'tpope/vim-commentary',
-	-- great tree explorer
-	'kyazdani42/nvim-tree.lua',
+	-- file filer
+	'nvim-telescope/telescope.nvim',
+	'nvim-lua/plenary.nvim',
+	'nvim-telescope/telescope-file-browser.nvim',
 	-- show git status
 	'airblade/vim-gitgutter',
 	-- the world-famous tpope's *nix helper
@@ -73,14 +75,17 @@ vim.keymap.set("n", "si", ":vsp<CR>")
 vim.keymap.set("n", "su", ":sp<CR>")
 
 -- snippets
-vim.keymap.set("n", ";c", ":-1r ~/.vim/snippets/skeleton.c<CR>7j8l :-1r ! date +'\\%b \\%d, \\%Y'<CR>kJ Gdd3k2l :let @a=expand('%t')<CR>\"aph2xl")
-vim.keymap.set("n", ";ds", ":-1r ~/.vim/snippets/script-doc.sh<CR>2j8l:r ! date +'\\%b \\%d, \\%Y'<CR>kJjdd")
-vim.keymap.set("n", ";mitc", ":r ~/.vim/snippets/mit.c<CR>j :r ! date +'\\%Y'<CR>kJJ")
-vim.keymap.set("n", ";mits", ":-1r ~/.vim/snippets/mit.sh<CR>j :r ! date +'\\%Y'<CR>kJJ")
-vim.keymap.set("n", ";mitt", ":-1r ~/.vim/snippets/mit.txt<CR>:r ! date +'\\%Y'<CR>kJJ")
+vim.keymap.set("n", ";c", ":-1r ~/.local/share/nvim/snippets/skeleton.c<CR>7j8l :-1r ! date +'\\%b \\%d, \\%Y'<CR>kJ Gdd3k2l :let @a=expand('%t')<CR>\"aph2xl")
+vim.keymap.set("n", ";ds", ":-1r ~/.local/share/nvim/snippets/script-doc.sh<CR>2j8l:r ! date +'\\%b \\%d, \\%Y'<CR>kJjdd")
+vim.keymap.set("n", ";mitc", ":r ~/.local/share/nvim/snippets/mit.c<CR>j :r ! date +'\\%Y'<CR>kJJ")
+vim.keymap.set("n", ";mits", ":-1r ~/.local/share/nvim/snippets/mit.sh<CR>j :r ! date +'\\%Y'<CR>kJJ")
+vim.keymap.set("n", ";mitt", ":-1r ~/.local/share/nvim/snippets/mit.txt<CR>:r ! date +'\\%Y'<CR>kJJ")
 
--- nvim tree
-vim.keymap.set("n", "<C-n>", ":NvimTreeToggle<CR>")
+-- telescope
+vim.keymap.set("n", "<C-n>", ":Telescope file_browser<CR>")
+vim.keymap.set("n", "<C-d>", ":Telescope diagnostics<CR>")
+vim.keymap.set("n", "<C-r>", ":Telescope lsp_references<CR>")
+vim.keymap.set("n", "<C-f>", ":Telescope git_files<CR>")
 -- }}}
 
 -- GIT GUTTER {{{
@@ -98,68 +103,41 @@ vim.g.floaterm_title = "terminal"
 -- vim.g.floaterm_borderchars = ""
 -- }}}
 
--- NVIM TREE {{{
-vim.g.nvim_tree_git_hl = 1
-vim.g.nvim_tree_show_icons = { 
-	git = 1, 
-	folders = 1, 
-	files = 1, 
-	folder_arrows = 1, 
-}
-
-require'nvim-tree'.setup {
-	hijack_cursor = false,
-	open_on_setup = false,
-	open_on_tab = true,
-	update_cwd = true,
-	view = {
-		width = 20,
-		height = 20,
-		side = "right",
-		preserve_window_proportions = true,
-		signcolumn = "yes",
+-- TELESCOPE {{{
+local fb_actions = require "telescope".extensions.file_browser.actions
+local actions = require("telescope.actions")
+require('telescope').setup({
+	defaults = {
 		mappings = {
-			custom_only = true,
-			list = {
-				{ key = {"<CR>"}, action = "edit" },
-				{ key = {"l"}, action = "cd" },
-				{ key = {"<Space>"}, action = "preview" },
-				{ key = {"g"}, action = "first_sibling" },
-				{ key = {"G"}, action = "last_sibling" },
-				{ key = {"a"}, action = "toggle_dotfiles" },
-				{ key = {"R"}, action = "refresh" },
-				{ key = {"m"}, action = "create" },
-				{ key = {"<BS>"}, action = "remove" },
-				{ key = {"r"}, action = "full_rename" },
-				{ key = {"h"}, action = "dir_up" },
-				{ key = {"q"}, action = "close" },
-				{ key = {"/"}, action = "search_node" },
-				{ key = {"$"}, action = "run_file_command" },
-				{ key = {"s"}, action = "vsplit" },
-				{ key = {"u"}, action = "split" },
+			i = {
+				["<esc>"] = actions.close,
+				["<Tab>"] = actions.move_selection_next,
+				["<S-Tab>"] = actions.move_selection_previous,
 			},
 		},
 	},
-	renderer = {
-		indent_markers = {
-			enable = true,
+	pickers = {
+		lsp_references = { theme = 'ivy', layout_config = { height = 0.4, }, },
+		diagnostics = { theme = 'ivy', layout_config = { height = 0.4, }, },
+		git_files = { theme = 'ivy', layout_config = { height = 0.4, }, },
+	},
+	extensions = {
+		file_browser = {
+			theme = 'ivy',
+			layout_config = { height = 0.4, },
+			mappings = {
+				["i"] = {
+					["<C-a>"] = fb_actions.toggle_hidden,
+					["<Space>"] = fb_actions.change_cwd,
+					["<C-h>"] = fb_actions.goto_parent_dir,
+					["<C-l>"] = fb_actions.change_cwd,
+				},
+			},
 		},
 	},
-	update_focused_file = {
-		enable = true,
-		update_cwd = true,
-	},
-	diagnostics = {
-		enable = true,
-		show_on_dirs = true,
-	},
-	actions = {
-		change_dir = {
-			enable = true,
-			global = true,
-		},
-	},
-}
+})
+
+require('telescope').load_extension('file_browser')
 -- }}}
 
 -- AUTOCMD {{{
