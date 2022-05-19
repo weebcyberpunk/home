@@ -206,6 +206,13 @@ require'nvim-treesitter.configs'.setup {
 -- APPEARANCE {{{
 local catppuccin = require('catppuccin')
 catppuccin.setup({
+	styles = {
+		comments = 'italic',
+		functions = 'italic',
+		keywords = 'bold',
+		strings = NONE,
+		variables = NONE,
+	},
 	transparent_background = true,
 	term_colors = true,
 	integrations = {
