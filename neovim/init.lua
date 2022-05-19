@@ -1,3 +1,7 @@
+-- GG's NeoVim configs
+--
+-- ;)
+
 -- GREAT DEFAULTS {{{
 vim.opt.textwidth = 80
 vim.opt.foldmethod = "marker"
@@ -43,10 +47,12 @@ require "paq" {
 	'voldikss/vim-floaterm',
 	-- colorscheme
 	'catppuccin/nvim',
-	-- indent guides for code indented with spaces (Python and Rust)
-	'Yggdroot/indentLine',
+	-- indent guides
+	'lukas-reineke/indent-blankline.nvim',
 	-- statusline
 	'nvim-lualine/lualine.nvim',
+	-- start screen
+	'startup-nvim/startup.nvim',
 	-- make highlighting great again
 	{ 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' },
 	-- lsp and completion config
@@ -112,7 +118,6 @@ require('telescope').setup({
 	defaults = {
 		prompt_prefix = ': ',
 		selection_caret = ' ',
-		border = false,
 		preview = { hide_on_startup = true, },
 		mappings = {
 			i = {
@@ -199,7 +204,6 @@ vim.api.nvim_create_autocmd({'BufNewFile', 'BufRead'}, {
 -- TREESITTER {{{
 require'nvim-treesitter.configs'.setup {
 	ensure_installed = { "c", "python", "rust", "bash", "lua" },
-	highlight = { enable = true, },
 }
 -- }}}
 
@@ -209,26 +213,74 @@ catppuccin.setup({
 	styles = {
 		comments = 'italic',
 		functions = 'italic',
-		keywords = 'bold',
-		strings = NONE,
-		variables = NONE,
+		keywords = 'NONE',
+		strings = 'NONE',
+		variables = 'NONE',
 	},
 	transparent_background = true,
 	term_colors = true,
 	integrations = {
 		gitgutter = true,
+		indent_blankline = { enabled = true, },
 	},
 })
 vim.cmd('colorscheme catppuccin')
 
-vim.api.nvim_set_hl(0, 'SignColumn',                  {bg = 'NONE'})
-
 vim.opt.fillchars = vim.opt.fillchars + { eob = ' ' }
-vim.opt.listchars = { tab = '| ' }
-vim.opt.list = true
 
-vim.g.indentLine_setColors = 0
-vim.g.indentLine_char = '|'
+require("indent_blankline").setup {
+	show_current_context = true,
+}
+
+-- }}}
+
+-- STARTUP {{{
+require"startup".setup({
+	header = {
+		type = "text",
+		align = "center",
+		title = "header",
+		content = {
+			"⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⠤⠖⠚⢉⣩⣭⡭⠛⠓⠲⠦⣄⡀⠀⠀⠀⠀⠀⠀⠀",
+			"⠀⠀⠀⠀⠀⠀⢀⡴⠋⠁⠀⠀⠊⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠳⢦⡀⠀⠀⠀⠀",
+			"⠀⠀⠀⠀⢀⡴⠃⢀⡴⢳⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⣆⠀⠀⠀",
+			"⠀⠀⠀⠀⡾⠁⣠⠋⠀⠈⢧⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⢧⠀⠀",
+			"⠀⠀⠀⣸⠁⢰⠃⠀⠀⠀⠈⢣⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⣇⠀",
+			"⠀⠀⠀⡇⠀⡾⡀⠀⠀⠀⠀⣀⣹⣆⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢹⠀",
+			"⠀⠀⢸⠃⢀⣇⡈⠀⠀⠀⠀⠀⠀⢀⡑⢄⡀⢀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⡇",
+			"⠀⠀⢸⠀⢻⡟⡻⢶⡆⠀⠀⠀⠀⡼⠟⡳⢿⣦⡑⢄⠀⠀⠀⠀⠀⠀⠀⠀⢸⡇",
+			"⠀⠀⣸⠀⢸⠃⡇⢀⠇⠀⠀⠀⠀⠀⡼⠀⠀⠈⣿⡗⠂⠀⠀⠀⠀⠀⠀⠀⢸⠁",
+			"⠀⠀⡏⠀⣼⠀⢳⠊⠀⠀⠀⠀⠀⠀⠱⣀⣀⠔⣸⠁⠀⠀⠀⠀⠀⠀⠀⢠⡟⠀",
+			"⠀⠀⡇⢀⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠠⠀⡇⠀⠀⠀⠀⠀⠀⠀⠀⢸⠃⠀",
+			"⠀⢸⠃⠘⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⠁⠀⠀⢀⠀⠀⠀⠀⠀⣾⠀⠀",
+			"⠀⣸⠀⠀⠹⡄⠀⠀⠈⠁⠀⠀⠀⠀⠀⠀⠀⡞⠀⠀⠀⠸⠀⠀⠀⠀⠀⡇⠀⠀",
+			"⠀⡏⠀⠀⠀⠙⣆⠀⠀⠀⠀⠀⠀⠀⢀⣠⢶⡇⠀⠀⢰⡀⠀⠀⠀⠀⠀⡇⠀⠀",
+			"⢰⠇⡄⠀⠀⠀⡿⢣⣀⣀⣀⡤⠴⡞⠉⠀⢸⠀⠀⠀⣿⡇⠀⠀⠀⠀⠀⣧⠀⠀",
+			"⣸⠀⡇⠀⠀⠀⠀⠀⠀⠉⠀⠀⠀⢹⠀⠀⢸⠀⠀⢀⣿⠇⠀⠀⠀⠁⠀⢸⠀⠀",
+			"⣿⠀⡇⠀⠀⠀⠀⠀⢀⡤⠤⠶⠶⠾⠤⠄⢸⠀⡀⠸⣿⣀⠀⠀⠀⠀⠀⠈⣇⠀",
+			"⡇⠀⡇⠀⠀⡀⠀⡴⠋⠀⠀⠀⠀⠀⠀⠀⠸⡌⣵⡀⢳⡇⠀⠀⠀⠀⠀⠀⢹⡀",
+			"⡇⠀⠇⠀⠀⡇⡸⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⠮⢧⣀⣻⢂⠀⠀⠀⠀⠀⠀⢧",
+			"⣇⠀⢠⠀⠀⢳⠇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⡎⣆⠀⠀⠀⠀⠀⠘",
+			"                              ",
+			"(Neo)Vim, the editor of the beast.",
+		},
+		highlight = 'Normal',
+	},
+
+	maps = {
+		type = "mapping",
+		title = "commands",
+		align = "center",
+		content = {
+			{ " File Browser", "Telescope file_browser",    "n" },
+			{ "ﱐ New File",     "enew",                      "e" },
+			{ " Config",       "e ~/.config/nvim/init.lua", "c" },
+		},
+		highlight = 'Conditional',
+	},
+
+	parts = { "header", "maps" },
+})
 -- }}}
 
 -- STATUSLINE {{{
