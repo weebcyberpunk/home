@@ -47,6 +47,8 @@ require "paq" {
 	'Yggdroot/indentLine',
 	-- statusline
 	'nvim-lualine/lualine.nvim',
+	-- make highlighting great again
+	{ 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' },
 	-- lsp and completion config
 	'neovim/nvim-lspconfig',
 	'hrsh7th/cmp-nvim-lsp',
@@ -194,21 +196,25 @@ vim.api.nvim_create_autocmd({'BufNewFile', 'BufRead'}, {
 })
 -- }}}
 
+-- TREESITTER {{{
+require'nvim-treesitter.configs'.setup {
+	ensure_installed = { "c", "python", "rust", "bash", "lua" },
+	highlight = { enable = true, },
+}
+-- }}}
+
 -- APPEARANCE {{{
 local catppuccin = require('catppuccin')
 catppuccin.setup({
 	transparent_background = true,
 	term_colors = true,
+	integrations = {
+		gitgutter = true,
+	},
 })
 vim.cmd('colorscheme catppuccin')
 
 vim.api.nvim_set_hl(0, 'SignColumn',                  {bg = 'NONE'})
-vim.api.nvim_set_hl(0, 'NvimTreeNormal',              {bg = 'NONE'})
-vim.api.nvim_set_hl(0, 'NvimTreeNormalNC',            {bg = 'NONE'})
-vim.api.nvim_set_hl(0, 'GitGutterAddLineNr',          {fg = 'Green'})
-vim.api.nvim_set_hl(0, 'GitGutterChangeLineNr',       {fg = 'Yellow'})
-vim.api.nvim_set_hl(0, 'GitGutterDeleteLineNr',       {fg = 'Red'})
-vim.api.nvim_set_hl(0, 'GitGutterChangeDeleteLineNr', {fg = 'Magenta'})
 
 vim.opt.fillchars = vim.opt.fillchars + { eob = ' ' }
 vim.opt.listchars = { tab = '| ' }
