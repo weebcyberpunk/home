@@ -2,6 +2,8 @@
 --
 -- ;)
 
+require('impatient')
+
 -- GREAT DEFAULTS {{{
 vim.opt.textwidth = 80
 vim.opt.foldmethod = "marker"
@@ -26,6 +28,8 @@ vim.opt.spelllang = "en,pt" -- I'm brazilian so eventually I write portuguese
 -- PLUGINS {{{
 require "paq" {
 	"savq/paq-nvim";
+	-- GOTTA GO FAST!
+	'lewis6991/impatient.nvim',
 	-- i complete with tab
 	'ervandew/supertab',
 	-- auto closing things
