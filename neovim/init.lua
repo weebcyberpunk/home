@@ -19,7 +19,6 @@ vim.opt.wildmode = "list:full"
 vim.opt.wildignore = { "__pycache__/", "test.txt", "test*.txt", "LICENSE", "a.out", "*.gch", ".SRCINFO", ".git" }
 vim.opt.splitbelow = true
 vim.opt.splitright = true
-vim.opt.updatetime = 100
 vim.opt.completeopt = {"menu", "menuone", "noselect"}
 vim.opt.laststatus = 3
 vim.opt.spelllang = "en,pt" -- I'm brazilian so eventually I write portuguese
@@ -44,7 +43,7 @@ require "paq" {
 	'nvim-lua/plenary.nvim',
 	'nvim-telescope/telescope-file-browser.nvim',
 	-- show git status
-	'airblade/vim-gitgutter',
+	'lewis6991/gitsigns.nvim',
 	-- the world-famous tpope's *nix helper
 	'tpope/vim-eunuch',
 	-- make terminal great again
@@ -100,19 +99,12 @@ vim.keymap.set("n", "<C-s>", ":Telescope lsp_references<CR>")
 vim.keymap.set("n", "<C-f>", ":Telescope git_files<CR>")
 -- }}}
 
--- GIT GUTTER {{{
-vim.g.gitgutter_terminal_reports_focus = 0
-vim.g.gitgutter_highlight_linenrs = 1
-vim.g.gitgutter_signs = 1
--- }}}
-
 -- TERMINAL {{{
 vim.g.floaterm_keymap_toggle = "<C-t>"
 vim.g.floaterm_width = 0.99
 vim.g.floaterm_height = 0.5
 vim.g.floaterm_position = "bottom"
 vim.g.floaterm_title = "terminal"
--- vim.g.floaterm_borderchars = ""
 -- }}}
 
 -- TELESCOPE {{{
@@ -154,6 +146,10 @@ require('telescope').setup({
 })
 
 require('telescope').load_extension('file_browser')
+-- }}}
+
+-- GITSIGNS {{{
+require('gitsigns').setup()
 -- }}}
 
 -- AUTOCMD {{{
@@ -208,6 +204,7 @@ vim.api.nvim_create_autocmd({'BufNewFile', 'BufRead'}, {
 -- TREESITTER {{{
 require'nvim-treesitter.configs'.setup {
 	ensure_installed = { "c", "python", "rust", "bash", "lua" },
+	highlight = { enable = true, },
 }
 -- }}}
 
@@ -224,7 +221,6 @@ catppuccin.setup({
 	transparent_background = true,
 	term_colors = true,
 	integrations = {
-		gitgutter = true,
 		indent_blankline = { enabled = true, },
 	},
 })
@@ -307,7 +303,6 @@ options = {
 	},
 extensions = {
 	'toggleterm',
-	'fugitive'
 	},
 }
 -- }}}
