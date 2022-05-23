@@ -29,8 +29,6 @@ require "paq" {
 	"savq/paq-nvim";
 	-- GOTTA GO FAST!
 	'lewis6991/impatient.nvim',
-	-- i complete with tab
-	'ervandew/supertab',
 	-- auto closing things
 	'ervandew/matchem',
 	'ervandew/sgmlendtag',
@@ -44,8 +42,6 @@ require "paq" {
 	'nvim-telescope/telescope-file-browser.nvim',
 	-- show git status
 	'lewis6991/gitsigns.nvim',
-	-- the world-famous tpope's *nix helper
-	'tpope/vim-eunuch',
 	-- make terminal great again
 	'voldikss/vim-floaterm',
 	-- colorscheme
@@ -59,6 +55,7 @@ require "paq" {
 	-- make highlighting great again
 	{ 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' },
 	-- lsp and completion config
+	'simrat39/rust-tools.nvim',
 	'neovim/nvim-lspconfig',
 	'hrsh7th/cmp-nvim-lsp',
 	'hrsh7th/cmp-buffer',
@@ -199,6 +196,18 @@ vim.api.nvim_create_autocmd({'BufNewFile', 'BufRead'}, {
 		vim.bo.makeprg = 'cargo'
 	end
 })
+
+vim.api.nvim_create_autocmd({'FileType'}, {
+	pattern = {
+		'python',
+		'sh',
+	},
+	group = buf_settings,
+	desc = 'Remove t from formatoptions from scripting langs',
+	callback = function()
+		vim.opt.formatoptions = vim.opt.formatoptions - 't'
+	end
+})
 -- }}}
 
 -- TREESITTER {{{
@@ -241,25 +250,23 @@ require"startup".setup({
 		align = "center",
 		title = "header",
 		content = {
-			"    ▒▒▒▒▒▒▒▒▒▒▒▒              ████████████████████████████              ", 
-			"▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒██                            ██            ", 
-			"▒▒▒▒▒▒▒▒░░▒▒░░▒▒▒▒▒▒▒▒▒▒▒▒██    ░░░░░░░░▒▒░░░░▒▒░░░░░░      ██          ", 
-			"░░▒▒░░▒▒▒▒░░░░░░▒▒▒▒▒▒░░▒▒██  ░░░░▒▒░░░░░░░░████░░░░░░░░░░  ██  ████    ", 
-			"▒▒░░░░░░░░░░░░████████░░░░██  ░░░░░░░░░░░░██▒▒▒▒██░░░░▒▒░░  ████▒▒▒▒██  ", 
-			"░░░░░░░░  ░░██▒▒▒▒▒▒████████  ░░░░░░░░░░░░██▒▒▒▒▒▒██░░░░░░  ██▒▒▒▒▒▒██  ", 
-			"░░  ░░░░  ░░████▒▒▒▒▒▒▒▒▒▒██  ░░░░░░▒▒░░░░██▒▒▒▒▒▒▒▒████████▒▒▒▒▒▒▒▒██  ", 
-			"░░    ░░░░  ░░  ████████▒▒██  ░░░░░░░░░░░░██▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒██  ", 
-			"░░░░  ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒██████  ░░░░░░░░▒▒██▒▒▒▒▒▒  ██▒▒▒▒▒▒▒▒▒▒  ██▒▒▒▒██", 
-			"▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒██  ░░▒▒░░░░░░██▒▒▒▒▒▒████▒▒▒▒▒▒██▒▒████▒▒▒▒██", 
-			"▒▒▒▒▒▒▓▓▓▓▓▓▓▓▓▓▒▒▒▒▒▒▒▒▒▒██  ░░░░░░▒▒░░██▒▒░░░░▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒░░░░██", 
-			"▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒████    ░░▒▒░░░░██▒▒░░░░▒▒██▒▒▒▒██▒▒▒▒██▒▒░░░░██", 
-			"▓▓▓▓▓▓          ▓▓▒▒████████      ░░░░░░░░██▒▒▒▒▒▒██████████████▒▒▒▒██  ", 
-			"                  ██▒▒▒▒▒▒████              ██▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒██    ", 
-			"                  ██▒▒▒▒██  ██████████████████████████████████████      ", 
-			"                  ██████      ██▒▒▒▒██      ██▒▒▒▒██  ██▒▒▒▒██          ", 
-			"                                ██████        ██████    ██████          ", 
+			"    ⢰⣧⣼⣯⠄⣸⣠⣶⣶⣦⣾⠄⠄⠄⠄⡀⠄⢀⣿⣿⠄⠄⠄⢸⡇⠄⠄ ",
+			"    ⣾⣿⠿⠿⠶⠿⢿⣿⣿⣿⣿⣦⣤⣄⢀⡅⢠⣾⣛⡉⠄⠄⠄⠸⢀⣿⠄ ",
+			"   ⢀⡋⣡⣴⣶⣶⡀⠄⠄⠙⢿⣿⣿⣿⣿⣿⣴⣿⣿⣿⢃⣤⣄⣀⣥⣿⣿⠄ ",
+			"   ⢸⣇⠻⣿⣿⣿⣧⣀⢀⣠⡌⢻⣿⣿⣿⣿⣿⣿⣿⣿⣿⠿⠿⠿⣿⣿⣿⠄ ",
+			"  ⢀⢸⣿⣷⣤⣤⣤⣬⣙⣛⢿⣿⣿⣿⣿⣿⣿⡿⣿⣿⡍⠄⠄⢀⣤⣄⠉⠋⣰ ",
+			"  ⣼⣖⣿⣿⣿⣿⣿⣿⣿⣿⣿⢿⣿⣿⣿⣿⣿⢇⣿⣿⡷⠶⠶⢿⣿⣿⠇⢀⣤ ",
+			" ⠘⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣽⣿⣿⣿⡇⣿⣿⣿⣿⣿⣿⣷⣶⣥⣴⣿⡗ ",
+			" ⢀⠈⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡟  ",
+			" ⢸⣿⣦⣌⣛⣻⣿⣿⣧⠙⠛⠛⡭⠅⠒⠦⠭⣭⡻⣿⣿⣿⣿⣿⣿⣿⣿⡿⠃  ",
+			" ⠘⣿⣿⣿⣿⣿⣿⣿⣿⡆⠄⠄⠄⠄⠄⠄⠄⠄⠹⠈⢋⣽⣿⣿⣿⣿⣵⣾⠃  ",
+			"  ⠘⣿⣿⣿⣿⣿⣿⣿⣿⠄⣴⣿⣶⣄⠄⣴⣶⠄⢀⣾⣿⣿⣿⣿⣿⣿⠃   ",
+			"   ⠈⠻⣿⣿⣿⣿⣿⣿⡄⢻⣿⣿⣿⠄⣿⣿⡀⣾⣿⣿⣿⣿⣛⠛⠁    ",
+			"     ⠈⠛⢿⣿⣿⣿⠁⠞⢿⣿⣿⡄⢿⣿⡇⣸⣿⣿⠿⠛⠁      ",
+			"        ⠉⠻⣿⣿⣾⣦⡙⠻⣷⣾⣿⠃⠿⠋⠁         ",
+			"           ⠉⠻⣿⣿⡆⣿⡿⠃             ",
 		},
-		highlight = 'Conditional',
+		highlight = 'ErrorMsg',
 	},
 
 	maps = {
@@ -267,9 +274,10 @@ require"startup".setup({
 		title = "commands",
 		align = "center",
 		content = {
-			{ " File Browser", "Telescope file_browser",    "n" },
-			{ "ﱐ New File",     "enew",                      "e" },
-			{ " Config",       "e ~/.config/nvim/init.lua", "c" },
+			{ " File Browser",  "Telescope file_browser",           "n" },
+			{ "ﱐ New File",      "lua require 'startup'.new_file()", "e" },
+			{ " Config",        "e ~/.config/nvim/init.lua",        "c" },
+			{ " Sync Packages", "PaqSync",                          "u" },
 		},
 		highlight = 'Question',
 	},
@@ -318,8 +326,8 @@ cmp.setup({
 	mapping = cmp.mapping.preset.insert({
 		['<C-d>'] = cmp.mapping.scroll_docs(-4),
 		['<C-f'] = cmp.mapping.scroll_docs(4),
-		['<C-Space>'] = cmp.mapping.complete(),
-		['<CR>'] = cmp.mapping.confirm {
+		['<C-g>'] = cmp.mapping.complete(),
+		['<C-Space>'] = cmp.mapping.confirm {
 			behavior = cmp.ConfirmBehavior.Replace,
 			select = true,
 		},
@@ -372,6 +380,7 @@ cmp.setup.cmdline(':', {
 
 local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
 require('lspconfig')['clangd'].setup { capabilities = capabilities }
-require('lspconfig')['rust_analyzer'].setup { capabilities = capabilities }
 require('lspconfig')['pylsp'].setup { capabilities = capabilities }
+
+require('rust-tools').setup({})
 -- }}}
