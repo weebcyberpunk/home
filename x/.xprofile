@@ -5,12 +5,12 @@
 SCRIPTS_HOME="$HOME/.local/bin"
 
 # autostart programs
-$SCRIPTS_HOME/dwmstatus.sh &
+$SCRIPTS_HOME/dwmstatus &
 nitrogen --restore &
 picom &
 lxsession &
 dunst &
-$SCRIPTS_HOME/dwmtasks.sh &
+$SCRIPTS_HOME/dwmtasks &
 $SCRIPTS_HOME/mpdchangestatus &
 
 # play sound
