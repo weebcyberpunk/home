@@ -26,35 +26,32 @@ vim.opt.spelllang = "en,pt" -- I'm brazilian so eventually I write portuguese
 
 -- PLUGINS {{{
 require "paq" {
-	"savq/paq-nvim";
+	'savq/paq-nvim';
 	-- GOTTA GO FAST!
 	'lewis6991/impatient.nvim',
-	-- auto closing things
+	-- formating
 	'ervandew/matchem',
 	'ervandew/sgmlendtag',
-	-- auto wrap documents
 	'preservim/vim-pencil',
-	-- the world-famous tpope's vim-commentary
 	'tpope/vim-commentary',
-	-- file filer
+	-- files and filers
 	'nvim-telescope/telescope.nvim',
 	'nvim-lua/plenary.nvim',
 	'nvim-telescope/telescope-file-browser.nvim',
-	-- show git status
+	-- git integration
 	'lewis6991/gitsigns.nvim',
+	'tpope/vim-fugitive',
 	-- make terminal great again
 	'voldikss/vim-floaterm',
-	-- colorscheme
+	-- appearance
 	'catppuccin/nvim',
-	-- indent guides
+	-- visual
 	'lukas-reineke/indent-blankline.nvim',
-	-- statusline
 	'nvim-lualine/lualine.nvim',
-	-- start screen
 	'startup-nvim/startup.nvim',
-	-- make highlighting great again
+	'folke/zen-mode.nvim',
 	{ 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' },
-	-- lsp and completion config
+	-- lsp, completion and all that modern stuff
 	'simrat39/rust-tools.nvim',
 	'p00f/clangd_extensions.nvim',
 	'neovim/nvim-lspconfig',
@@ -65,9 +62,11 @@ require "paq" {
 	'hrsh7th/nvim-cmp',
 	'L3MON4D3/LuaSnip',
 	'saadparwaiz1/cmp_luasnip',
-	-- Finally, the devicons
+	-- Finally, the devicons (for safety is the least to be loaded)
 	'ryanoasis/vim-devicons'
 }
+
+require('gitsigns').setup()
 -- }}}
 
 -- KEYBINDS {{{
@@ -146,10 +145,6 @@ require('telescope').setup({
 require('telescope').load_extension('file_browser')
 -- }}}
 
--- GITSIGNS {{{
-require('gitsigns').setup()
--- }}}
-
 -- AUTOCMD {{{
 local buf_settings = vim.api.nvim_create_augroup('buf_settings', {clear = true})
 
@@ -216,6 +211,22 @@ require'nvim-treesitter.configs'.setup {
 	ensure_installed = { "c", "python", "rust", "bash", "lua" },
 	highlight = { enable = true, },
 }
+-- }}}
+
+-- ZEN MODE {{{
+require('zen-mode').setup({
+	window = {
+		backdrop = 1,
+		width = 85,
+		height = 1,
+		options = {
+			signcolumn = "no",
+			number = false,
+			relativenumber = false,
+			list = false,
+		},
+	},
+})
 -- }}}
 
 -- APPEARANCE {{{
