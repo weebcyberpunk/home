@@ -7,7 +7,7 @@ require('impatient')
 -- GREAT DEFAULTS {{{
 vim.opt.textwidth = 80
 vim.opt.foldmethod = "marker"
-vim.opt.signcolumn = "yes"
+vim.opt.signcolumn = "yes:2"
 vim.opt.wrap = false
 vim.opt.number = true
 vim.opt.relativenumber = true
@@ -100,7 +100,7 @@ vim.keymap.set("n", "<C-f>", ":Telescope git_files<CR>")
 -- TERMINAL {{{
 vim.g.floaterm_keymap_toggle = "<C-t>"
 vim.g.floaterm_width = 0.99
-vim.g.floaterm_height = 0.5
+vim.g.floaterm_height = 0.7
 vim.g.floaterm_position = "bottom"
 vim.g.floaterm_title = "terminal"
 -- }}}
@@ -122,14 +122,14 @@ require('telescope').setup({
 		},
 	},
 	pickers = {
-		lsp_references = { theme = 'ivy', layout_config = { height = 0.4, }, },
-		diagnostics = { theme = 'ivy', layout_config = { height = 0.4, }, },
-		git_files = { theme = 'ivy', layout_config = { height = 0.4, }, },
+		lsp_references = { theme = 'ivy', layout_config = { height = 0.7, }, },
+		diagnostics = { theme = 'ivy', layout_config = { height = 0.7, }, },
+		git_files = { theme = 'ivy', layout_config = { height = 0.7, }, },
 	},
 	extensions = {
 		file_browser = {
 			theme = 'ivy',
-			layout_config = { height = 0.4, },
+			layout_config = { height = 0.7, },
 			hidden = true,
 			mappings = {
 				["i"] = {
@@ -246,26 +246,27 @@ require("indent_blankline").setup {
 
 -- STARTUP {{{
 require"startup".setup({
+	-- everything is padded because of signcolumn
 	header = {
 		type = "text",
 		align = "center",
 		title = "header",
 		content = {
-			"    ⢰⣧⣼⣯⠄⣸⣠⣶⣶⣦⣾⠄⠄⠄⠄⡀⠄⢀⣿⣿⠄⠄⠄⢸⡇⠄⠄ ",
-			"    ⣾⣿⠿⠿⠶⠿⢿⣿⣿⣿⣿⣦⣤⣄⢀⡅⢠⣾⣛⡉⠄⠄⠄⠸⢀⣿⠄ ",
-			"   ⢀⡋⣡⣴⣶⣶⡀⠄⠄⠙⢿⣿⣿⣿⣿⣿⣴⣿⣿⣿⢃⣤⣄⣀⣥⣿⣿⠄ ",
-			"   ⢸⣇⠻⣿⣿⣿⣧⣀⢀⣠⡌⢻⣿⣿⣿⣿⣿⣿⣿⣿⣿⠿⠿⠿⣿⣿⣿⠄ ",
-			"  ⢀⢸⣿⣷⣤⣤⣤⣬⣙⣛⢿⣿⣿⣿⣿⣿⣿⡿⣿⣿⡍⠄⠄⢀⣤⣄⠉⠋⣰ ",
-			"  ⣼⣖⣿⣿⣿⣿⣿⣿⣿⣿⣿⢿⣿⣿⣿⣿⣿⢇⣿⣿⡷⠶⠶⢿⣿⣿⠇⢀⣤ ",
-			" ⠘⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣽⣿⣿⣿⡇⣿⣿⣿⣿⣿⣿⣷⣶⣥⣴⣿⡗ ",
-			" ⢀⠈⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡟  ",
-			" ⢸⣿⣦⣌⣛⣻⣿⣿⣧⠙⠛⠛⡭⠅⠒⠦⠭⣭⡻⣿⣿⣿⣿⣿⣿⣿⣿⡿⠃  ",
-			" ⠘⣿⣿⣿⣿⣿⣿⣿⣿⡆⠄⠄⠄⠄⠄⠄⠄⠄⠹⠈⢋⣽⣿⣿⣿⣿⣵⣾⠃  ",
-			"  ⠘⣿⣿⣿⣿⣿⣿⣿⣿⠄⣴⣿⣶⣄⠄⣴⣶⠄⢀⣾⣿⣿⣿⣿⣿⣿⠃   ",
-			"   ⠈⠻⣿⣿⣿⣿⣿⣿⡄⢻⣿⣿⣿⠄⣿⣿⡀⣾⣿⣿⣿⣿⣛⠛⠁    ",
-			"     ⠈⠛⢿⣿⣿⣿⠁⠞⢿⣿⣿⡄⢿⣿⡇⣸⣿⣿⠿⠛⠁      ",
-			"        ⠉⠻⣿⣿⣾⣦⡙⠻⣷⣾⣿⠃⠿⠋⠁         ",
-			"           ⠉⠻⣿⣿⡆⣿⡿⠃             ",
+			"   ⢰⣧⣼⣯⠄⣸⣠⣶⣶⣦⣾⠄⠄⠄⠄⡀⠄⢀⣿⣿⠄⠄⠄⢸⡇⠄⠄    ",
+			"   ⣾⣿⠿⠿⠶⠿⢿⣿⣿⣿⣿⣦⣤⣄⢀⡅⢠⣾⣛⡉⠄⠄⠄⠸⢀⣿⠄    ",
+			"  ⢀⡋⣡⣴⣶⣶⡀⠄⠄⠙⢿⣿⣿⣿⣿⣿⣴⣿⣿⣿⢃⣤⣄⣀⣥⣿⣿⠄    ",
+			"  ⢸⣇⠻⣿⣿⣿⣧⣀⢀⣠⡌⢻⣿⣿⣿⣿⣿⣿⣿⣿⣿⠿⠿⠿⣿⣿⣿⠄    ",
+			" ⢀⢸⣿⣷⣤⣤⣤⣬⣙⣛⢿⣿⣿⣿⣿⣿⣿⡿⣿⣿⡍⠄⠄⢀⣤⣄⠉⠋⣰    ",
+			" ⣼⣖⣿⣿⣿⣿⣿⣿⣿⣿⣿⢿⣿⣿⣿⣿⣿⢇⣿⣿⡷⠶⠶⢿⣿⣿⠇⢀⣤    ",
+			"⠘⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣽⣿⣿⣿⡇⣿⣿⣿⣿⣿⣿⣷⣶⣥⣴⣿⡗    ",
+			"⢀⠈⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡟     ",
+			"⢸⣿⣦⣌⣛⣻⣿⣿⣧⠙⠛⠛⡭⠅⠒⠦⠭⣭⡻⣿⣿⣿⣿⣿⣿⣿⣿⡿⠃     ",
+			"⠘⣿⣿⣿⣿⣿⣿⣿⣿⡆⠄⠄⠄⠄⠄⠄⠄⠄⠹⠈⢋⣽⣿⣿⣿⣿⣵⣾⠃     ",
+			" ⠘⣿⣿⣿⣿⣿⣿⣿⣿⠄⣴⣿⣶⣄⠄⣴⣶⠄⢀⣾⣿⣿⣿⣿⣿⣿⠃      ",
+			"  ⠈⠻⣿⣿⣿⣿⣿⣿⡄⢻⣿⣿⣿⠄⣿⣿⡀⣾⣿⣿⣿⣿⣛⠛⠁       ",
+			"    ⠈⠛⢿⣿⣿⣿⠁⠞⢿⣿⣿⡄⢿⣿⡇⣸⣿⣿⠿⠛⠁         ",
+			"       ⠉⠻⣿⣿⣾⣦⡙⠻⣷⣾⣿⠃⠿⠋⠁            ",
+			"          ⠉⠻⣿⣿⡆⣿⡿⠃                ",
 		},
 		highlight = 'ErrorMsg',
 	},
@@ -275,10 +276,10 @@ require"startup".setup({
 		title = "commands",
 		align = "center",
 		content = {
-			{ " File Browser",  "Telescope file_browser",           "n" },
-			{ "ﱐ New File",      "lua require 'startup'.new_file()", "e" },
-			{ " Config",        "e ~/.config/nvim/init.lua",        "c" },
-			{ " Sync Packages", "PaqSync",                          "u" },
+			{ " File Browser     ",  "Telescope file_browser",           "n" },
+			{ "ﱐ New File     ",      "lua require 'startup'.new_file()", "e" },
+			{ " Config     ",        "e ~/.config/nvim/init.lua",        "c" },
+			{ " Sync Packages     ", "PaqSync",                          "u" },
 		},
 		highlight = 'Question',
 	},
@@ -287,7 +288,7 @@ require"startup".setup({
 		type = "text",
 		title = "footer",
 		align = "center",
-		content = { "(Neo)Vim, The Editor of The Beast." },
+		content = { "(Neo)Vim, The Editor of The Beast.   " },
 		highlight = "Normal",
 	},
 
@@ -309,9 +310,6 @@ sections = {
 options = {
 	theme = 'auto', -- note: I manually changed the normal c bg to match my term bg
 	globalstatus = true
-	},
-extensions = {
-	'toggleterm',
 	},
 }
 -- }}}
