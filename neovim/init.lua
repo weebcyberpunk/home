@@ -30,8 +30,8 @@ require "paq" {
 	-- GOTTA GO FAST!
 	'lewis6991/impatient.nvim',
 	-- formating
-	'ervandew/matchem',
-	'ervandew/sgmlendtag',
+	'windwp/nvim-autopairs',
+	'windwp/nvim-ts-autotag',
 	'preservim/vim-pencil',
 	'tpope/vim-commentary',
 	-- files and filers
@@ -67,6 +67,8 @@ require "paq" {
 }
 
 require('gitsigns').setup()
+require('nvim-autopairs').setup()
+require('nvim-ts-autotag').setup()
 -- }}}
 
 -- KEYBINDS {{{
@@ -208,7 +210,7 @@ vim.api.nvim_create_autocmd({'FileType'}, {
 
 -- TREESITTER {{{
 require'nvim-treesitter.configs'.setup {
-	ensure_installed = { "c", "python", "rust", "bash", "lua" },
+	ensure_installed = { "c", "python", "rust", "bash", "lua", "html" },
 	highlight = { enable = true, },
 }
 -- }}}
