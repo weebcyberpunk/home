@@ -72,6 +72,10 @@ require('packer').startup(function(use)
 		require('packer').sync()
 	end
 end)
+
+require('gitsigns').setup()
+require('nvim-autopairs').setup()
+require('nvim-ts-autotag').setup()
 --- }}}
 
 -- GREAT DEFAULTS {{{
