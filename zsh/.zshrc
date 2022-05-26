@@ -40,7 +40,7 @@ alias font-list="fc-list | awk '{gsub(\$1, \"\"); print \$0}'"
 alias mount-drive='udisksctl mount -b /dev/sdb1'
 alias umount-drive='udisksctl unmount -b /dev/sdb1'
 # downloads and records
-alias music-dl='youtube-dl -i -x --audio-format mp3'
+alias music-dl='yt-dlp -i -x --audio-format mp3'
 alias convert-to-web='ffmpeg -i out.mp4 -c:v libx264 -crf 20 -preset slow -vf format=yuv420p -c:a aac -movflags +faststart output.mp4'
 # command configs
 alias cbonsai='cbonsai -l -S -i'
