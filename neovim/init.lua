@@ -206,6 +206,17 @@ vim.api.nvim_create_autocmd({'FileType'}, {
 		vim.opt.formatoptions = vim.opt.formatoptions - 't'
 	end
 })
+
+vim.api.nvim_create_autocmd({'FileType'}, {
+	pattern = {
+		'startup',
+	},
+	group = buf_settings,
+	desc = 'Remove lualine from startup',
+	callback = function()
+		vim.cmd('setlocal laststatus=0')
+	end
+})
 -- }}}
 
 -- TREESITTER {{{
