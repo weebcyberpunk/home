@@ -97,6 +97,7 @@ vim.opt.completeopt = {"menu", "menuone", "noselect"}
 vim.opt.laststatus = 3
 vim.opt.spelllang = "en,pt" -- I'm brazilian so eventually I write portuguese
 vim.opt.showmode = false -- this is only done because the mode is shown in lualine and in the cursor itself
+vim.opt.mouse = "a"
 -- }}}
 
 -- KEYBINDS {{{
