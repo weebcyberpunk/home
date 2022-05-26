@@ -22,6 +22,7 @@ vim.opt.splitright = true
 vim.opt.completeopt = {"menu", "menuone", "noselect"}
 vim.opt.laststatus = 3
 vim.opt.spelllang = "en,pt" -- I'm brazilian so eventually I write portuguese
+vim.opt.showmode = false -- this is only done because the mode is shown in lualine and in the cursor itself
 -- }}}
 
 -- PLUGINS {{{
@@ -63,7 +64,7 @@ require "paq" {
 	'L3MON4D3/LuaSnip',
 	'saadparwaiz1/cmp_luasnip',
 	-- Finally, the devicons (for safety is the least to be loaded)
-	'ryanoasis/vim-devicons'
+	'kyazdani42/nvim-web-devicons',
 }
 
 require('gitsigns').setup()
@@ -72,9 +73,9 @@ require('nvim-ts-autotag').setup()
 -- }}}
 
 -- KEYBINDS {{{
-vim.keymap.set("n", "tn", ":set rnu!<CR>:set nu!<CR>")
 vim.keymap.set("n", "<C-s>", ":setlocal spell!<CR>")
 vim.keymap.set("n", "<Space><Space>", "/++<CR>2xi")
+vim.keymap.set("n", "<C-p>", ":FloatermNew python<CR>")
 
 -- navigation and splits
 vim.keymap.set("n", "<C-H>", "<C-W><C-H>")
@@ -154,7 +155,6 @@ vim.api.nvim_create_autocmd({'BufNewFile', 'BufRead'}, {
 	pattern = {
 		'*.md',
 		'*.html',
-		'*.txt',
 	},
 	group = buf_settings,
 	desc = 'Docs auto setting',
