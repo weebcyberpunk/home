@@ -4,6 +4,76 @@
 
 require('impatient')
 
+-- PACKER BOOTSTRAP AND PLUGINS {{{
+local fn = vim.fn
+local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
+if fn.empty(fn.glob(install_path)) > 0 then
+	packer_bootstrap = fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
+end
+
+require('packer').startup(function(use)
+	use 'wbthomason/packer.nvim'
+
+	-- GOTTA GO FAST!
+	use 'lewis6991/impatient.nvim'
+	-- formating
+	use 'windwp/nvim-autopairs'
+	use 'windwp/nvim-ts-autotag'
+	use { 'preservim/vim-pencil', opt = true, cmd = { 'HardPencil', 'Pencil', 'PencilHard', 'SoftPencil', 'PencilSoft', 'PencilToggle' } }
+	use 'tpope/vim-commentary'
+	-- files and filers
+	use 'nvim-telescope/telescope.nvim'
+	use 'nvim-lua/plenary.nvim'
+	use 'nvim-telescope/telescope-file-browser.nvim'
+	-- git integration
+	use  'lewis6991/gitsigns.nvim'
+	use { 'tpope/vim-fugitive', opt = true, cmd = { 'G' } }
+	-- make terminal great again
+	use { 'voldikss/vim-floaterm', opt = true, keys = '<C-t>', cmd = { 'FloatermNew', 'FloatermToggle' } }
+	-- appearance
+	use { 'catppuccin/nvim', as = 'catppucin', commit = 'f079dda' }
+	-- visual
+	use 'lukas-reineke/indent-blankline.nvim'
+	use 'nvim-lualine/lualine.nvim'
+	use 'startup-nvim/startup.nvim'
+	-- unfortunatelly I cannot remove this from here
+	use { 'folke/zen-mode.nvim', opt = true, cmd = { 'ZenMode' }, config = function()
+		require('zen-mode').setup({
+			window = {
+				backdrop = 1,
+				width = 85,
+				height = 1,
+				options = {
+					signcolumn = "no",
+					number = false,
+					relativenumber = false,
+					list = false,
+				},
+			},
+		})
+	end
+	}
+	use { 'nvim-treesitter/nvim-treesitter', run = 'TSUpdate' }
+	-- lsp, completion and all that modern stuff
+	use 'simrat39/rust-tools.nvim'
+	use 'p00f/clangd_extensions.nvim'
+	use 'neovim/nvim-lspconfig'
+	use 'hrsh7th/cmp-nvim-lsp'
+	use 'hrsh7th/cmp-buffer'
+	use 'hrsh7th/cmp-path'
+	use 'hrsh7th/cmp-cmdline'
+	use 'hrsh7th/nvim-cmp'
+	use 'L3MON4D3/LuaSnip'
+	use 'saadparwaiz1/cmp_luasnip'
+	-- Finally, the devicons (for safety is the least to be loaded)
+	use 'kyazdani42/nvim-web-devicons'
+
+	if packer_bootstrap then
+		require('packer').sync()
+	end
+end)
+--- }}}
+
 -- GREAT DEFAULTS {{{
 vim.opt.textwidth = 80
 vim.opt.foldmethod = "marker"
@@ -23,53 +93,6 @@ vim.opt.completeopt = {"menu", "menuone", "noselect"}
 vim.opt.laststatus = 3
 vim.opt.spelllang = "en,pt" -- I'm brazilian so eventually I write portuguese
 vim.opt.showmode = false -- this is only done because the mode is shown in lualine and in the cursor itself
--- }}}
-
--- PLUGINS {{{
-require "paq" {
-	'savq/paq-nvim';
-	-- GOTTA GO FAST!
-	'lewis6991/impatient.nvim',
-	-- formating
-	'windwp/nvim-autopairs',
-	'windwp/nvim-ts-autotag',
-	'preservim/vim-pencil',
-	'tpope/vim-commentary',
-	-- files and filers
-	'nvim-telescope/telescope.nvim',
-	'nvim-lua/plenary.nvim',
-	'nvim-telescope/telescope-file-browser.nvim',
-	-- git integration
-	'lewis6991/gitsigns.nvim',
-	'tpope/vim-fugitive',
-	-- make terminal great again
-	'voldikss/vim-floaterm',
-	-- appearance
-	'catppuccin/nvim',
-	-- visual
-	'lukas-reineke/indent-blankline.nvim',
-	'nvim-lualine/lualine.nvim',
-	'startup-nvim/startup.nvim',
-	'folke/zen-mode.nvim',
-	{ 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' },
-	-- lsp, completion and all that modern stuff
-	'simrat39/rust-tools.nvim',
-	'p00f/clangd_extensions.nvim',
-	'neovim/nvim-lspconfig',
-	'hrsh7th/cmp-nvim-lsp',
-	'hrsh7th/cmp-buffer',
-	'hrsh7th/cmp-path',
-	'hrsh7th/cmp-cmdline',
-	'hrsh7th/nvim-cmp',
-	'L3MON4D3/LuaSnip',
-	'saadparwaiz1/cmp_luasnip',
-	-- Finally, the devicons (for safety is the least to be loaded)
-	'kyazdani42/nvim-web-devicons',
-}
-
-require('gitsigns').setup()
-require('nvim-autopairs').setup()
-require('nvim-ts-autotag').setup()
 -- }}}
 
 -- KEYBINDS {{{
@@ -226,22 +249,6 @@ require'nvim-treesitter.configs'.setup {
 }
 -- }}}
 
--- ZEN MODE {{{
-require('zen-mode').setup({
-	window = {
-		backdrop = 1,
-		width = 85,
-		height = 1,
-		options = {
-			signcolumn = "no",
-			number = false,
-			relativenumber = false,
-			list = false,
-		},
-	},
-})
--- }}}
-
 -- APPEARANCE {{{
 local catppuccin = require('catppuccin')
 catppuccin.setup({
@@ -303,7 +310,7 @@ require"startup".setup({
 			{ " File Browser     ",  "Telescope file_browser",           "n" },
 			{ "ﱐ New File     ",      "lua require 'startup'.new_file()", "e" },
 			{ " Config     ",        "e ~/.config/nvim/init.lua",        "c" },
-			{ " Sync Packages     ", "PaqSync",                          "u" },
+			{ " Sync Packages     ", "PackerSync",                       "u" },
 		},
 		highlight = 'Question',
 	},
@@ -332,7 +339,7 @@ sections = {
 	lualine_z = {'location'}
 	},
 options = {
-	theme = 'auto', -- note: I manually changed the normal c bg to match my term bg
+	theme = 'auto',
 	globalstatus = true
 	},
 }
