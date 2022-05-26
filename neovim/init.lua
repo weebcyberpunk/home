@@ -113,7 +113,7 @@ local actions = require("telescope.actions")
 require('telescope').setup({
 	defaults = {
 		prompt_prefix = ': ',
-		selection_caret = ' ',
+		-- selection_caret = ' ',
 		preview = { hide_on_startup = true, },
 		mappings = {
 			i = {
