@@ -29,9 +29,14 @@ require('packer').startup(function(use)
 	use  'lewis6991/gitsigns.nvim'
 	use { 'tpope/vim-fugitive', opt = true, cmd = { 'G' } }
 	-- make terminal great again
-	use { 'voldikss/vim-floaterm', opt = true, keys = '<C-t>', cmd = { 'FloatermNew', 'FloatermToggle' } }
+	use { 'voldikss/vim-floaterm', opt = true, keys = '<C-t>', cmd = { 'FloatermNew', 'FloatermToggle' }, config = function()
+		vim.cmd('hi FloatermBorder guibg=NONE')
+	end 
+	}
 	-- appearance
-	use { 'catppuccin/nvim', as = 'catppucin', commit = 'f079dda' }
+	use { 'catppuccin/nvim', as = 'catppucin', 
+		-- commit = 'f079dda' 
+	}
 	-- visual
 	use 'lukas-reineke/indent-blankline.nvim'
 	use 'nvim-lualine/lualine.nvim'
@@ -272,6 +277,7 @@ catppuccin.setup({
 		indent_blankline = { enabled = true, },
 	},
 })
+vim.g.catppuccin_flavour = "mocha"
 vim.cmd('colorscheme catppuccin')
 
 vim.opt.fillchars = vim.opt.fillchars + { eob = ' ' }
