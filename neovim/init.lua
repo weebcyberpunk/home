@@ -65,6 +65,8 @@ require('packer').startup(function(use)
 	use 'hrsh7th/nvim-cmp'
 	use 'L3MON4D3/LuaSnip'
 	use 'saadparwaiz1/cmp_luasnip'
+	-- tetris
+	use { 'alec-gibson/nvim-tetris', opt = true, cmd = 'Tetris' }
 	-- Finally, the devicons (for safety is the least to be loaded)
 	use 'kyazdani42/nvim-web-devicons'
 
