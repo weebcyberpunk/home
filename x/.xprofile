@@ -6,7 +6,7 @@ SCRIPTS_HOME="$HOME/.local/bin"
 
 # autostart programs
 $SCRIPTS_HOME/dwmstatus &
-unclutter --start-hidden &
+unclutter --start-hidden --jitter 10 --ignore-scrolling &
 nitrogen --restore
 picom &
 # lxsession &
