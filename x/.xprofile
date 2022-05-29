@@ -6,9 +6,11 @@ SCRIPTS_HOME="$HOME/.local/bin"
 
 # autostart programs
 $SCRIPTS_HOME/dwmstatus &
-nitrogen --restore &
+unclutter --start-hidden &
+nitrogen --restore
 picom &
-lxsession &
+# lxsession &
+/usr/lib/xfce-polkit/xfce-polkit &
 dunst &
 $SCRIPTS_HOME/dwmtasks &
 $SCRIPTS_HOME/mpdchangestatus &
