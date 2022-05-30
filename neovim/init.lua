@@ -81,7 +81,7 @@ require('packer').startup(function(use)
 end)
 
 require('gitsigns').setup()
-require('nvim-autopairs').setup()
+require('nvim-autopairs').setup({ ignored_next_char = "" })
 require('nvim-ts-autotag').setup()
 --- }}}
 
@@ -108,9 +108,8 @@ vim.opt.mouse = "a"
 -- }}}
 
 -- KEYBINDS {{{
-vim.keymap.set("n", "<C-s>", ":setlocal spell!<CR>")
 vim.keymap.set("n", "<Space><Space>", "/++<CR>2xi")
-vim.keymap.set("n", "<C-p>", ":FloatermNew python<CR>")
+vim.keymap.set("n", "<C-c>p", ":FloatermNew python<CR>")
 
 -- navigation and splits
 vim.keymap.set("n", "<C-H>", "<C-W><C-H>")
@@ -136,10 +135,14 @@ vim.keymap.set("n", "<C-f>", ":Telescope git_files<CR>")
 
 -- TERMINAL {{{
 vim.g.floaterm_keymap_toggle = "<C-t>"
-vim.g.floaterm_width = 0.99
+vim.g.floaterm_keymap_new = "<C-c>n"
+vim.g.floaterm_keymap_next = "<C-c>l"
+vim.g.floaterm_keymap_prev = "<C-c>h"
+vim.g.floaterm_width = vim.o.columns
 vim.g.floaterm_height = 0.7
 vim.g.floaterm_position = "bottom"
-vim.g.floaterm_title = "terminal"
+vim.g.floaterm_title = "Terminal $1"
+vim.g.floaterm_borderchars = "─   ──  "
 -- }}}
 
 -- TELESCOPE {{{
@@ -296,23 +299,50 @@ require"startup".setup({
 		align = "center",
 		title = "header",
 		content = {
-			"   ⢰⣧⣼⣯⠄⣸⣠⣶⣶⣦⣾⠄⠄⠄⠄⡀⠄⢀⣿⣿⠄⠄⠄⢸⡇⠄⠄    ",
-			"   ⣾⣿⠿⠿⠶⠿⢿⣿⣿⣿⣿⣦⣤⣄⢀⡅⢠⣾⣛⡉⠄⠄⠄⠸⢀⣿⠄    ",
-			"  ⢀⡋⣡⣴⣶⣶⡀⠄⠄⠙⢿⣿⣿⣿⣿⣿⣴⣿⣿⣿⢃⣤⣄⣀⣥⣿⣿⠄    ",
-			"  ⢸⣇⠻⣿⣿⣿⣧⣀⢀⣠⡌⢻⣿⣿⣿⣿⣿⣿⣿⣿⣿⠿⠿⠿⣿⣿⣿⠄    ",
-			" ⢀⢸⣿⣷⣤⣤⣤⣬⣙⣛⢿⣿⣿⣿⣿⣿⣿⡿⣿⣿⡍⠄⠄⢀⣤⣄⠉⠋⣰    ",
-			" ⣼⣖⣿⣿⣿⣿⣿⣿⣿⣿⣿⢿⣿⣿⣿⣿⣿⢇⣿⣿⡷⠶⠶⢿⣿⣿⠇⢀⣤    ",
-			"⠘⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣽⣿⣿⣿⡇⣿⣿⣿⣿⣿⣿⣷⣶⣥⣴⣿⡗    ",
-			"⢀⠈⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡟     ",
-			"⢸⣿⣦⣌⣛⣻⣿⣿⣧⠙⠛⠛⡭⠅⠒⠦⠭⣭⡻⣿⣿⣿⣿⣿⣿⣿⣿⡿⠃     ",
-			"⠘⣿⣿⣿⣿⣿⣿⣿⣿⡆⠄⠄⠄⠄⠄⠄⠄⠄⠹⠈⢋⣽⣿⣿⣿⣿⣵⣾⠃     ",
-			" ⠘⣿⣿⣿⣿⣿⣿⣿⣿⠄⣴⣿⣶⣄⠄⣴⣶⠄⢀⣾⣿⣿⣿⣿⣿⣿⠃      ",
-			"  ⠈⠻⣿⣿⣿⣿⣿⣿⡄⢻⣿⣿⣿⠄⣿⣿⡀⣾⣿⣿⣿⣿⣛⠛⠁       ",
-			"    ⠈⠛⢿⣿⣿⣿⠁⠞⢿⣿⣿⡄⢿⣿⡇⣸⣿⣿⠿⠛⠁         ",
-			"       ⠉⠻⣿⣿⣾⣦⡙⠻⣷⣾⣿⠃⠿⠋⠁            ",
-			"          ⠉⠻⣿⣿⡆⣿⡿⠃                ",
+			-- '   ⢰⣧⣼⣯⠄⣸⣠⣶⣶⣦⣾⠄⠄⠄⠄⡀⠄⢀⣿⣿⠄⠄⠄⢸⡇⠄⠄    ',
+			-- '   ⣾⣿⠿⠿⠶⠿⢿⣿⣿⣿⣿⣦⣤⣄⢀⡅⢠⣾⣛⡉⠄⠄⠄⠸⢀⣿⠄    ',
+			-- '  ⢀⡋⣡⣴⣶⣶⡀⠄⠄⠙⢿⣿⣿⣿⣿⣿⣴⣿⣿⣿⢃⣤⣄⣀⣥⣿⣿⠄    ',
+			-- '  ⢸⣇⠻⣿⣿⣿⣧⣀⢀⣠⡌⢻⣿⣿⣿⣿⣿⣿⣿⣿⣿⠿⠿⠿⣿⣿⣿⠄    ',
+			-- ' ⢀⢸⣿⣷⣤⣤⣤⣬⣙⣛⢿⣿⣿⣿⣿⣿⣿⡿⣿⣿⡍⠄⠄⢀⣤⣄⠉⠋⣰    ',
+			-- ' ⣼⣖⣿⣿⣿⣿⣿⣿⣿⣿⣿⢿⣿⣿⣿⣿⣿⢇⣿⣿⡷⠶⠶⢿⣿⣿⠇⢀⣤    ',
+			-- '⠘⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣽⣿⣿⣿⡇⣿⣿⣿⣿⣿⣿⣷⣶⣥⣴⣿⡗    ',
+			-- '⢀⠈⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡟     ',
+			-- '⢸⣿⣦⣌⣛⣻⣿⣿⣧⠙⠛⠛⡭⠅⠒⠦⠭⣭⡻⣿⣿⣿⣿⣿⣿⣿⣿⡿⠃     ',
+			-- '⠘⣿⣿⣿⣿⣿⣿⣿⣿⡆⠄⠄⠄⠄⠄⠄⠄⠄⠹⠈⢋⣽⣿⣿⣿⣿⣵⣾⠃     ',
+			-- ' ⠘⣿⣿⣿⣿⣿⣿⣿⣿⠄⣴⣿⣶⣄⠄⣴⣶⠄⢀⣾⣿⣿⣿⣿⣿⣿⠃      ',
+			-- '  ⠈⠻⣿⣿⣿⣿⣿⣿⡄⢻⣿⣿⣿⠄⣿⣿⡀⣾⣿⣿⣿⣿⣛⠛⠁       ',
+			-- '    ⠈⠛⢿⣿⣿⣿⠁⠞⢿⣿⣿⡄⢿⣿⡇⣸⣿⣿⠿⠛⠁         ',
+			-- '       ⠉⠻⣿⣿⣾⣦⡙⠻⣷⣾⣿⠃⠿⠋⠁            ',
+			-- '          ⠉⠻⣿⣿⡆⣿⡿⠃                ',
+			-- '██████                    ████  ',
+			-- '████  ▓▓                ▓▓  ██  ',
+			-- '  ██    ██            ▓▓    ██  ',
+			-- '  ██      ██▓▓▓▓████▓▓      ██  ',
+			-- '  ██                        ██  ',
+			-- '  ▓▓                        ██  ',
+			-- '  ▓▓                        ██  ',
+			-- '  ▓▓    ▓▓▓▓          ██    ██  ',
+			-- '  ██░░▒▒    ██      ██  ██  ██  ',
+			-- '  ▓▓██░░░░              ░░░░██  ',
+			-- '    ██▓▓                  ██    ',
+			-- '        ▓▓              ██      ',
+			-- '          ▓▓██▓▓████████░░      ',
+			'                        _ ',
+			'                       | \\',
+			'                       | |',
+			'                       | |',
+			'  |\\                   | |',
+			' /, ~\\                / / ',
+			'X     `-.....-------./ /  ',
+			' ~-. ~  ~              |  ',
+			'    \\             /    |  ',
+			'     \\  /_     ___\\   /   ',
+			'     | /\\ ~~~~~   \\ |     ',
+			'     | | \\        || |    ',
+			'     | |\\ \\       || )    ',
+			'    (_/ (_/      ((_/     ',
 		},
-		highlight = 'ErrorMsg',
+		highlight = 'Conditional',
 	},
 
 	maps = {
@@ -324,6 +354,7 @@ require"startup".setup({
 			{ "ﱐ New File     ",      "lua require 'startup'.new_file()", "e" },
 			{ " Config     ",        "e ~/.config/nvim/init.lua",        "c" },
 			{ " Sync Packages     ", "PackerSync",                       "u" },
+			{ " Nyan!     ",         "term nyancat",                     "y" }
 		},
 		highlight = 'Question',
 	},
@@ -332,7 +363,7 @@ require"startup".setup({
 		type = "text",
 		title = "footer",
 		align = "center",
-		content = { "(Neo)Vim, The Editor of The Beast.   " },
+		content = { "Welcome to NyanVim!   " },
 		highlight = "Normal",
 	},
 
@@ -411,7 +442,6 @@ cmp.setup.cmdline('/', {
 		{ name = 'buffer' }
 	}
 })
-
 cmp.setup.cmdline(':', {
 	mapping = cmp.mapping.preset.cmdline(),
 	sources = cmp.config.sources({
@@ -422,7 +452,7 @@ cmp.setup.cmdline(':', {
 })
 
 local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
-require('lspconfig')['pylsp'].setup { capabilities = capabilities }
+require('lspconfig')['pyright'].setup { capabilities = capabilities }
 
 require('rust-tools').setup()
 require('clangd_extensions').setup()
