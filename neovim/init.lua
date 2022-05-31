@@ -21,6 +21,7 @@ require('packer').startup(function(use)
 	use 'windwp/nvim-ts-autotag'
 	use { 'preservim/vim-pencil', opt = true, cmd = { 'HardPencil', 'Pencil', 'PencilHard', 'SoftPencil', 'PencilSoft', 'PencilToggle' } }
 	use 'tpope/vim-commentary'
+	use { 'dhruvasagar/vim-table-mode', opt = true, cmd = { 'TableModeEnable', 'TableModeToggle' }, keys = '\tm', }
 	-- files and filers
 	use 'nvim-telescope/telescope.nvim'
 	use 'nvim-lua/plenary.nvim'
