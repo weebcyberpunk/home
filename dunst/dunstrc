@@ -68,12 +68,14 @@
     # The transparency of the window.  Range: [0; 100].
     # This option will only work if a compositing window manager is
     # present (e.g. xcompmgr, compiz, etc.). (X11 only)
-    transparency = 5
+    transparency = 10
 
     # Draw a line of "separator_height" pixel height between two
     # notifications.
     # Set to 0 to disable.
     separator_height = 10
+
+    separator_color= frame
 
     # Padding between text and separator.
     padding = 8
@@ -86,7 +88,7 @@
 
     # Defines width in pixels of frame around the notification window.
     # Set to 0 to disable.
-    frame_width = 3
+    frame_width = 4
 
     # Sort messages by urgency.
     sort = yes
@@ -174,7 +176,7 @@
     ### Icons ###
 
     # Align icons left/right/off
-    icon_position = left
+    icon_position = off
 
     # Scale small icons up to this size, set to 0 to disable. Helpful
     # for e.g. small files or high-dpi screens. In case of conflict,
@@ -267,6 +269,10 @@
     mouse_middle_click = close_all
     mouse_right_click = close_current
 
+	# catppuccin theme, but I changed it
+
+
+
 # Experimental features that may or may not work correctly. Do not expect them
 # to have a consistent behaviour across releases.
 [experimental]
@@ -277,18 +283,15 @@
     # where there are multiple screens with very different dpi values.
     per_monitor_dpi = false
 
-# catppuccin theme, but I changed it
-
-frame_color = "#F5C2E7"
-separator_color= frame
-
 [urgency_low]
 background = "#1E1E2E"
 foreground = "#D9E0EE"
+frame_color = "#F5C2E7"
 
 [urgency_normal]
 background = "#1E1E2E"
 foreground = "#D9E0EE"
+frame_color = "#F5C2E7"
 
 [urgency_critical]
 background = "#F28FAD"
