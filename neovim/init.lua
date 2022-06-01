@@ -17,7 +17,7 @@ require('packer').startup(function(use)
 	-- GOTTA GO FAST!
 	use 'lewis6991/impatient.nvim'
 	-- formating
-	use 'windwp/nvim-autopairs'
+	use 'ervandew/matchem'
 	use 'windwp/nvim-ts-autotag'
 	use { 'preservim/vim-pencil', opt = true, cmd = { 'HardPencil', 'Pencil', 'PencilHard', 'SoftPencil', 'PencilSoft', 'PencilToggle' } }
 	use 'tpope/vim-commentary'
@@ -82,7 +82,6 @@ require('packer').startup(function(use)
 end)
 
 require('gitsigns').setup()
-require('nvim-autopairs').setup({ ignored_next_char = "" })
 require('nvim-ts-autotag').setup()
 --- }}}
 
@@ -108,9 +107,10 @@ vim.opt.showmode = false -- this is only done because the mode is shown in luali
 vim.opt.mouse = "a"
 -- }}}
 
--- KEYBINDS {{{
+-- KEYBINDS AND COMMANDS {{{
 vim.keymap.set("n", "<Space><Space>", "/++<CR>2xi")
-vim.keymap.set("n", "<C-c>p", ":FloatermNew python<CR>")
+
+vim.api.nvim_create_user_command('Config', 'e ~/.config/nvim/init.lua', {})
 
 -- navigation and splits
 vim.keymap.set("n", "<C-H>", "<C-W><C-H>")
@@ -139,6 +139,9 @@ vim.g.floaterm_keymap_toggle = "<C-t>"
 vim.g.floaterm_keymap_new = "<C-c>n"
 vim.g.floaterm_keymap_next = "<C-c>l"
 vim.g.floaterm_keymap_prev = "<C-c>h"
+vim.keymap.set("n", "<C-c>p", ":FloatermNew python<CR>")
+vim.keymap.set("n", "<C-c>f", ":FloatermNew lf<CR>")
+
 vim.g.floaterm_width = vim.o.columns
 vim.g.floaterm_height = 0.7
 vim.g.floaterm_position = "bottom"
