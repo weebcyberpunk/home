@@ -46,7 +46,8 @@ alias ls='ls --color=auto'
 alias grep='grep --color=auto'
 
 # set prompt
-PS1='%B%F{magenta}%2~%f%b  -> '
+PROMPT='%B%F{magenta}%2~%f%b  -> '
+RPROMPT='%B%F{cyan}%n%f%b@%B%F{magenta}%m%f%b'
 
 # aliases
 
