@@ -300,8 +300,8 @@ def_key "8"
 def_key "="
   show_clock
 #
-#def_key "@"
-#  show_server_info
+def_key "@"
+  show_server_info
 #
 # def_key "s"
 #   stop
@@ -444,7 +444,7 @@ def_key "i"
 #def_key "g"
 #  jump_to_position_in_song
 #
-#def_key "l"
+# def_key "ctrl-l"
 #  show_lyrics
 #
 #def_key "ctrl-v"
