@@ -9,7 +9,6 @@ $SCRIPTS_HOME/dwmstatus &
 unclutter --start-hidden --jitter 10 --ignore-scrolling &
 nitrogen --restore
 picom &
-# lxsession &
 /usr/lib/xfce-polkit/xfce-polkit &
 dunst &
 $SCRIPTS_HOME/dwmtasks &
