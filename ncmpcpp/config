@@ -31,7 +31,7 @@ lyrics_directory = ~/.local/share/lyrics
 #
 ## Needed for tag editor and file operations to work.
 ##
-mpd_music_dir = ~/Music
+mpd_music_dir = ~/mus
 #
 #mpd_crossfade_time = 5
 #
@@ -392,9 +392,9 @@ media_library_hide_album_dates = yes
 #
 #default_tag_editor_pattern = %n - %t
 #
-# header_visibility = yes
+header_visibility = no
 #
-# statusbar_visibility = yes
+#statusbar_visibility = yes
 #
 ## Show the "Connected to ..." message on startup
 connected_message_on_startup = no
