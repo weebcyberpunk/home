@@ -26,6 +26,7 @@ set drawbox
 set previewer '~/.config/lf/scope'
 set icons
 set autoquit on
+set hidden
 # }}}
 
 # FUNCTIONS {{{
