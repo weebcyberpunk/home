@@ -41,7 +41,7 @@ cmd open ${{
 	image/j*) sxiv -b $fx &;;
 	image/xcf) gimp $fx;;
 	video/*) mpv $fx;;
-	audio/*) mpv $fx;;
+	audio/*) mpv --no-video $fx;;
 	*/pdf) zathura $fx &;;
     esac
 }}
