@@ -1,0 +1,52 @@
+#!/usr/bin/sh
+
+# author GG weebcyberpunk@gmail.com
+# version 0.0.0
+# since May 13, 2022
+
+# dmenu menu to:
+# - enable second display as mirrored
+# - enable second display as second monitor
+# - disable default display
+# - disable second display
+
+# if your outputs names are different you need to change
+DEFAULT="eDP1"
+SECOND="HDMI1"
+
+CHOICE="$(echo -e 'Second as monitor\nSecond as mirror\nSecond disabled\nDefault disabled' | dmenu -p 'Display option: ')"
+
+if [ "$CHOICE" == "Second as monitor" ]
+then
+	SIDE="$(echo -e 'left\nright\nabove\nbelow' | dmenu -p 'HDMI monitor side: ')"
+
+	# defaults to right
+	if [ "$SIDE" == "left" ]
+	then
+		xrandr --output $DEFAULT --auto --output $SECOND --left-of $DEFAULT
+
+	elif [ "$SIDE" == "above" ]
+	then
+		xrandr --output $DEFAULT --auto --output $SECOND --above $DEFAULT
+
+
+	elif [ "$SIDE" == "below" ]
+	then
+		xrandr --output $DEFAULT --auto --output $SECOND --below $DEFAULT
+
+	else
+		xrandr --output $DEFAULT --auto --output $SECOND --right-of $DEFAULT
+	fi
+
+elif [ "$CHOICE" == "Second as mirror" ]
+then
+	xrandr --output $DEFAULT --auto --output $SECOND --same-as $DEFAULT
+
+elif [ "$CHOICE" == "Second disabled" ]
+then
+	xrandr --output $SECOND --off --output $DEFAULT --auto
+
+elif [ "$CHOICE" == "Default disabled" ]
+then
+	xrandr --output $DEFAULT --off --output $SECOND --auto
+fi

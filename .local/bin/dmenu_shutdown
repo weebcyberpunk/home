@@ -1,0 +1,33 @@
+#!/usr/bin/sh
+# author GG weebcyberpunk@gmail.com
+# version 1.0.0
+# since Mar 19, 2022
+
+ACTIONS=("logout\nrestart\nshutdown\nlock\nsuspend")
+CHOICE="$(echo -e $ACTIONS | dmenu -p 'Action: ')"
+
+if [ "$CHOICE" == "logout" ]
+then
+	# that's the only way I found to not having any random mpd script
+	# running
+	killall -u $USER
+
+elif [ "$CHOICE" == "restart" ]
+then
+	systemctl reboot
+
+elif [ "$CHOICE" == "shutdown" ]
+then
+	systemctl poweroff
+
+elif [ "$CHOICE" == "lock" ]
+then
+	slock
+	mpv --no-video $HOME/.local/share/startsound.mp3
+	$HOME/.local/bin/dwm_refresh_status
+
+elif [ "$CHOICE" == "suspend" ]
+then
+	$HOME/.local/bin/suspend
+
+fi

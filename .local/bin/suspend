@@ -1,0 +1,16 @@
+#!/usr/bin/sh
+slock &
+systemctl suspend
+while :
+do
+	if [ "$(pstree | grep slock)" != "" ]
+	then
+		sleep 2s
+
+	else
+		$HOME/.local/bin/dwm_refresh_status
+		mpv --no-video $HOME/.local/share/startsound.mp3
+		exit
+
+	fi
+done

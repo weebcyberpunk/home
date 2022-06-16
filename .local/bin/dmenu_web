@@ -1,0 +1,13 @@
+#!/usr/bin/sh
+
+PAGE="$(cat ~/.config/ggidle-bookmarks | awk -F '|' '{print substr($1, 0)}' | dmenu -p 'Site: ')"
+if [ "$PAGE" != "" ] 
+then 
+	SITE=$(grep "^$PAGE" ~/.config/ggidle-bookmarks | awk -F '|' '{print substr($2, 0)}')
+	if [ "$SITE" == "" ]
+	then
+		$BROWSER "$PAGE"
+	else
+		$BROWSER "$SITE"
+	fi
+fi

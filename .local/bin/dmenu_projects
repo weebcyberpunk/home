@@ -1,0 +1,21 @@
+#!/usr/bin/sh
+
+# author GG weebcyberpunk@gmail.com
+# version 1.0.0
+# since May 12, 2022
+
+cd ~/proj
+PROJECT="$(echo -e "$(ls)" "\nnew" | dmenu -p 'Project: ')"
+
+if [ "$PROJECT" == "new" ]
+then
+	NEW_PROJECT="$(echo '' | dmenu -p 'Name: ')"
+	mkdir "$NEW_PROJECT"
+	cd $NEW_PROJECT
+	$TERMINAL -e $EDITOR
+
+elif [ "$PROJECT" != "" ]
+then
+	cd $PROJECT
+	$TERMINAL -e $EDITOR
+fi
