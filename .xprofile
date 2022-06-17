@@ -5,10 +5,10 @@
 SCRIPTS_HOME="$HOME/.local/bin"
 
 # autostart programs
+picom &
 $SCRIPTS_HOME/mpdchangestatus &
 unclutter --start-hidden --jitter 10 --ignore-scrolling &
 nitrogen --restore
-picom &
 /usr/lib/xfce-polkit/xfce-polkit &
 dunst &
 $SCRIPTS_HOME/dwmstatus &
