@@ -5,14 +5,15 @@
 SCRIPTS_HOME="$HOME/.local/bin"
 
 # autostart programs
-$SCRIPTS_HOME/dwmstatus &
+$SCRIPTS_HOME/mpdchangestatus &
 unclutter --start-hidden --jitter 10 --ignore-scrolling &
 nitrogen --restore
 picom &
 /usr/lib/xfce-polkit/xfce-polkit &
 dunst &
+$SCRIPTS_HOME/dwmstatus &
 $SCRIPTS_HOME/dwmtasks &
-$SCRIPTS_HOME/mpdchangestatus &
+conky &
 
 # play sound
 mpv --no-video $HOME/.local/share/startsound.mp3 &
