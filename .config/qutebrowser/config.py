@@ -42,9 +42,7 @@ c.confirm_quit = ['downloads']
 c.zoom.default = '125'
 
 # darkmode
-# c.colors.webpage.darkmode.enabled = True
-# c.colors.webpage.darkmode.algorithm = 'lightness-cielab'
-# c.colors.webpage.darkmode.policy.images = 'never'
+c.colors.webpage.preferred_color_scheme = 'dark'
 
 # font
 c.fonts.default_family = 'Fira Code Nerd Font'
