@@ -91,4 +91,4 @@ c.colors.tabs.selected.even.bg = magenta
 # bindings
 #
 config.bind('b', 'set-cmd-text -s :quickmark-load ')
-config.bind('e', 'set-cmd-text -s :open file:///home/gg/')
+config.bind('e', 'hint links spawn mpv {hint-url}')
