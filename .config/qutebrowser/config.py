@@ -18,10 +18,12 @@ config.set('content.javascript.enabled', True, 'chrome://*/*')
 config.set('content.javascript.enabled', True, 'qute://*/*')
 c.content.notifications.enabled = True
 c.downloads.remove_finished = 5
+config.set('content.blocking.method', 'both')
 
 # tabs
 c.tabs.last_close = 'close'
 c.tabs.show = 'multiple'
+c.tabs.tabs_are_windows = True
 
 # start pages
 c.url.start_pages = 'file:///home/gg/proj/cool-web-homepage/home.html'
@@ -40,9 +42,9 @@ c.confirm_quit = ['downloads']
 c.zoom.default = '125'
 
 # darkmode
-c.colors.webpage.darkmode.enabled = True
-c.colors.webpage.darkmode.algorithm = 'lightness-cielab'
-c.colors.webpage.darkmode.policy.images = 'never'
+# c.colors.webpage.darkmode.enabled = True
+# c.colors.webpage.darkmode.algorithm = 'lightness-cielab'
+# c.colors.webpage.darkmode.policy.images = 'never'
 
 # font
 c.fonts.default_family = 'Fira Code Nerd Font'
@@ -71,7 +73,7 @@ c.colors.completion.item.selected.fg = bg
 c.colors.completion.item.selected.border.top = magenta 
 c.colors.completion.item.selected.border.bottom = magenta 
 
-c.colors.completion.item.selected.match.fg = yellow 
+c.colors.completion.item.selected.match.fg = cyan 
 c.colors.completion.match.fg = yellow 
 
 c.colors.statusbar.normal.bg = cyan 
