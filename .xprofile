@@ -13,7 +13,6 @@ nitrogen --restore
 dunst &
 $SCRIPTS_HOME/dwmstatus &
 $SCRIPTS_HOME/dwmtasks &
-conky &
 
 # play sound
 mpv --no-video $HOME/.local/share/startsound.mp3 &
