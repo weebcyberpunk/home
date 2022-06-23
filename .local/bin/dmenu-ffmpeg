@@ -19,7 +19,7 @@ then
 
 elif [ "$CHOICE" == 'Take a shot' ]
 then 
-	$TERM -e  mpv av://v4l2:/dev/video0 --profile=low-latency --untimed 
+	mpv av://v4l2:/dev/video0 --profile=low-latency --untimed 
 
 elif [ "$CHOICE" == 'Record all' ]
 then
