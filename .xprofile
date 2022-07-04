@@ -15,5 +15,5 @@ unclutter --start-hidden --jitter 10 --ignore-scrolling &
 dunst &
 
 # play sound and greet
-notify-send --expire-time=3000 'Welcome back, GG'
+notify-send --expire-time=3000 "Welcome back, $USER"
 mpv --no-video $HOME/.local/share/startsound.mp3 &
