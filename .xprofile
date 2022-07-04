@@ -14,5 +14,6 @@ unclutter --start-hidden --jitter 10 --ignore-scrolling &
 /usr/lib/xfce-polkit/xfce-polkit &
 dunst &
 
-# play sound
+# play sound and greet
+notify-send --expire-time=3000 'Welcome back, GG'
 mpv --no-video $HOME/.local/share/startsound.mp3 &
