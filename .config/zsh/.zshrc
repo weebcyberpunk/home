@@ -45,10 +45,6 @@ preexec() { echo -ne '\e[5 q' ;} # Use beam shape cursor for each new prompt.
 alias ls='ls --color=auto'
 alias grep='grep --color=auto'
 
-# set prompt
-PROMPT='%B%F{magenta}%2~%f%b  -> '
-RPROMPT='%B%F{cyan}%n%f%b@%B%F{magenta}%m%f%b'
-
 # aliases
 
 # common
@@ -74,8 +70,36 @@ bindkey '^e' edit-command-line
 # print exit value if != 0
 setopt PRINT_EXIT_VALUE
 
+# prompt
+PROMPT='%B%F{magenta}%2~%f%b  -> '
+RPROMPT='%B%F{cyan}%n%f%b@%B%F{magenta}%m%f%b'
+
+# if on a framebuffer, fix the colors and the cursor, increase the font, 
+# remove the nerd icon on the prompt and start tmux
+if [ "$TERM" = "linux" ]; then
+	PROMPT="%B%F{magenta}%2~%f%b -> "
+	RPROMPT='%B%F{cyan}%n%f%b@%B%F{magenta}%m%f%b'
+	setfont /usr/share/kbd/consolefonts/solar24x32
+	echo -en  "\e]P01E1E2E" # black
+	echo -en  "\e]P1F28FAD" # red
+	echo -en  "\e]P2ABE9B3" # green
+	echo -en  "\e]P3FAE3B0" # yellow
+	echo -en  "\e]P496CDFB" # blue
+	echo -en  "\e]P5F5C2E7" # magenta
+	echo -en  "\e]P689DCEB" # cyan
+	echo -en  "\e]P7FFFFFF" # white
+	clear #for background artifacting
+	echo -e "\e[?16;0;250c"
+
+	if [ "$TMUX" == "" ]
+	then
+		tmux
+		exit
+	fi
+fi
+
 # source plugins
 PLUGS_HOME="$HOME/.config/zsh/plugs/"
-source $PLUGS_HOME/catppuccin-zsyntaxhi/catppuccin-zsh-syntax-highlighting.zsh
+source "$PLUGS_HOME/catppuccin-zsyntaxhi/catppuccin-zsh-syntax-highlighting.zsh"
 source "$PLUGS_HOME/zsh-autosuggestions/zsh-autosuggestions.zsh"
 source "$PLUGS_HOME/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh"
