@@ -5,6 +5,7 @@
 SCRIPTS_HOME="$HOME/.local/bin"
 
 # autostart programs
+mpd &
 nitrogen --restore
 $SCRIPTS_HOME/mpdchangestatus &
 $SCRIPTS_HOME/dwmstatus &
