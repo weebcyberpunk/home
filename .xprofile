@@ -12,7 +12,7 @@ function start_process {
 }
 # no way an important sleep will be running (this prevents thoose random sleeps
 # from scripts to keep running)
-killall -u $USER sleep
+killall -u $USER sleep 2> /dev/null
 
 # load envvars
 [ -f ~/.zshenv ] && . ~/.zshenv
@@ -34,4 +34,4 @@ start_process "dunst"
 
 # play sound and greet
 notify-send --expire-time=3000 "Welcome back, $USER"
-mpv --no-video $HOME/.local/share/startsound.mp3 &
+mpv --no-video $HOME/.local/share/startsound.mp3 2> /dev/null &
