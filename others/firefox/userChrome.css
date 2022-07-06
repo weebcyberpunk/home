@@ -1,0 +1,184 @@
+/*
+ * Auto-hide the navigation bar, stolen from
+ * https://github.com/MrOtherGuy/firefox-csshacks, see the repository for the
+ * full license (Mozilla Public License)
+ */
+#navigator-toolbox{
+  --uc-bm-padding: 4px; /* Vertical padding to be applied to bookmarks */
+  --uc-bm-height: calc(20px + 2 * var(--uc-bm-padding)); /* Might need to adjust if the toolbar has other buttons */
+  --uc-navbar-height: -40px; /* navbar is main toolbar. Use negative value */
+  --uc-autohide-toolbar-delay: 600ms; /* The toolbar is hidden after 0.6s */
+}
+
+:root[uidensity="compact"] #navigator-toolbox{
+  --uc-bm-padding: 1px;
+  --uc-navbar-height: -34px;
+}
+:root[uidensity="touch"] #navigator-toolbox{ --uc-bm-padding: 6px }
+
+:root[sessionrestored] #nav-bar,
+:root[sessionrestored] #PersonalToolbar{
+  background-image: linear-gradient(var(--toolbar-bgcolor),var(--toolbar-bgcolor)), var(--lwt-additional-images,var(--toolbar-bgimage))  !important;
+  background-position: top,var(--lwt-background-alignment);
+  background-position-y: calc(0px - var(--tab-min-height) - 2*var(--tab-block-margin,0px));
+  background-repeat: repeat,var(--lwt-background-tiling);
+  transform: rotateX(90deg);
+  transform-origin: top;
+  transition: transform 10ms linear var(--uc-autohide-toolbar-delay) !important;
+  z-index: 2;
+}
+
+:root[sessionrestored] #PersonalToolbar{
+  z-index: 1;
+  background-position-y: calc(0px - var(--tab-min-height) - 2*var(--tab-block-margin,0px) + var( --uc-navbar-height));
+}
+
+:root[lwtheme-image] #nav-bar,
+:root[lwtheme-image] #PersonalToolbar{
+  background-image: linear-gradient(var(--toolbar-bgcolor),var(--toolbar-bgcolor)),var(--lwt-header-image), var(--lwt-additional-images,var(--toolbar-bgimage)) !important;
+}
+
+#nav-bar[customizing],#PersonalToolbar[customizing]{ transform: none !important }
+
+#navigator-toolbox > #PersonalToolbar{
+  transform-origin: 0px var(--uc-navbar-height);
+  position: relative;
+}
+
+:root[sessionrestored]:not([customizing]) #navigator-toolbox{
+  margin-bottom:  calc(0px - var(--uc-bm-height) + var(--uc-navbar-height));
+}
+#PlacesToolbarItems > .bookmark-item {
+  min-height: calc(var(--uc-bm-height) - 4px); /* Bookmarks have 2px block margin */
+  padding-block: 0px !important;
+}
+
+#OtherBookmarks,
+#PlacesChevron,
+#PersonalToolbar > #import-button{
+  padding-block: var(--uc-bm-padding) !important;
+}
+
+/* Make sure the bookmarks toolbar is never collapsed even if it is disabled */
+:root[sizemode="fullscreen"] #PersonalToolbar,
+#PersonalToolbar[collapsed="true"]{
+  min-height: initial !important;
+  max-height: initial !important;
+  visibility: hidden !important
+}
+#PersonalToolbar[collapsed="true"] #PlacesToolbarItems > *,
+:root[sizemode="fullscreen"] #PersonalToolbar #PlacesToolbarItems > *{
+  visibility: hidden !important;
+}
+
+/* The invisible toolbox will overlap sidebar so we'll work around that here */
+#navigator-toolbox{ pointer-events: none; border-bottom: none !important; }
+#PersonalToolbar{ border-bottom: 1px solid var(--chrome-content-separator-color) }
+#navigator-toolbox > *{ pointer-events: auto }
+
+#sidebar-box{ position: relative }
+
+/* Selected tab needs higher z-index now to "hide" the broder below it */
+.tabbrowser-tab[selected]{ z-index: 3 !important; }
+
+/* SELECT TOOLBAR BEHAVIOR */
+/* Comment out or delete one of these to disable that behavior */
+
+/* Show when urlbar is focused */
+#nav-bar:focus-within + #PersonalToolbar,
+#navigator-toolbox > #nav-bar:focus-within{
+  transition-delay: 10ms !important;
+  transform: rotateX(0);
+}
+
+/* Show when cursor is over the toolbar area */
+#navigator-toolbox:hover > .browser-toolbar{
+  transition-delay: 100ms !important;
+  transform: rotateX(0);
+}
+/* This makes the tab notification box show immediately below tabs, otherwise it would break the layout */
+#navigator-toolbox > div{ display: contents }
+:where(#titlebar,#tab-notification-deck,.global-notificationbox){
+  -moz-box-ordinal-group: 0;
+}
+/* Show when cursor is over popups/context-menus - cannot control which ones */
+
+#mainPopupSet:hover ~ box > toolbox > .browser-toolbar{
+  transition-delay: 100ms !important;
+  transform: rotateX(0);
+}
+
+/*
+ * Auto-hide the tabbar with only one tab, stolen from the same repo above and
+ * licensed under the same license
+ */
+
+/* Makes tabs toolbar items zero-height initially and sets enlarge them to fill up space equal to tab-min-height set on tabs. Optionally use privatemode_indicator_as_menu_button.css to replace main menu icon with private browsing indicator while tabs are hidden. */
+
+/* This style causes CSD window controls to disappear on linux, but you can kind of work around that by using window_control_fallback_for_custom_windows_theme.css */
+
+:root[sizemode="normal"] #nav-bar{ --uc-window-drag-space-width: 20px }
+
+#titlebar{ -moz-appearance: none !important; }
+#TabsToolbar{ min-height: 0px !important }
+
+#tabbrowser-tabs,
+#tabbrowser-arrowscrollbox{ min-height: 0 !important; }
+
+:root:not([customizing]) #tabs-newtab-button,
+:root:not([customizing]) #TabsToolbar-customization-target > .toolbarbutton-1,
+:root:not([customizing]) #TabsToolbar .titlebar-button{
+  -moz-appearance: none !important;
+  height: 0px;
+  padding-top: 0px !important;
+  padding-bottom: 0px !important;
+  -moz-box-align: stretch;
+  margin: 0 !important;
+}
+
+.accessibility-indicator,
+.private-browsing-indicator{ 
+  height: unset !important;
+}
+.accessibility-indicator > hbox{ padding-block: 0 !important }
+
+.tabbrowser-tab{
+  height: calc(var(--tab-min-height) + 2 * var(--tab-block-margin,0px));
+}
+
+.tabbrowser-tab[first-visible-tab="true"][last-visible-tab="true"]{
+  visibility: collapse !important;
+  /* These seem unnecessary, but they achieve compatibility with hide_tabs_with_one_tab.css */
+  min-height: 0 !important;
+  height: 0;
+}
+
+/* Button re-styling */
+#tabs-newtab-button{ transform: scale(0.8); }
+#tabs-newtab-button:hover{
+  background-color: var(--toolbarbutton-hover-background);
+  border-radius: var(--tab-border-radius);
+}
+
+#tabs-newtab-button > .toolbarbutton-icon{
+  padding: 0 !important;
+  transform: scale(0.5);
+  background-color: transparent !important;
+}
+/* Fix window controls not being clickable */
+:root[tabsintitlebar] #toolbar-menubar[autohide="true"][inactive]{
+  transition: height 0ms steps(1) 80ms;
+}
+:where(#nav-bar){
+  border-inline: var(--uc-window-drag-space-width,0) solid var(--toolbar-bgcolor);
+}
+@media (-moz-platform: linux){
+  #TabsToolbar .titlebar-buttonbox{
+    -moz-box-align: stretch !important;
+  }
+  #TabsToolbar > .titlebar-buttonbox-container > .titlebar-buttonbox > .titlebar-button{
+    transform: scale(0.8);
+    margin-inline: -3px !important;
+  }
+  #TabsToolbar .titlebar-button > .toolbarbutton-icon{ padding: 0 13px !important }
+}
