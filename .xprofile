@@ -6,8 +6,9 @@
 
 # autostart function used to avoid race condition on processes
 function start_process {
-	kill $(pidof -x $1) 2> /dev/null
-	$1 &
+	kill $(pidof -x "$1") 2> /dev/null
+	# redirecting stderr to void because I hate .xsession-errors file
+	$1 2> /dev/null &
 }
 # no way an important sleep will be running (this prevents thoose random sleeps
 # from scripts to keep running)
