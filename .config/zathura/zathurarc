@@ -5,5 +5,6 @@ set selection-clipboard clipboard
 " APPEARANCE
 
 set font "Fira Code Nerd Font 16"
+set guioptions none
 
 include catppuccin
