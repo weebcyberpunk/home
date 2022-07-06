@@ -1,17 +1,13 @@
 #!/usr/bin/sh
 
-# author GG weebcyberpunk@gmail.com
-# version 0.0.0
-# since Jul 05, 2022
-
-# sets my dwm bar, now readable
-
 BAT_NOTIFIED="no"
 BAT_ALERTED="no"
 
-# MPD {{{
-function mpd_widget {
-	echo -n " "
+while :
+do
+
+	# mpd widget
+	STATUS=" "
 
 	MPD_ARTIST="$(mpc -f '%artist%' current)"
 	MPD_SONG="$(mpc -f '%title%' current)"
@@ -19,90 +15,90 @@ function mpd_widget {
 
 	if [ "$MPD_ARTIST" = "" ]
 	then
-		echo -n "nothing playing"
+		STATUS="$STATUS nothing playing"
 
 	else
 		if [ "$MPD_ARTIST" = "Various" ]
 		then
-			echo -n "$MPD_SONG"
+			STATUS="$STATUS $MPD_SONG "
 		else
-			echo -n "$MPD_ARTIST - $MPD_SONG"
+			STATUS="$STATUS $MPD_ARTIST - $MPD_SONG "
 		fi
 
 		if [ "$MPD_STATUS" == "playing" ]
 		then
-			echo -n " 契"
+			STATUS="$STATUS契"
 		else
-			echo -n " "
+			STATUS="$STATUS"
 		fi
 	fi
 
-}
-# }}}
+	STATUS="$STATUS   "
 
-# SYS {{{
-function sys_widget {
-	echo -n " $(pamixer --get-volume-human)"
+	# volume and battery
+	STATUS="$STATUS $(pamixer --get-volume-human) "
 
-	# battery and integrated notify
-	BATTERY=$(cat /sys/class/power_supply/BAT1/capacity 2> /dev/null) || return
-	
+	# battery widget and notify
+	BATTERY="$(cat /sys/class/power_supply/BAT1/capacity)"
 	CHARGING="$(cat /sys/class/power_supply/BAT1/status)"
-
-	if [ $CHARGING == "Charging" ]
+	
+	if [ $BATTERY != "" ]
 	then
-		echo -n "  $BATTERY%"
-		BAT_NOTIFIED="no"
-		BAT_ALERTED="no"
-
-	else
-
-		if [ $BATTERY -gt 80 ]
+		if [ $CHARGING == "Charging" ]
 		then
-			echo -n "  $BATTERY%"
-
-		elif [ $BATTERY -gt 60 ]
-		then
-			echo -n "  $BATTERY%"
-
-		elif [ $BATTERY -gt 40 ]
-		then
-			echo -n "  $BATTERY%"
-
-		elif [ $BATTERY -gt 20 ]
-		then
-			echo -n "  $BATTERY%"
-
-		elif [ $BATTERY -gt 10 ]
-		then
-			echo -n "  $BATTERY%"
-			if [ "$BAT_NOTIFIED" == "no" ]
-			then
-				notify-send 'Low battery level.' 'Battery level is below 20%. Please connect the computer to the charger.'
-				BAT_NOTIFIED="yes"
-			fi
+			STATUS="$STATUS $BATTERY%"
+			BAT_NOTIFIED="no"
+			BAT_ALERTED="no"
 
 		else
-			echo -n "  $BATTERY%"
-			if [ "$BAT_ALERTED" == "no" ]
+
+			if [ $BATTERY -gt 80 ]
 			then
-				notify-send --urgency=critical 'Critical battery level.' 'Battery level is below 10%. Please connect the computer to the charger immediately.'
-				mpv --no-video $HOME/.local/share/battery-alert.mp3
-				BAT_ALERTED="yes"
+				STATUS="$STATUS $BATTERY%"
+
+			elif [ $BATTERY -gt 60 ]
+			then
+				STATUS="$STATUS $BATTERY%"
+
+			elif [ $BATTERY -gt 40 ]
+			then
+				STATUS="$STATUS $BATTERY%"
+
+			elif [ $BATTERY -gt 20 ]
+			then
+				STATUS="$STATUS $BATTERY%"
+
+			elif [ $BATTERY -gt 10 ]
+			then
+				STATUS="$STATUS $BATTERY%"
+				if [ "$BAT_NOTIFIED" == "no" ]
+				then
+					notify-send 'Low battery level.' 'Battery level is below 20%. Please connect the computer to the charger.'
+					BAT_NOTIFIED="yes"
+				fi
+
+			else
+				STATUS="$STATUS $BATTERY%"
+				if [ "$BAT_ALERTED" == "no" ]
+				then
+					notify-send --urgency=critical 'Critical battery level.' 'Battery level is below 10%. Please connect the computer to the charger immediately.'
+					mpv --no-video $HOME/.local/share/battery-alert.mp3
+					BAT_ALERTED="yes"
+				fi
+				
 			fi
-			
+
 		fi
 
+	STATUS="$STATUS   "
+
 	fi
-}
-# }}}
 
-function clock_widget {
-	date +' %a %b %d  %H:%M'
-}
+	# date
+	STATUS="$STATUS$(date +' %a %b %d  %H:%M') "
 
-while :
-do
-	xsetroot -name " $(mpd_widget)   $(sys_widget)   $(clock_widget) "
+	xsetroot -name "$STATUS"
+
+	# sleep so it doesn't take all our resources
 	sleep 1m
 done
