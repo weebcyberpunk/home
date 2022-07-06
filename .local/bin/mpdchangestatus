@@ -6,6 +6,6 @@
 
 while :
 do
-	mpc idle player
+	mpc idle player || sleep 10
 	$HOME/.local/bin/dwm_refresh_status
 done
