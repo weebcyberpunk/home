@@ -1,5 +1,14 @@
 #!/usr/bin/sh
 
+# author GG weebcyberpunk@gmail.com
+# version 1.0.0
+# since Jul 06, 2022
+
+# my dwm bar
+
+# unfortunatelly, the shitty subshell scheme from GNU Bash dont let me to have
+# global variables so I'm not able to do this on a procedural, readable way
+
 BAT_NOTIFIED="no"
 BAT_ALERTED="no"
 
@@ -9,9 +18,9 @@ do
 	# mpd widget
 	STATUS=" "
 
-	MPD_ARTIST="$(mpc -f '%artist%' current)"
-	MPD_SONG="$(mpc -f '%title%' current)"
-	MPD_STATUS="$(mpc status '%state%')"
+	MPD_ARTIST="$(mpc -f '%artist%' current)" 2> /dev/null
+	MPD_SONG="$(mpc -f '%title%' current)" 2> /dev/null
+	MPD_STATUS="$(mpc status '%state%')" 2> /dev/null
 
 	if [ "$MPD_ARTIST" = "" ]
 	then
@@ -39,14 +48,14 @@ do
 	STATUS="$STATUS $(pamixer --get-volume-human) "
 
 	# battery widget and notify
-	BATTERY="$(cat /sys/class/power_supply/BAT1/capacity)"
-	CHARGING="$(cat /sys/class/power_supply/BAT1/status)"
+	BATTERY="$(cat /sys/class/power_supply/BAT1/capacity)" 2> /dev/null
+	CHARGING="$(cat /sys/class/power_supply/BAT1/status)" 2> /dev/null
 	
-	if [ $BATTERY != "" ]
+	if [ "$BATTERY" != "" ]
 	then
 		if [ $CHARGING == "Charging" ]
 		then
-			STATUS="$STATUS $BATTERY%"
+			STATUS="$STATUS $BATTERY% "
 			BAT_NOTIFIED="no"
 			BAT_ALERTED="no"
 
@@ -54,23 +63,23 @@ do
 
 			if [ $BATTERY -gt 80 ]
 			then
-				STATUS="$STATUS $BATTERY%"
+				STATUS="$STATUS $BATTERY% "
 
 			elif [ $BATTERY -gt 60 ]
 			then
-				STATUS="$STATUS $BATTERY%"
+				STATUS="$STATUS $BATTERY% "
 
 			elif [ $BATTERY -gt 40 ]
 			then
-				STATUS="$STATUS $BATTERY%"
+				STATUS="$STATUS $BATTERY% "
 
 			elif [ $BATTERY -gt 20 ]
 			then
-				STATUS="$STATUS $BATTERY%"
+				STATUS="$STATUS $BATTERY% "
 
 			elif [ $BATTERY -gt 10 ]
 			then
-				STATUS="$STATUS $BATTERY%"
+				STATUS="$STATUS $BATTERY% "
 				if [ "$BAT_NOTIFIED" == "no" ]
 				then
 					notify-send 'Low battery level.' 'Battery level is below 20%. Please connect the computer to the charger.'
@@ -78,7 +87,7 @@ do
 				fi
 
 			else
-				STATUS="$STATUS $BATTERY%"
+				STATUS="$STATUS $BATTERY% "
 				if [ "$BAT_ALERTED" == "no" ]
 				then
 					notify-send --urgency=critical 'Critical battery level.' 'Battery level is below 10%. Please connect the computer to the charger immediately.'
@@ -89,10 +98,9 @@ do
 			fi
 
 		fi
-
-	STATUS="$STATUS   "
-
 	fi
+
+	STATUS="$STATUS  "
 
 	# date
 	STATUS="$STATUS$(date +' %a %b %d  %H:%M') "
