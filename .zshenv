@@ -14,7 +14,7 @@ export PYTHONSTARTUP="$HOME/.config/pyrc.py"
 
 # default programs
 export EDITOR=nvim
-export BROWSER=firefox
+export BROWSER=qutebrowser
 export TERMINAL=st
 
 # sensible defaults
