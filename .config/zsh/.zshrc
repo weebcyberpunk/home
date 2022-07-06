@@ -99,7 +99,7 @@ if [ "$TERM" = "linux" ]; then
 fi
 
 # source plugins
-PLUGS_HOME="$HOME/.config/zsh/plugs/"
-source "$PLUGS_HOME/catppuccin-zsyntaxhi/catppuccin-zsh-syntax-highlighting.zsh"
-source "$PLUGS_HOME/zsh-autosuggestions/zsh-autosuggestions.zsh"
-source "$PLUGS_HOME/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh"
+PLUGS_HOME=$HOME"/.config/zsh/plugs"
+source $PLUGS_HOME"/catppuccin-zsyntaxhi/catppuccin-zsh-syntax-highlighting.zsh"
+source $PLUGS_HOME"/zsh-autosuggestions/zsh-autosuggestions.zsh"
+source $PLUGS_HOME"/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh"
