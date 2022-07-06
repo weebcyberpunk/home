@@ -1,19 +1,35 @@
 #!/bin/sh
+
+# author GG weebcyberpunk@gmail.com
+# version 1.0.0
+# since Jul 06, 2022
+
+# autostart function used to avoid race condition on processes
+function start_process {
+	kill $(pidof -x $1) 2> /dev/null
+	$1 &
+}
+# no way an important sleep will be running (this prevents thoose random sleeps
+# from scripts to keep running)
+killall -u $USER sleep
+
+# load envvars
 [ -f ~/.zshenv ] && . ~/.zshenv
 
-# vars
 SCRIPTS_HOME="$HOME/.local/bin"
 
-# autostart programs
-mpd &
+# wallpaper is not daemonized
 nitrogen --restore
-$SCRIPTS_HOME/mpdchangestatus &
-$SCRIPTS_HOME/dwmstatus &
-$SCRIPTS_HOME/dwmtasks &
-picom &
-unclutter --start-hidden --jitter 10 --ignore-scrolling &
-/usr/lib/xfce-polkit/xfce-polkit &
-dunst &
+
+# autostart programs 
+start_process "mpd"
+start_process "$SCRIPTS_HOME/mpdchangestatus"
+start_process "$SCRIPTS_HOME/dwmstatus"
+start_process "$SCRIPTS_HOME/dwmtasks"
+start_process "picom"
+start_process "unclutter --start-hidden --jitter 10 --ignore-scrolling"
+start_process "/usr/lib/xfce-polkit/xfce-polkit"
+start_process "dunst"
 
 # play sound and greet
 notify-send --expire-time=3000 "Welcome back, $USER"
