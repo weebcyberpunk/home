@@ -269,8 +269,6 @@
     mouse_middle_click = close_all
     mouse_right_click = close_current
 
-	# catppuccin theme, but I changed it
-
 
 
 # Experimental features that may or may not work correctly. Do not expect them

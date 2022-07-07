@@ -38,12 +38,12 @@ cmd open ${{
     test -L $f && f=$(readlink -f $f)
     case $(file --mime-type $f -b) in
         text/*) $EDITOR $fx;;
-	image/png) sxiv -b $fx &;;
-	image/j*) sxiv -b $fx &;;
-	image/xcf) gimp $fx;;
-	video/*) mpv $fx;;
-	audio/*) mpv --no-video $fx;;
-	*/pdf) zathura $fx &;;
+        image/png) sxiv -b $fx &;;
+        image/j*) sxiv -b $fx &;;
+        image/xcf) gimp $fx;;
+        video/*) mpv $fx;;
+        audio/*) mpv --no-video $fx;;
+        */pdf) zathura $fx &;;
     esac
 }}
 
