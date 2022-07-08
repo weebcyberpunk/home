@@ -8,6 +8,7 @@ export GNUPGHOME="$HOME/.local/share/gnupg"
 export PASSWORD_STORE_DIR="$HOME/.local/share/password-store"
 export WGETRC="$HOME/.config/wget/wgetrc"
 export CARGO_HOME="$HOME/.local/share/cargo"
+export RUSTUP_HOME="$HOME/.local/share/rustup"
 
 # my pyrc
 export PYTHONSTARTUP="$HOME/.config/pyrc.py"
