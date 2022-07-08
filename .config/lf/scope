@@ -6,7 +6,6 @@ set -C -f
 
 case "$(file --brief --mime-type "$1")" in
 	image/*) mediainfo "$1" ;;
-        text/html) $BROWSER "$1" ;;
 	text/* | */xml | application/json) highlight -O ansi "$1";;
         audio/* | application/octet-stream | video/*) mediainfo "$1" || exit 1;;
         */pdf) pdfinfo "$1" ;;

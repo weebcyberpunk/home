@@ -37,6 +37,7 @@ set hidden
 cmd open ${{
     test -L $f && f=$(readlink -f $f)
     case $(file --mime-type $f -b) in
+        text/html) $BROWSER $fx ;;
         text/*) $EDITOR $fx;;
         image/png) sxiv -b $fx &;;
         image/j*) sxiv -b $fx &;;
