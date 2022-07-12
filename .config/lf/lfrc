@@ -22,7 +22,7 @@ set ifs "\n"
 set scrolloff 10
 
 # others
-set drawbox
+# set drawbox
 set previewer '~/.config/lf/scope'
 set icons
 set autoquit on
