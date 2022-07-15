@@ -1,0 +1,14 @@
+#!/usr/bin/python -i
+
+# author GG weebcyberpunk@gmail.com
+# version 1.0.0
+# since Jul 15, 2022
+
+import sysconfig
+# we import two times so we can enter help(math) and don't specify namespaces
+# for math functions at the same time
+import math
+from math import *
+print(f"Python {sysconfig.get_python_version()} with module math imported.")
+print(f"Enter help() for general help and help(math) for help on mathematical functions.")
+print(f"Constants: pi, e, tau, inf, nan.")
