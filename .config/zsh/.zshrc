@@ -51,11 +51,13 @@ if [ "$TERM" = "linux" ]; then
     fi
 fi
 
+#
+# aliases
+#
+
 # colored aliases
 alias ls='ls --color=auto'
 alias grep='grep --color=auto'
-
-# aliases
 
 # common
 alias suckless='rm config.h && sudo make clean install'
