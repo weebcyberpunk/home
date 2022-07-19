@@ -4,6 +4,10 @@
 # version 1.0.0
 # since Jul 15, 2022
 
+# disable history
+import readline
+readline.write_history_file = lambda *args: None
+
 import sysconfig
 # we import two times so we can enter help(math) and don't specify namespaces
 # for math functions at the same time
