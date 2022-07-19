@@ -12,6 +12,7 @@ export PASSWORD_STORE_DIR="$HOME/.local/share/password-store"
 export WGETRC="$HOME/.config/wget/wgetrc"
 export CARGO_HOME="$HOME/.local/share/cargo"
 export RUSTUP_HOME="$HOME/.local/share/rustup"
+export MYSQL_HISTFILE="$HOME/.local/share/mysql_history"
 
 # my pyrc
 export PYTHONSTARTUP="$HOME/.config/pyrc.py"
