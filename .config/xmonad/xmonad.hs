@@ -21,8 +21,10 @@ import XMonad.Layout.SimplestFloat
 -- VARIABLES {{{
 --
 
-colorBack = "#1E1E2E"
-colorFore = "#F5C2E7"
+colorBack = "#1E1E2E" -- bgdark
+colorFore = "#F5C2E7" -- fgdark
+-- colorBack = "#EFF1F5" -- bglight
+-- colorFore = "#EA76CB" -- fglight
 
 myFocusFollowsMouse :: Bool
 myFocusFollowsMouse = True
