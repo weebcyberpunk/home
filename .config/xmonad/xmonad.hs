@@ -13,6 +13,8 @@ import XMonad.Util.Run
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.ManageHelpers
 import XMonad.Hooks.DynamicLog
+import XMonad.Hooks.EwmhDesktops
+import XMonad.Layout.NoBorders
 
 
 -- VARIABLES {{{
@@ -82,16 +84,13 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm,               xK_l     ), sendMessage Expand)
 
     -- Push window back into tiling
-    , ((modm .|. shiftMask, xK_t     ), withFocused $ windows . W.sink)
+    , ((modm .|. shiftMask, xK_f     ), withFocused $ windows . W.sink)
 
     -- Increment the number of windows in the master area
     , ((modm .|. shiftMask, xK_h     ), sendMessage (IncMasterN 1))
 
     -- Deincrement the number of windows in the master area
     , ((modm .|. shiftMask, xK_l     ), sendMessage (IncMasterN (-1)))
-
-    -- Toggle the status bar gap
-    -- , ((modm .|. controlMask, xK_b   ), sendMessage ToggleStruts)
 
     -- Quit xmonad
     , ((modm .|. controlMask, xK_q   ), io (exitWith ExitSuccess))
@@ -161,18 +160,12 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 -- LAYOUTS {{{
 --
 
-myLayout = avoidStruts (tiled ||| Mirror tiled ||| Full)
+myLayout = avoidStruts (tiled ||| Mirror tiled ||| noBorders Full)
   where
-    -- default tiling algorithm partitions the screen into two panes
+    -- default tilling
     tiled   = Tall nmaster delta ratio
-
-    -- The default number of windows in the master pane
     nmaster = 1
-
-    -- Default proportion of screen occupied by master pane
     ratio   = 1/2
-
-    -- Percent of screen to increment by when resizing panes
     delta   = 3/100
 
 -- }}}
@@ -193,7 +186,7 @@ myManageHook = composeAll
 -- EVENT HANDLING {{{
 --
 
-myEventHook = mempty
+myEventHook = fullscreenEventHook
 
 myLogHook = return ()
 
@@ -204,10 +197,10 @@ myStartupHook = return ()
 -- ETC {{{
 
 -- bar key
-toggleStrutsKey XConfig {XMonad.modMask = modMask} = (modMask, xK_b)
+toggleStrutsKey XConfig {XMonad.modMask = modMask} = (modMask .|. controlMask, xK_b)
 
 -- Run xmonad
-main = xmonad =<< statusBar myBar myPP toggleStrutsKey defaults
+main = xmonad =<< statusBar myBar myPP toggleStrutsKey (ewmh defaults)
 
 -- structure with config
 defaults = def {
@@ -228,7 +221,7 @@ defaults = def {
       -- hooks, layouts
         layoutHook         = myLayout,
         manageHook         = myManageHook,
-        handleEventHook    = myEventHook,
+        handleEventHook    = handleEventHook def <+> myEventHook,
         logHook            = myLogHook,
         startupHook        = myStartupHook
     }
