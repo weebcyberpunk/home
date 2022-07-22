@@ -20,23 +20,26 @@ import XMonad.Layout.NoBorders
 -- VARIABLES {{{
 --
 
+colorBack = "#1E1E2E"
+colorFore = "#F5C2E7"
+
 myFocusFollowsMouse :: Bool
 myFocusFollowsMouse = True
 
 myTerminal      = "st"
 myBar           = "xmobar ~/.config/xmonad/xmobar.hs"
 myPP            = xmobarPP { 
-    ppCurrent = xmobarColor "#F5C2E7" "" . wrap "[" "]",
+    ppCurrent = xmobarColor colorFore "" . wrap "[" "]",
     ppTitle   = shorten' "" 0,
-    ppLayout  = shorten' "" 0,
+    -- ppLayout  = shorten' "" 0,
     ppOrder   = reverse
 }
 
 myBorderWidth   = 4
 myModMask       = mod4Mask
 myWorkspaces    = ["1","2","3","4","5","6","7","8","9"]
-myNormalBorderColor  = "#1E1E2E"
-myFocusedBorderColor = "#F5C2E7"
+myNormalBorderColor  = colorBack
+myFocusedBorderColor = colorFore
 
 -- }}}
 
@@ -160,7 +163,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 -- LAYOUTS {{{
 --
 
-myLayout = avoidStruts (tiled ||| Mirror tiled ||| noBorders Full)
+myLayout = avoidStruts (tiled ||| noBorders Full)
   where
     -- default tilling
     tiled   = Tall nmaster delta ratio
