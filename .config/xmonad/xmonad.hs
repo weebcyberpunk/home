@@ -28,7 +28,7 @@ myFocusFollowsMouse :: Bool
 myFocusFollowsMouse = True
 
 myTerminal      = "st"
-myBar           = "xmobar ~/.config/xmonad/xmobar.hs"
+myBar           = "polybar"
 myPP            = xmobarPP { 
     ppCurrent = xmobarColor colorFore "" . wrap "[" "]",
     ppTitle   = shorten' "" 0,
