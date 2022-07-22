@@ -24,9 +24,9 @@ nitrogen --restore
 
 # autostart programs 
 start_process "mpd"
-start_process "$SCRIPTS_HOME/mpdchangestatus"
-start_process "$SCRIPTS_HOME/dwmstatus"
-start_process "$SCRIPTS_HOME/dwmtasks"
+# start_process "$SCRIPTS_HOME/mpdchangestatus"
+# start_process "$SCRIPTS_HOME/dwmstatus"
+# start_process "$SCRIPTS_HOME/dwmtasks"
 start_process "picom"
 start_process "unclutter --start-hidden --jitter 10 --ignore-scrolling"
 start_process "/usr/lib/xfce-polkit/xfce-polkit"
