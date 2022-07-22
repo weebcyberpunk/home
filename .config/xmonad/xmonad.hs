@@ -15,6 +15,7 @@ import XMonad.Hooks.ManageHelpers
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.EwmhDesktops
 import XMonad.Layout.NoBorders
+import XMonad.Layout.SimplestFloat
 
 
 -- VARIABLES {{{
@@ -163,7 +164,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 -- LAYOUTS {{{
 --
 
-myLayout = avoidStruts (tiled ||| noBorders Full)
+myLayout = avoidStruts (tiled ||| noBorders Full ||| simplestFloat)
   where
     -- default tilling
     tiled   = Tall nmaster delta ratio
