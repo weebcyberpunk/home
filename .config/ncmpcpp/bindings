@@ -330,10 +330,10 @@ def_key "backspace"
 def_key "c"
   play
 #
-def_key "l"
+def_key "ctrl-l"
   seek_forward
 #
-def_key "h"
+def_key "ctrl-h"
   seek_backward
 #
 def_key "r"

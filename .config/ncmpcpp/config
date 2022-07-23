@@ -440,7 +440,7 @@ titles_visibility = no
 ## media_library, playlist_editor, tag_editor, outputs, visualizer, clock,
 ## lyrics, last_fm.
 ##
-screen_switcher_mode = playlist, media_library, visualizer
+screen_switcher_mode = playlist, media_library
 #
 ##
 ## Note: You can define startup screen by choosing screen from the list above.
@@ -451,7 +451,7 @@ startup_screen = media_library
 ## Note: You can define startup slave screen by choosing screen from the list
 ## above or an empty value for no slave screen.
 ##
-#startup_slave_screen = ""
+startup_slave_screen = ""
 #
 #startup_slave_screen_focus = no
 #
